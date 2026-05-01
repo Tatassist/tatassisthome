@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+  accent?: 'red' | 'blue' | 'gold';
+  trackingLocation?: string;
+  trackingEvent?: string;
+}
+
+const {
+  title,
+  description,
+  ctaLabel,
+  ctaHref,
+  accent = 'red',
+  trackingLocation = 'offer_card',
+  trackingEvent = 'tatassist_cta_click',
+} = Astro.props;
+
+const accentBorder = {
+  red: 'border-brand-red/40 hover:border-brand-red',
+  blue: 'border-brand-blue/40 hover:border-brand-blue',
+  gold: 'border-brand-gold/40 hover:border-brand-gold',
+};
+
+const accentButton = {
+  red: 'bg-brand-red hover:bg-brand-red-dark text-white',
+  blue: 'bg-brand-blue hover:bg-brand-blue-dark text-white',
+  gold: 'bg-brand-gold hover:bg-brand-gold/80 text-brand-dark',
+};
+---
+
+<div class={`bg-brand-dark-lighter border ${accentBorder[accent]} rounded-xl p-6 sm:p-8 transition-colors flex flex-col`}>
+  <h3 class="text-xl font-heading font-bold text-brand-cream mb-3">{title}</h3>
+  <p class="text-brand-text-muted text-sm leading-relaxed mb-6 flex-1">{description}</p>
+  <a
+    href={ctaHref}
+    class={`inline-flex items-center justify-center px-6 py-3 ${accentButton[accent]} font-semibold rounded-lg transition-colors text-sm`}
+    data-track="true"
+    data-track-event={trackingEvent}
+    data-track-label={ctaLabel}
+    data-track-location={trackingLocation}
+    data-track-type="offer_card"
+    data-track-destination={ctaHref}
+  >
+    {ctaLabel}
+  </a>
+</div>

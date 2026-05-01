@@ -1,0 +1,76 @@
+---
+interface Props {
+  headline: string;
+  body?: string;
+  primaryCTA: {
+    label: string;
+    href: string;
+    trackingEvent?: string;
+    trackingType?: string;
+  };
+  secondaryCTA?: {
+    label: string;
+    href: string;
+    trackingEvent?: string;
+    trackingType?: string;
+  };
+  variant?: 'default' | 'dark' | 'accent';
+  trackingLocation?: string;
+}
+
+const {
+  headline,
+  body,
+  primaryCTA,
+  secondaryCTA,
+  variant = 'default',
+  trackingLocation = 'cta_block',
+} = Astro.props;
+
+const bgClasses = {
+  default: 'bg-brand-dark-lighter',
+  dark: 'bg-brand-dark',
+  accent: 'bg-brand-red-dark',
+};
+---
+
+<section class={`${bgClasses[variant]} py-16 sm:py-20`}>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-brand-cream mb-4">
+      {headline}
+    </h2>
+    {body && (
+      <p class="text-brand-text-muted text-lg mb-8 max-w-2xl mx-auto">
+        {body}
+      </p>
+    )}
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={primaryCTA.href}
+        class="inline-flex items-center px-8 py-3.5 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors text-lg"
+        data-track="true"
+        data-track-event={primaryCTA.trackingEvent || 'tatassist_cta_click'}
+        data-track-label={primaryCTA.label}
+        data-track-location={trackingLocation}
+        data-track-type={primaryCTA.trackingType || 'primary'}
+        data-track-destination={primaryCTA.href}
+      >
+        {primaryCTA.label}
+      </a>
+      {secondaryCTA && (
+        <a
+          href={secondaryCTA.href}
+          class="inline-flex items-center px-8 py-3.5 border border-brand-cream/30 text-brand-cream hover:bg-white/5 font-medium rounded-lg transition-colors text-lg"
+          data-track="true"
+          data-track-event={secondaryCTA.trackingEvent || 'tatassist_cta_click'}
+          data-track-label={secondaryCTA.label}
+          data-track-location={trackingLocation}
+          data-track-type={secondaryCTA.trackingType || 'secondary'}
+          data-track-destination={secondaryCTA.href}
+        >
+          {secondaryCTA.label}
+        </a>
+      )}
+    </div>
+  </div>
+</section>

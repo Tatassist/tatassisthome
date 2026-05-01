@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { landingPages } from '../../data/landing-pages';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Tatassist Landing Pages',
+  description: 'A collection of focused landing pages for Tatassist campaign topics.',
+  url: new URL('/lp', Astro.site),
+};
+---
+
+<BaseLayout
+  title="Landing Pages"
+  description="Tatassist landing pages for campaign-specific traffic across pricing, deposits, client qualification, and quote authority."
+  structuredData={structuredData}
+  pageType="landing_index"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-12 sm:pb-16 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Campaign Pages</p>
+      <h1 class="text-4xl sm:text-5xl font-heading font-bold text-brand-cream leading-tight mb-4">
+        Focused entry points for Tatassist traffic and testing.
+      </h1>
+      <p class="text-lg text-brand-text-muted max-w-3xl leading-relaxed">
+        These pages are built for tighter messaging around specific business pain points, while still routing into the broader Tatassist ecosystem.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12 sm:py-16 bg-brand-dark-lighter border-y border-white/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {landingPages.map((page) => (
+          <a href={`/lp/${page.slug}`} class="group bg-brand-dark border border-white/10 hover:border-brand-gold/30 rounded-xl p-6 transition-colors block">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-gold/70 mb-3">{page.eyebrow}</p>
+            <h2 class="text-2xl font-heading font-bold text-brand-cream group-hover:text-brand-gold transition-colors mb-3">
+              {page.title}
+            </h2>
+            <p class="text-brand-text-muted leading-relaxed">{page.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

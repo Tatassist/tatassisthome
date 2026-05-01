@@ -1,0 +1,94 @@
+---
+const navLinks = [
+  { href: '/resources', label: 'Resources' },
+  { href: '/youtube', label: 'YouTube' },
+  { href: '/about', label: 'About' },
+  { href: '/calculator', label: 'Calculator' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/95 backdrop-blur-sm border-b border-white/10">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="/logo.jpg" alt="Tatassist" class="h-10 sm:h-12 w-auto" />
+        <span class="hidden sm:block text-brand-cream font-heading text-xl font-bold tracking-tight group-hover:text-brand-gold transition-colors">
+          Tatassist
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-1">
+        {navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class:list={[
+              'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+              currentPath.startsWith(href)
+                ? 'text-brand-gold bg-white/10'
+                : 'text-brand-cream/80 hover:text-brand-cream hover:bg-white/5',
+            ]}
+            data-track="true"
+            data-track-event="tatassist_nav_click"
+            data-track-label={label}
+            data-track-location="header_nav"
+            data-track-type="navigation"
+            data-track-destination={href}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 text-brand-cream/80 hover:text-brand-cream"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col gap-1">
+        {navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class:list={[
+              'px-4 py-3 rounded-lg text-sm font-medium transition-colors',
+              currentPath.startsWith(href)
+                ? 'text-brand-gold bg-white/10'
+                : 'text-brand-cream/80 hover:text-brand-cream hover:bg-white/5',
+            ]}
+            data-track="true"
+            data-track-event="tatassist_nav_click"
+            data-track-label={label}
+            data-track-location="mobile_nav"
+            data-track-type="navigation"
+            data-track-destination={href}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+</script>

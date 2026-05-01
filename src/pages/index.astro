@@ -1,0 +1,320 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import OfferCard from '../components/OfferCard.astro';
+import {
+  founderStats,
+  homepageProducts,
+  resourceCategories,
+  youtubeHighlights,
+} from '../data/site';
+
+const allArticles = await getCollection('resources');
+const categoryLabelMap = new Map(resourceCategories.map((category) => [category.slug, category.label]));
+const sortByNewest = (a: (typeof allArticles)[number], b: (typeof allArticles)[number]) =>
+  new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime();
+
+const topicClusters = resourceCategories.map((category) => ({
+  title: category.label,
+  description: category.description,
+  href: `/resources/${category.slug}`,
+  articles: allArticles
+    .filter((article) => article.data.category === category.slug)
+    .sort(sortByNewest)
+    .slice(0, 3)
+    .map((article) => ({
+      title: article.data.title,
+      href: `/resources/${article.id}`,
+    })),
+}));
+
+const featuredArticles = allArticles
+  .filter((article) => article.data.featured)
+  .sort(sortByNewest)
+  .slice(0, 4)
+  .map((article) => ({
+    title: article.data.title,
+    description: article.data.description,
+    href: `/resources/${article.id}`,
+    category: categoryLabelMap.get(article.data.category) ?? article.data.category,
+  }));
+---
+
+<BaseLayout
+  title="Tattoo Business Resources — Pricing, Deposits, and Professional Systems"
+  ogImage="/og/tatassist-home.png"
+  pageType="home"
+>
+  <Nav slot="header" />
+
+  <!-- Hero — positions as a knowledge hub, not a product pitch -->
+  <section class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 bg-brand-dark overflow-hidden">
+    <!-- Logo background -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <img
+        src="/logo.jpg"
+        alt=""
+        aria-hidden="true"
+        class="w-[600px] sm:w-[700px] lg:w-[800px] max-w-none opacity-[0.07]"
+      />
+    </div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">By Artists, For Artists Since 2008</p>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
+        Tattoo business education for artists who are done winging it.
+      </h1>
+      <p class="text-lg sm:text-xl text-brand-text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+        Resources, strategies, and tools for pricing, deposits, client management, and building a tattoo business that actually supports your life. From artists with 18+ years in the industry.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/resources"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors text-lg"
+          data-track="true"
+          data-track-event="tatassist_cta_click"
+          data-track-label="Browse Resources"
+          data-track-location="home_hero"
+          data-track-type="primary"
+          data-track-destination="/resources"
+        >
+          Browse Resources
+        </a>
+        <a
+          href="/youtube"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-brand-cream/30 text-brand-cream hover:bg-white/5 font-medium rounded-lg transition-colors text-lg"
+          data-track="true"
+          data-track-event="tatassist_cta_click"
+          data-track-label="Watch on YouTube"
+          data-track-location="home_hero"
+          data-track-type="secondary"
+          data-track-destination="/youtube"
+        >
+          Watch on YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse by Topic — the hub's core navigation -->
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-3">
+          Start with the problem you're trying to solve.
+        </h2>
+        <p class="text-brand-text-muted text-lg">Practical tattoo business knowledge, organized by the issues that actually cost you money.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {topicClusters.map((cluster) => (
+          <a href={cluster.href} class="group bg-brand-dark border border-white/10 hover:border-brand-gold/30 rounded-xl p-6 transition-all block">
+            <h3 class="text-xl font-heading font-bold text-brand-cream group-hover:text-brand-gold transition-colors mb-2">
+              {cluster.title}
+            </h3>
+            <p class="text-brand-text-muted text-sm leading-relaxed mb-4">{cluster.description}</p>
+            {cluster.articles.length > 0 ? (
+              <ul class="space-y-1.5">
+                {cluster.articles.map((article) => (
+                  <li class="text-sm text-brand-text-muted/70 leading-snug pl-3 border-l border-white/10">
+                    {article.title}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="text-sm text-brand-text-muted/70 leading-snug pl-3 border-l border-white/10">
+                Fresh resources for this topic are on the way.
+              </p>
+            )}
+            <p class="text-brand-gold text-sm font-medium mt-4 group-hover:translate-x-1 transition-transform">
+              Explore {cluster.title} &rarr;
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Articles -->
+  <section class="py-16 sm:py-20 bg-brand-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-end justify-between mb-10">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-2">
+            Featured Resources
+          </h2>
+          <p class="text-brand-text-muted">The most important business fundamentals for tattoo artists.</p>
+        </div>
+        <a href="/resources" class="hidden sm:block text-brand-gold hover:text-brand-gold/80 text-sm font-medium transition-colors">
+          View all &rarr;
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {featuredArticles.map((article) => (
+          <a href={article.href} class="group bg-brand-dark-lighter border border-white/10 hover:border-brand-gold/20 rounded-xl p-6 sm:p-8 transition-colors block">
+            <span class="text-xs font-semibold uppercase tracking-wider text-brand-gold/70 mb-3 block">
+              {article.category}
+            </span>
+            <h3 class="text-lg sm:text-xl font-heading font-bold text-brand-cream group-hover:text-brand-gold transition-colors mb-3 leading-snug">
+              {article.title}
+            </h3>
+            <p class="text-brand-text-muted text-sm leading-relaxed">{article.description}</p>
+          </a>
+        ))}
+      </div>
+      <div class="sm:hidden text-center mt-6">
+        <a href="/resources" class="text-brand-gold hover:text-brand-gold/80 text-sm font-medium transition-colors">
+          View all resources &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube / Video Section -->
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+            Watch on YouTube
+          </h2>
+          <p class="text-brand-text-muted text-lg leading-relaxed mb-6">
+            Tattoo business education from real artists. No fluff, no fake guru energy. Practical business reality from 18+ years in the industry.
+          </p>
+          <ul class="space-y-3 mb-8">
+            {youtubeHighlights.map((video) => (
+              <li>
+                <a href="/youtube" class="group flex items-start gap-3">
+                  <span class="text-brand-red mt-1 shrink-0">&#9654;</span>
+                  <span>
+                    <span class="text-brand-cream group-hover:text-brand-gold transition-colors text-sm font-medium block">
+                      {video.title}
+                    </span>
+                    <span class="text-brand-text-muted text-sm leading-relaxed block mt-1">
+                      {video.description}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="/youtube"
+            class="inline-flex items-center px-6 py-3 border border-brand-cream/30 text-brand-cream hover:bg-white/5 font-medium rounded-lg transition-colors text-sm"
+          >
+            Browse all videos
+          </a>
+        </div>
+        <div class="bg-brand-dark border border-white/10 rounded-xl aspect-video flex items-center justify-center">
+          <div class="text-center p-8">
+            <span class="text-4xl text-brand-red mb-3 block">&#9654;</span>
+            <p class="text-brand-text-muted text-sm">Latest video embed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who We Are — brief authority, not a full about page -->
+  <section class="py-16 sm:py-20 bg-brand-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+            Built by tattoo artists, not business coaches.
+          </h2>
+          <p class="text-brand-text-muted leading-relaxed mb-4">
+            We've been tattooing for over 18 years each. Survived the 2008 crash, COVID, and today's slowdown. What changed our business wasn't more hustle — it was better structure.
+          </p>
+          <p class="text-brand-text-muted leading-relaxed mb-6">
+            Clearer pricing. Stronger deposits. Professional systems. Less emotional friction around money. More control over time, clients, and income.
+          </p>
+          <a
+            href="/about"
+            class="text-brand-gold hover:text-brand-gold/80 font-medium transition-colors"
+            data-track="true"
+            data-track-event="tatassist_cta_click"
+            data-track-label="Read our full story"
+            data-track-location="home_about"
+            data-track-type="supporting"
+            data-track-destination="/about"
+          >
+            Read our full story &rarr;
+          </a>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          {founderStats.map((stat) => (
+            <div class="bg-brand-dark-lighter border border-white/10 rounded-xl p-5 text-center">
+              <p class="text-2xl font-heading font-bold text-brand-gold mb-1">{stat.value}</p>
+              <p class="text-xs text-brand-text-muted">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools — products mentioned contextually, not as the centerpiece -->
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-3">
+          Tools that put the knowledge to work.
+        </h2>
+        <p class="text-brand-text-muted">When you're ready to go beyond learning and start implementing.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {homepageProducts.map((product) => (
+          <OfferCard
+            title={product.title}
+            description={product.description}
+            ctaLabel={product.ctaLabel}
+            ctaHref={product.ctaHref}
+            accent={product.accent}
+            trackingLocation="home_offer_cards"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA — routes to resources, not a product -->
+  <section class="bg-brand-red-dark py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-white mb-4">
+        Tattoo business advice for artists who are done guessing.
+      </h2>
+      <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+        Done undercharging, done treating business fundamentals like an afterthought. Start with the problem that's costing you the most.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/resources"
+          class="inline-flex items-center px-8 py-3.5 bg-white text-brand-dark font-semibold rounded-lg hover:bg-brand-cream transition-colors text-lg"
+          data-track="true"
+          data-track-event="tatassist_cta_click"
+          data-track-label="Browse Resources"
+          data-track-location="home_final_cta"
+          data-track-type="primary"
+          data-track-destination="/resources"
+        >
+          Browse Resources
+        </a>
+        <a
+          href="/youtube"
+          class="inline-flex items-center px-8 py-3.5 border border-white/40 text-white hover:bg-white/10 font-medium rounded-lg transition-colors text-lg"
+          data-track="true"
+          data-track-event="tatassist_cta_click"
+          data-track-label="Watch on YouTube"
+          data-track-location="home_final_cta"
+          data-track-type="secondary"
+          data-track-destination="/youtube"
+        >
+          Watch on YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

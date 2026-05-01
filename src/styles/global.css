@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* Tatassist Brand Tokens */
+@theme {
+  --color-brand-red: #C0392B;
+  --color-brand-red-dark: #922B21;
+  --color-brand-blue: #2E86C1;
+  --color-brand-blue-dark: #1A5276;
+  --color-brand-cream: #F5F0E8;
+  --color-brand-dark: #1A1A1A;
+  --color-brand-dark-lighter: #2D2D2D;
+  --color-brand-gold: #D4A843;
+  --color-brand-text: #F5F0E8;
+  --color-brand-text-muted: #B8B0A0;
+
+  --font-heading: "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "Source Sans 3", "Helvetica Neue", sans-serif;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-brand-dark);
+  color: var(--color-brand-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Article prose styling */
+.prose-tatassist h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-brand-cream);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.prose-tatassist h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-brand-cream);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.prose-tatassist p {
+  color: var(--color-brand-text-muted);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.prose-tatassist strong {
+  color: var(--color-brand-cream);
+  font-weight: 600;
+}
+
+.prose-tatassist ul, .prose-tatassist ol {
+  color: var(--color-brand-text-muted);
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.prose-tatassist li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.prose-tatassist ul li::marker {
+  color: var(--color-brand-gold);
+}
+
+.prose-tatassist ol li::marker {
+  color: var(--color-brand-gold);
+  font-weight: 600;
+}
+
+.prose-tatassist blockquote {
+  border-left: 3px solid var(--color-brand-gold);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--color-brand-cream);
+  font-style: italic;
+}
+
+.prose-tatassist a {
+  color: var(--color-brand-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-tatassist a:hover {
+  color: var(--color-brand-cream);
+}
+
+.prose-tatassist hr {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 2.5rem 0;
+}

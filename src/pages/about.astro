@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTABlock from '../components/CTABlock.astro';
+import ProblemCard from '../components/ProblemCard.astro';
+import { founderStats } from '../data/site';
+
+const proofPoints = [
+  {
+    title: 'Tattoo-native perspective',
+    description:
+      'Tatassist was built from years in real tattoo shops, not from generic business-coach advice borrowed from another industry.',
+  },
+  {
+    title: 'Systems over hype',
+    description:
+      'We care about cleaner pricing, stronger deposits, and better client boundaries because those are the things that actually change daily life.',
+  },
+  {
+    title: 'Built for hard seasons',
+    description:
+      'The guidance here was shaped by surviving downturns, slow periods, and the strain that comes with running a creative business under pressure.',
+  },
+];
+---
+
+<BaseLayout
+  title="About Tatassist"
+  description="Tatassist is a tattoo-business education brand built by working artists who care about better pricing, stronger deposits, and professional systems."
+  pageType="about"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-16 sm:pb-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">About Tatassist</p>
+      <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_0.9fr] gap-10 items-start">
+        <div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
+            Built by tattoo artists who got tired of watching good work get underpriced.
+          </h1>
+          <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed mb-5">
+            Tatassist exists because too many solid artists are still doing business off instinct alone. The art is strong. The systems behind the art are not.
+          </p>
+          <p class="text-brand-text-muted leading-relaxed">
+            Khan and Linda built this brand around the stuff that changes outcomes in a real shop: estimating before design starts, taking meaningful deposits, qualifying clients better, and running a business that feels professional without feeling fake.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          {founderStats.map((stat) => (
+            <div class="bg-brand-dark-lighter border border-white/10 rounded-xl p-5 text-center">
+              <p class="text-2xl font-heading font-bold text-brand-gold mb-1">{stat.value}</p>
+              <p class="text-xs text-brand-text-muted">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl mb-10">
+        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+          What shaped the brand
+        </h2>
+        <p class="text-brand-text-muted text-lg leading-relaxed">
+          Years in the trade. The 2008 crash. COVID. Today's slowdown. The lesson from all of it was the same: talent matters, but structure decides whether the business can breathe.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {proofPoints.map((point) => (
+          <ProblemCard title={point.title} description={point.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+            What we believe
+          </h2>
+          <p class="text-brand-text-muted leading-relaxed mb-4">
+            Artists should not have to choose between strong creative standards and a healthy business. You can care deeply about the work and still tighten the process around it.
+          </p>
+          <p class="text-brand-text-muted leading-relaxed">
+            We are not interested in guru language, fake scarcity, or selling people on hustle for the sake of hustle. We care about clarity, boundaries, and systems that lower friction in the actual day-to-day business.
+          </p>
+        </div>
+        <div class="bg-brand-dark-lighter border border-white/10 rounded-xl p-6 sm:p-8">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand-gold mb-3">The line we draw</p>
+          <p class="text-brand-text-muted leading-relaxed mb-4">
+            Tatassist is here to sell the necessity of better systems, not to give away the entire system in free content.
+          </p>
+          <p class="text-brand-text-muted leading-relaxed">
+            The free side of the brand helps artists understand what is broken and why it matters. The products go deeper for the people ready to implement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABlock
+    headline="Start with the business problem that's costing you the most."
+    body="If pricing is messy, start there. If client fit and deposits are the issue, the resources hub will point you to the right place fast."
+    primaryCTA={{ label: 'Browse Resources', href: '/resources' }}
+    secondaryCTA={{ label: 'See the Calculator', href: '/calculator' }}
+    variant="accent"
+    trackingLocation="about_final_cta"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>

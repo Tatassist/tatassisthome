@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import ProblemCard from '../../components/ProblemCard.astro';
+import { landingPages } from '../../data/landing-pages';
+
+export async function getStaticPaths() {
+  return landingPages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+
+const landingPageStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.title,
+    description: page.description,
+    url: new URL(Astro.url.pathname, Astro.site),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Landing Pages',
+        item: new URL('/lp', Astro.site),
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: page.title,
+        item: new URL(Astro.url.pathname, Astro.site),
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  ogImage={page.ogImage}
+  structuredData={landingPageStructuredData}
+  pageType="landing_page"
+>
+  <main>
+    <section class="border-b border-white/10 bg-brand-dark">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-3 group">
+          <img src="/logo.jpg" alt="Tatassist" class="h-10 w-auto" />
+          <span class="text-brand-cream font-heading text-xl font-bold group-hover:text-brand-gold transition-colors">
+            Tatassist
+          </span>
+        </a>
+        <a
+          href={page.cta.href}
+          class="inline-flex items-center justify-center px-5 py-2.5 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors text-sm"
+          data-track="true"
+          data-track-event="tatassist_cta_click"
+          data-track-label={page.cta.label}
+          data-track-location="landing_page_topbar"
+          data-track-type="primary"
+          data-track-destination={page.cta.href}
+        >
+          {page.cta.label}
+        </a>
+      </div>
+    </section>
+
+    <section class="relative overflow-hidden bg-brand-dark pt-16 sm:pt-20 pb-18 sm:pb-24">
+      <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(212,168,67,0.14),transparent_38%),radial-gradient(circle_at_left,rgba(192,57,43,0.18),transparent_34%)]"></div>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 items-start">
+          <div class="max-w-3xl">
+            <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">{page.eyebrow}</p>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
+              {page.title}
+            </h1>
+            <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed mb-5">
+              {page.intro}
+            </p>
+            <p class="text-brand-text-muted leading-relaxed mb-8">
+              {page.audience}
+            </p>
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+              <a
+                href={page.cta.href}
+                class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors text-lg"
+                data-track="true"
+                data-track-event="tatassist_cta_click"
+                data-track-label={page.cta.label}
+                data-track-location="landing_page_hero"
+                data-track-type="primary"
+                data-track-destination={page.cta.href}
+              >
+                {page.cta.label}
+              </a>
+              <a
+                href={page.secondaryCTA.href}
+                class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-brand-cream/30 text-brand-cream hover:bg-white/5 font-medium rounded-lg transition-colors text-lg"
+                data-track="true"
+                data-track-event="tatassist_cta_click"
+                data-track-label={page.secondaryCTA.label}
+                data-track-location="landing_page_hero"
+                data-track-type="secondary"
+                data-track-destination={page.secondaryCTA.href}
+              >
+                {page.secondaryCTA.label}
+              </a>
+            </div>
+          </div>
+          <div class="bg-brand-dark-lighter border border-white/10 rounded-2xl p-6 sm:p-8">
+            <p class="text-sm font-semibold uppercase tracking-widest text-brand-gold mb-4">Why artists land here</p>
+            <ul class="space-y-4">
+              {page.proof.map((point) => (
+                <li class="flex gap-3">
+                  <span class="text-brand-red text-lg leading-none mt-0.5">+</span>
+                  <span class="text-brand-text-muted leading-relaxed">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="max-w-3xl mb-10">
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+            The business pain underneath the click
+          </h2>
+          <p class="text-brand-text-muted text-lg leading-relaxed">
+            These pages are not about hype. They are about the day-to-day friction artists feel when pricing, deposits, client fit, or quote confidence are still being handled too loosely.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {page.painPoints.map((point) => (
+            <ProblemCard title={point.title} description={point.description} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CTABlock
+      headline="If the problem is clear, the next step should be too."
+      body="Tatassist is built around moving artists from vague business friction into clearer systems and stronger decision-making."
+      primaryCTA={page.cta}
+      secondaryCTA={page.secondaryCTA}
+      variant="accent"
+      trackingLocation="landing_page_final_cta"
+    />
+  </main>
+</BaseLayout>

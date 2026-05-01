@@ -1,0 +1,72 @@
+---
+const year = new Date().getFullYear();
+
+const footerLinks = {
+  Resources: [
+    { href: '/resources/pricing', label: 'Pricing' },
+    { href: '/resources/deposits', label: 'Deposits' },
+    { href: '/resources/client-qualification', label: 'Client Qualification' },
+    { href: '/resources/professional-systems', label: 'Professional Systems' },
+    { href: '/resources/coverups', label: 'Coverups' },
+  ],
+  Products: [
+    { href: '/calculator', label: 'Pricing Calculator' },
+    { href: '/toolkit', label: "Ink Hustler's Toolkit" },
+    { href: '/coverup-ebook', label: 'Coverup Ebook' },
+  ],
+  Company: [
+    { href: '/about', label: 'About' },
+    { href: '/youtube', label: 'YouTube' },
+    { href: '/resources', label: 'All Resources' },
+  ],
+};
+---
+
+<footer class="bg-brand-dark border-t border-white/10 mt-auto">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-1">
+        <a href="/" class="flex items-center gap-2 mb-4">
+          <img src="/logo.jpg" alt="Tatassist" class="h-10 w-auto" />
+          <span class="font-heading text-lg font-bold text-brand-cream">Tatassist</span>
+        </a>
+        <p class="text-sm text-brand-text-muted leading-relaxed">
+          By Artists, For Artists Since 2008.<br />
+          Better pricing. Stronger deposits. Professional systems.
+        </p>
+      </div>
+
+      <!-- Link columns -->
+      {Object.entries(footerLinks).map(([heading, links]) => (
+        <div>
+          <h3 class="text-sm font-semibold text-brand-cream mb-3 uppercase tracking-wider">{heading}</h3>
+          <ul class="space-y-2">
+            {links.map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
+                  class="text-sm text-brand-text-muted hover:text-brand-cream transition-colors"
+                  data-track="true"
+                  data-track-event="tatassist_nav_click"
+                  data-track-label={label}
+                  data-track-location="footer_nav"
+                  data-track-type="navigation"
+                  data-track-destination={href}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-white/10 text-center">
+      <p class="text-sm text-brand-text-muted">
+        &copy; {year} Tatassist. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

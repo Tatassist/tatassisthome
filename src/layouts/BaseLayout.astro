@@ -1,0 +1,177 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  robots?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  pageType?: string;
+}
+
+const {
+  title,
+  description = 'Tatassist helps tattoo artists make more money with better pricing, stronger deposits, and professional business systems. By artists, for artists since 2008.',
+  ogImage = '/og/tatassist-home.png',
+  ogType = 'website',
+  robots = 'index,follow',
+  structuredData = [],
+  pageType = 'page',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteName = 'Tatassist';
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const hasGTM = Boolean(gtmId);
+const baseStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteName,
+    url: Astro.site,
+    logo: new URL('/logo.jpg', Astro.site),
+    description,
+    slogan: 'By Artists, For Artists, est 2008',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteName,
+    url: Astro.site,
+    description:
+      'Tatassist is a tattoo-business education site focused on pricing, deposits, client qualification, and professional systems.',
+  },
+];
+const structuredDataScripts = [
+  ...baseStructuredData,
+  ...(Array.isArray(structuredData) ? structuredData : [structuredData]),
+].filter(Boolean);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title} | Tatassist</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="generator" content={siteName} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Tatassist`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={`${title} | Tatassist`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    {gaMeasurementId && !hasGTM && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+    )}
+    {hasGTM && (
+      <script is:inline define:vars={{ gtmId }}>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        const firstScript = document.getElementsByTagName('script')[0];
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
+        firstScript?.parentNode?.insertBefore(script, firstScript);
+      </script>
+    )}
+    {gaMeasurementId && !hasGTM && (
+      <script is:inline define:vars={{ gaMeasurementId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          window.dataLayer.push(arguments);
+        }
+        window.gtag = window.gtag || gtag;
+        window.gtag('js', new Date());
+        window.gtag('config', gaMeasurementId);
+      </script>
+    )}
+    {structuredDataScripts.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+    ))}
+  </head>
+  <body class="min-h-screen flex flex-col" data-page-type={pageType} data-page-path={Astro.url.pathname}>
+    {hasGTM && (
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+          title="Google Tag Manager"
+        ></iframe>
+      </noscript>
+    )}
+    <slot name="header">
+      <header>
+        <!-- Nav injected per page or via component -->
+      </header>
+    </slot>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <slot name="footer">
+      <footer>
+        <!-- Footer injected per page or via component -->
+      </footer>
+    </slot>
+    <script is:inline define:vars={{ pageTitle: title, pagePath: Astro.url.pathname, pageType, hasGTM }}>
+      window.dataLayer = window.dataLayer || [];
+      window.tatassistTrack = function (payload) {
+        if (!payload || !payload.event) return;
+        const eventPayload = {
+          ...payload,
+          page_title: pageTitle,
+          page_path: pagePath,
+          page_type: pageType,
+        };
+        window.dataLayer.push(eventPayload);
+        if (!hasGTM && typeof window.gtag === 'function') {
+          const { event, ...params } = eventPayload;
+          window.gtag('event', event, params);
+        }
+      };
+
+      document.addEventListener('click', function (event) {
+        const target = event.target instanceof Element ? event.target.closest('[data-track]') : null;
+        if (!(target instanceof HTMLElement)) return;
+
+        const destination =
+          target.dataset.trackDestination ||
+          (target instanceof HTMLAnchorElement ? target.href : window.location.href);
+
+        window.tatassistTrack({
+          event: target.dataset.trackEvent || 'tatassist_cta_click',
+          cta_label: target.dataset.trackLabel || target.textContent?.trim() || 'unknown',
+          cta_location: target.dataset.trackLocation || 'unknown',
+          cta_type: target.dataset.trackType || 'link',
+          cta_destination: destination,
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTABlock from '../components/CTABlock.astro';
+import ProblemCard from '../components/ProblemCard.astro';
+import SolutionPillar from '../components/SolutionPillar.astro';
+
+const toolkitProblems = [
+  {
+    title: 'Bad-fit clients slip through',
+    description:
+      'When intake is loose and expectations are fuzzy, artists spend energy on people who were never a real fit in the first place.',
+  },
+  {
+    title: 'Policies live in your head',
+    description:
+      'If deposits, reschedules, consultation rules, and communication boundaries are all improvised, every client interaction gets heavier.',
+  },
+  {
+    title: 'Professionalism feels inconsistent',
+    description:
+      'Clients can feel the difference between a clear process and a handmade scramble, even when the tattoo work itself is strong.',
+  },
+];
+
+const toolkitPillars = [
+  {
+    title: 'Deposit and booking systems',
+    description:
+      'Support stronger commitment with clearer policies, tighter flow, and less last-minute friction around money.',
+    ctaLabel: 'Read deposit resources',
+    ctaHref: '/resources/deposits',
+  },
+  {
+    title: 'Qualification and boundaries',
+    description:
+      'Set expectations earlier so weak leads filter themselves out before they eat up time, design hours, and emotional bandwidth.',
+    ctaLabel: 'See client qualification resources',
+    ctaHref: '/resources/client-qualification',
+  },
+  {
+    title: 'Shop-floor professionalism',
+    description:
+      'The toolkit is built around making your process feel more deliberate, more premium, and easier for good clients to trust.',
+    ctaLabel: 'See systems resources',
+    ctaHref: '/resources/professional-systems',
+  },
+];
+---
+
+<BaseLayout
+  title="Ink Hustler's Toolkit"
+  description="The Ink Hustler's Toolkit is Tatassist's system-focused product for deposits, client qualification, boundaries, and a more professional tattoo business flow."
+  ogImage="/og/tatassist-toolkit.png"
+  pageType="toolkit"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-16 sm:pb-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Ink Hustler's Toolkit</p>
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
+          The business toolkit for artists who need stronger systems, not more motivational noise.
+        </h1>
+        <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed mb-6">
+          This product is aimed at the backend of the tattoo business: policies, deposits, client flow, expectations, and the practical structure that keeps a busy artist from operating in constant reaction mode.
+        </p>
+        <p class="text-brand-text-muted leading-relaxed">
+          The release details are still being finalized, but the direction is clear: less chaos, less people-pleasing, and a cleaner process from inquiry to appointment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-8">
+        Why the toolkit matters
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {toolkitProblems.map((problem) => (
+          <ProblemCard title={problem.title} description={problem.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl mb-10">
+        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+          What lives inside the category
+        </h2>
+        <p class="text-brand-text-muted text-lg leading-relaxed">
+          Think of the toolkit as the operating structure behind better deposits, clearer boundaries, and a more premium client experience.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {toolkitPillars.map((pillar) => (
+          <SolutionPillar
+            title={pillar.title}
+            description={pillar.description}
+            ctaLabel={pillar.ctaLabel}
+            ctaHref={pillar.ctaHref}
+            trackingLocation="toolkit_supporting_links"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABlock
+    headline="Start with the pain points the toolkit is built around."
+    body="The resource hub already covers the deposit, qualification, and professionalism problems this product is meant to solve."
+    primaryCTA={{ label: 'Browse Toolkit-Related Resources', href: '/resources/deposits' }}
+    secondaryCTA={{ label: 'See Professional Systems', href: '/resources/professional-systems' }}
+    variant="dark"
+    trackingLocation="toolkit_final_cta"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>

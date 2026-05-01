@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTABlock from '../components/CTABlock.astro';
+import ProblemCard from '../components/ProblemCard.astro';
+import SolutionPillar from '../components/SolutionPillar.astro';
+
+const coverupProblems = [
+  {
+    title: 'High-skill work gets flattened',
+    description:
+      'Artists often price difficult coverups too close to standard work even when the design and execution demands are much higher.',
+  },
+  {
+    title: 'Consultations stay vague',
+    description:
+      'Complex transformations need clearer framing, stronger expectation-setting, and better control over what the client thinks is possible.',
+  },
+  {
+    title: 'Premium positioning gets lost',
+    description:
+      'If the process is not explained well, clients miss the planning, judgment, and technical depth behind the work.',
+  },
+];
+
+const coverupPillars = [
+  {
+    title: 'Position complexity properly',
+    description:
+      'Coverups are not standard projects with a little extra effort. They deserve their own pricing and communication discipline.',
+    ctaLabel: 'Browse coverup resources',
+    ctaHref: '/resources/coverups',
+  },
+  {
+    title: 'Set realistic expectations',
+    description:
+      'Better communication around possibility, limitations, and tradeoffs protects the artist and improves client trust.',
+    ctaLabel: 'Read about qualification',
+    ctaHref: '/resources/client-qualification',
+  },
+  {
+    title: 'Support premium pricing',
+    description:
+      'Harder work, stronger judgment, and more demanding outcomes need a more professional framework around the quote.',
+    ctaLabel: 'See premium pricing content',
+    ctaHref: '/resources/professional-systems',
+  },
+];
+---
+
+<BaseLayout
+  title="Coverup Ebook"
+  description="The Tatassist Coverup Ebook is focused on premium coverup thinking, stronger positioning, and better pricing discipline for complex tattoo work."
+  ogImage="/og/tatassist-coverup-ebook.png"
+  pageType="coverup_ebook"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-16 sm:pb-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Coverup Ebook</p>
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
+          A premium-work mindset for artists handling coverups, corrections, and high-complexity projects.
+        </h1>
+        <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed mb-6">
+          The coverup category is where artists most easily underprice judgment-heavy work. This ebook is meant to sharpen how that work is framed, discussed, and priced.
+        </p>
+        <p class="text-brand-text-muted leading-relaxed">
+          The direct release flow is still coming together, but the positioning around it is already part of the Tatassist resource strategy.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-8">
+        The problems it addresses
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {coverupProblems.map((problem) => (
+          <ProblemCard title={problem.title} description={problem.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl mb-10">
+        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+          What the ebook is trying to reinforce
+        </h2>
+        <p class="text-brand-text-muted text-lg leading-relaxed">
+          Complex tattoo work needs more than artistic skill. It needs tighter communication, more deliberate positioning, and pricing discipline that matches the difficulty.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {coverupPillars.map((pillar) => (
+          <SolutionPillar
+            title={pillar.title}
+            description={pillar.description}
+            ctaLabel={pillar.ctaLabel}
+            ctaHref={pillar.ctaHref}
+            trackingLocation="coverup_supporting_links"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABlock
+    headline="Use the surrounding content while the ebook offer is being finalized."
+    body="The resource center already points toward the pricing, qualification, and professionalism issues that complex coverup work creates."
+    primaryCTA={{ label: 'Browse Resources', href: '/resources' }}
+    secondaryCTA={{ label: 'Read About Tatassist', href: '/about' }}
+    variant="accent"
+    trackingLocation="coverup_final_cta"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>

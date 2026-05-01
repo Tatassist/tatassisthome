@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTABlock from '../components/CTABlock.astro';
+import { resourceCategories, youtubeHighlights } from '../data/site';
+---
+
+<BaseLayout
+  title="YouTube"
+  description="Tatassist's YouTube hub for tattoo business education around pricing, deposits, client qualification, and professional systems."
+  ogImage="/og/tatassist-youtube.png"
+  pageType="youtube"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-16 sm:pb-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">YouTube Hub</p>
+      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
+        <div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
+            Tattoo business breakdowns for artists who want clarity without guru nonsense.
+          </h1>
+          <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed mb-6">
+            This hub is where the Tatassist video side will connect back into the site. The channel focus is straightforward: pricing, deposits, client fit, and professional systems explained by people who actually tattoo.
+          </p>
+          <p class="text-brand-text-muted leading-relaxed">
+            Direct embeds and full channel routing can be layered in next. For now, this page gives the video strategy a proper home instead of sending people into a dead route.
+          </p>
+        </div>
+        <div class="bg-brand-dark-lighter border border-white/10 rounded-2xl p-8 aspect-video flex items-center justify-center">
+          <div class="text-center">
+            <span class="text-5xl text-brand-red mb-3 block">&#9654;</span>
+            <p class="text-brand-cream font-medium">Featured video space</p>
+            <p class="text-brand-text-muted text-sm mt-2">Embed-ready once the channel links are wired in.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-8">
+        Video themes
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {youtubeHighlights.map((video) => (
+          <article class="bg-brand-dark border border-white/10 rounded-xl p-6">
+            <p class="text-brand-red text-xs font-semibold uppercase tracking-wider mb-3">Video Idea</p>
+            <h3 class="text-lg font-heading font-bold text-brand-cream mb-3">{video.title}</h3>
+            <p class="text-brand-text-muted text-sm leading-relaxed">{video.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl mb-10">
+        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+          Every video should lead somewhere useful
+        </h2>
+        <p class="text-brand-text-muted text-lg leading-relaxed">
+          The channel is not meant to float separately from the site. Each topic should point people into the matching resource hub and, when relevant, into the product that helps them implement.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {resourceCategories.map((category) => (
+          <a
+            href={`/resources/${category.slug}`}
+            class="group bg-brand-dark-lighter border border-white/10 hover:border-brand-gold/30 rounded-xl p-6 transition-colors block"
+            data-track="true"
+            data-track-event="tatassist_cta_click"
+            data-track-label={category.label}
+            data-track-location="youtube_topic_grid"
+            data-track-type="topic_link"
+            data-track-destination={`/resources/${category.slug}`}
+          >
+            <h3 class="text-xl font-heading font-bold text-brand-cream group-hover:text-brand-gold transition-colors mb-2">
+              {category.label}
+            </h3>
+            <p class="text-brand-text-muted text-sm leading-relaxed mb-4">{category.description}</p>
+            <p class="text-brand-gold text-sm font-medium">
+              Explore the related resources &rarr;
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABlock
+    headline="Use the resource hub as the current destination for channel traffic."
+    body="Until embeds and channel links are fully wired, the content library is the strongest place to send visitors who want the next step."
+    primaryCTA={{ label: 'Browse Resources', href: '/resources' }}
+    secondaryCTA={{ label: 'Read About Tatassist', href: '/about' }}
+    variant="dark"
+    trackingLocation="youtube_final_cta"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>

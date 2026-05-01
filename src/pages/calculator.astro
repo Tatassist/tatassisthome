@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTABlock from '../components/CTABlock.astro';
+import ProblemCard from '../components/ProblemCard.astro';
+import SolutionPillar from '../components/SolutionPillar.astro';
+
+const painPoints = [
+  {
+    title: 'Quotes depend on mood',
+    description:
+      'When the number only exists in your head, every consultation becomes a confidence test instead of a clear process.',
+  },
+  {
+    title: 'Deposits stay weak',
+    description:
+      'It is hard to ask for a meaningful percentage upfront when you do not trust the estimate you are basing it on.',
+  },
+  {
+    title: 'Design starts too early',
+    description:
+      'Without an estimate first, artists end up doing unpaid creative labor before the client has actually committed.',
+  },
+];
+
+const calculatorPillars = [
+  {
+    title: 'Estimate before design',
+    description:
+      'Use known variables like size, placement, complexity, detail, color, and session scope to ground the price conversation early.',
+    ctaLabel: 'Read pricing resources',
+    ctaHref: '/resources/pricing',
+  },
+  {
+    title: 'Quote with clearer logic',
+    description:
+      'Move from “I think maybe this much” to a professional range you can explain without sounding defensive or vague.',
+    ctaLabel: 'See deposit articles',
+    ctaHref: '/resources/deposits',
+  },
+  {
+    title: 'Support stronger deposits',
+    description:
+      'Once the estimate is reliable, the deposit stops feeling arbitrary and starts feeling proportional and fair.',
+    ctaLabel: 'See how deposits changed',
+    ctaHref: '/resources/deposits/10x-deposits',
+  },
+];
+---
+
+<BaseLayout
+  title="Pricing Calculator"
+  description="The Tatassist Pricing Calculator helps tattoo artists estimate cost before design starts so pricing, deposits, and booking conversations feel more professional."
+  ogImage="/og/tatassist-calculator.png"
+  pageType="calculator"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-16 sm:pb-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Pricing Calculator</p>
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
+          A cleaner way to estimate tattoo pricing before the design work begins.
+        </h1>
+        <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed mb-6">
+          The calculator is built for artists who are done pricing off gut feel. It helps turn the money conversation into a structured estimate based on the real variables behind the work.
+        </p>
+        <p class="text-brand-text-muted leading-relaxed">
+          The iOS app exists. The direct launch flow is still being finalized here on the site, so this page is the product overview and the fastest path into the pricing content around it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-8">
+        What it fixes
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {painPoints.map((point) => (
+          <ProblemCard title={point.title} description={point.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-dark">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl mb-10">
+        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
+          What the calculator is meant to do
+        </h2>
+        <p class="text-brand-text-muted text-lg leading-relaxed">
+          This is not about squeezing every client for more money. It is about pricing the work more accurately, protecting your time earlier, and making the booking process feel solid from the start.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {calculatorPillars.map((pillar) => (
+          <SolutionPillar
+            title={pillar.title}
+            description={pillar.description}
+            ctaLabel={pillar.ctaLabel}
+            ctaHref={pillar.ctaHref}
+            trackingLocation="calculator_supporting_links"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABlock
+    headline="See the pricing philosophy before you touch the tool."
+    body="The fastest way to understand the calculator is to read the resource pieces that explain why estimating first changes everything."
+    primaryCTA={{ label: 'Browse Pricing Resources', href: '/resources/pricing' }}
+    secondaryCTA={{ label: 'Read the About Page', href: '/about' }}
+    variant="accent"
+    trackingLocation="calculator_final_cta"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>

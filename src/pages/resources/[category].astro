@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { resourceCategories } from '../../data/site';
+
+export async function getStaticPaths() {
+  return resourceCategories.map((cat) => ({
+    params: { category: cat.slug },
+    props: { meta: cat },
+  }));
+}
+
+const { meta } = Astro.props;
+const category = meta.slug;
+
+const allArticles = await getCollection('resources');
+const articles = allArticles.filter((a) => a.data.category === category);
+const featured = articles.filter((a) => a.data.featured);
+const rest = articles.filter((a) => !a.data.featured);
+---
+
+<BaseLayout
+  title={`${meta.label} — Tattoo Business Resources`}
+  description={meta.description}
+  pageType="resource_category"
+>
+  <Nav slot="header" />
+
+  <!-- Hero -->
+  <section class="pt-28 sm:pt-36 pb-12 sm:pb-16 bg-brand-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <a href="/resources" class="text-brand-gold/70 hover:text-brand-gold text-sm font-medium transition-colors mb-4 inline-block">&larr; All Resources</a>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-brand-cream leading-tight mb-4">
+        {meta.label}
+      </h1>
+      <p class="text-lg text-brand-text-muted max-w-2xl">
+        {meta.description}
+      </p>
+      <p class="mt-4 text-sm text-brand-text-muted/60">
+        {articles.length} article{articles.length !== 1 ? 's' : ''} in this topic
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured -->
+  {featured.length > 0 && (
+    <section class="py-12 sm:py-16 bg-brand-dark-lighter border-y border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="text-2xl font-heading font-bold text-brand-cream mb-8">Featured</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {featured.map((article) => (
+            <a href={`/resources/${article.id}`} class="group bg-brand-dark border border-white/10 hover:border-brand-gold/20 rounded-xl p-6 sm:p-8 transition-colors block">
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-brand-cream group-hover:text-brand-gold transition-colors mb-3 leading-snug">
+                {article.data.title}
+              </h3>
+              <p class="text-brand-text-muted text-sm leading-relaxed">{article.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- All Articles -->
+  <section class="py-12 sm:py-16 bg-brand-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl font-heading font-bold text-brand-cream mb-8">
+        {featured.length > 0 ? 'More articles' : 'Articles'}
+      </h2>
+      <div class="space-y-4">
+        {(featured.length > 0 ? rest : articles).map((article) => (
+          <a href={`/resources/${article.id}`} class="group flex items-start gap-4 bg-brand-dark-lighter border border-white/10 hover:border-brand-gold/20 rounded-xl p-5 sm:p-6 transition-colors block">
+            <div class="flex-1">
+              <h3 class="text-base sm:text-lg font-heading font-bold text-brand-cream group-hover:text-brand-gold transition-colors leading-snug">
+                {article.data.title}
+              </h3>
+              <p class="text-brand-text-muted text-sm leading-relaxed mt-2">{article.data.description}</p>
+            </div>
+            <span class="text-brand-gold/50 group-hover:text-brand-gold text-sm mt-1 shrink-0 transition-colors">&rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Category CTA -->
+  <section class="bg-brand-red-dark py-12 sm:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-4">
+        Ready to put this into practice?
+      </h2>
+      <p class="text-white/80 mb-8">
+        The {meta.offer} turns these ideas into real results for your business.
+      </p>
+      <a
+        href={meta.offerHref}
+        class="inline-flex items-center px-8 py-3.5 bg-white text-brand-dark font-semibold rounded-lg hover:bg-brand-cream transition-colors"
+        data-track="true"
+        data-track-event="tatassist_cta_click"
+        data-track-label={`Check out the ${meta.offer}`}
+        data-track-location="resource_category_final_cta"
+        data-track-type="primary"
+        data-track-destination={meta.offerHref}
+      >
+        Check out the {meta.offer}
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
