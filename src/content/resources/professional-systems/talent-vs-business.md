@@ -5,7 +5,7 @@ category: "professional-systems"
 quickTake: "Talent gets attention. Systems create trust. If the art is excellent but the booking process, pricing logic, communication, and boundaries all feel improvised, the business will still underperform."
 primaryCTA: "toolkit"
 secondaryCTA: "calculator"
-ctaBridge: "If your work is strong but the business side still feels patchy, the toolkit is meant to tighten the systems around the art. That is what makes premium pricing believable and the day-to-day operation easier to run."
+ctaBridge: "If your work is strong but the business side still feels patchy, Artist Systems is meant to tighten the process around the art. That is what makes premium pricing believable and the day-to-day operation easier to run."
 publishDate: "2026-04-06"
 relatedArticles:
   - "professional-systems/premium-pricing"

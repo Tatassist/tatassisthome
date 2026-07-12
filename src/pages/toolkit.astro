@@ -2,123 +2,393 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import CTABlock from '../components/CTABlock.astro';
-import ProblemCard from '../components/ProblemCard.astro';
-import SolutionPillar from '../components/SolutionPillar.astro';
+import { artistSystemsConfig } from '../data/artist-systems';
 
-const toolkitProblems = [
+const includedSystems = [
   {
-    title: 'Bad-fit clients slip through',
+    number: '01',
+    title: 'Client-flow audit + map',
     description:
-      'When intake is loose and expectations are fuzzy, artists spend energy on people who were never a real fit in the first place.',
+      'See where inquiries stall, where expectations get muddy, and what should happen from first contact to a paid appointment.',
   },
   {
-    title: 'Policies live in your head',
+    number: '02',
+    title: 'Inquiry form field map',
     description:
-      'If deposits, reschedules, consultation rules, and communication boundaries are all improvised, every client interaction gets heavier.',
+      'A tattoo-specific Google Forms setup that collects the details you actually need before starting a long DM thread.',
   },
   {
-    title: 'Professionalism feels inconsistent',
+    number: '03',
+    title: 'Fit decision guide',
     description:
-      'Clients can feel the difference between a clear process and a handmade scramble, even when the tattoo work itself is strong.',
+      'A compact way to sort ready, not-yet-ready, and wrong-fit inquiries without making every decision from scratch.',
+  },
+  {
+    number: '04',
+    title: 'Eight modular client messages',
+    description:
+      'Adaptable replies for common moments such as missing details, next steps, deposits, rescheduling, and a respectful no.',
+  },
+  {
+    number: '05',
+    title: 'Three policy decision worksheets',
+    description:
+      'Choose how your own deposit, reschedule, and communication boundaries should work before you turn them into client-facing policies.',
+  },
+  {
+    number: '06',
+    title: 'Two simple trackers',
+    description:
+      'Follow inquiry progress and unwanted calendar gaps without adopting a heavy studio-management platform.',
+  },
+  {
+    number: '07',
+    title: 'Books Open campaign',
+    description:
+      'Six layouts, two short videos, four captions, one email, and three personal DMs built around one focused booking push.',
   },
 ];
 
-const toolkitPillars = [
+const frictionPoints = [
   {
-    title: 'Deposit and booking systems',
-    description:
-      'Support stronger commitment with clearer policies, tighter flow, and less last-minute friction around money.',
-    ctaLabel: 'Read deposit resources',
-    ctaHref: '/resources/deposits',
+    title: 'Every inquiry becomes detective work',
+    description: 'Missing references, unclear budgets, vague placement, and long reply chains steal time before you know whether the project fits.',
   },
   {
-    title: 'Qualification and boundaries',
-    description:
-      'Set expectations earlier so weak leads filter themselves out before they eat up time, design hours, and emotional bandwidth.',
-    ctaLabel: 'See client qualification resources',
-    ctaHref: '/resources/client-qualification',
+    title: 'The same replies get rewritten',
+    description: 'You keep explaining next steps, deposits, boundaries, and availability in slightly different words across DMs and email.',
   },
   {
-    title: 'Shop-floor professionalism',
-    description:
-      'The toolkit is built around making your process feel more deliberate, more premium, and easier for good clients to trust.',
-    ctaLabel: 'See systems resources',
-    ctaHref: '/resources/professional-systems',
+    title: 'Calendar gaps get handled too late',
+    description: 'A cancellation or slow week appears, then the scramble starts without a ready campaign or a clean list of people to contact.',
   },
 ];
+
+const steps = [
+  {
+    title: 'Check founding fit',
+    description: 'Answer six private, browser-only questions. It takes about a minute and does not send your answers anywhere.',
+  },
+  {
+    title: 'Configure the system',
+    description: 'Use the guided worksheets to make the messages, form, and boundaries sound and operate like your business.',
+  },
+  {
+    title: 'Install one working path',
+    description: 'Put the form, replies, tracker, and campaign into the tools you already use, then improve from real client activity.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is this another booking app?',
+    answer:
+      'No. Artist Systems is a guided set of client-flow tools and monthly campaign material. It is designed to work beside your current email, DMs, Google Forms, calendar, or booking software.',
+  },
+  {
+    question: 'Does it include contracts or legal forms?',
+    answer:
+      'No. The policy worksheets help you make business decisions and prepare clearer language, but they are not legal advice or jurisdiction-specific legal documents.',
+  },
+  {
+    question: 'Do I need Canva, Notion, or the Tatassist calculator?',
+    answer:
+      'No. The core system works without the calculator and does not require Notion. Campaign files will include practical formats and clear instructions for the tools they use.',
+  },
+  {
+    question: 'Will it guarantee bookings?',
+    answer:
+      'No. Your market, portfolio, availability, reputation, pricing, and follow-through all affect results. Artist Systems gives you a clearer process and a campaign to run; it cannot promise appointments or income.',
+  },
+  {
+    question: 'What does the founding reservation pay for?',
+    answer: `The refundable $${artistSystemsConfig.foundingPrice} reservation covers September access. Founders then choose whether to activate the private $${artistSystemsConfig.foundingPrice}/month membership. The first recurring charge is expected one month after activation.`,
+  },
+  {
+    question: 'Who can join the founding release?',
+    answer:
+      'The first release is limited to working, U.S.-based tattoo artists who actively manage their own inquiries and have enough current demand or a known calendar gap to test the system.',
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
 ---
 
 <BaseLayout
-  title="Ink Hustler's Toolkit"
-  description="The Ink Hustler's Toolkit is Tatassist's system-focused product for deposits, client qualification, boundaries, and a more professional tattoo business flow."
+  title="Tatassist Artist Systems"
+  description="A guided client-flow system and monthly booking campaign for tattoo artists who want cleaner inquiries, consistent replies, and fewer last-minute scrambles."
   ogImage="/og/tatassist-toolkit.png"
-  pageType="toolkit"
+  pageType="artist_systems_offer"
+  structuredData={structuredData}
 >
   <Nav slot="header" />
 
-  <section class="pt-28 sm:pt-36 pb-16 sm:pb-20 bg-brand-dark">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Ink Hustler's Toolkit</p>
-      <div class="max-w-3xl">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
-          The business toolkit for artists who need stronger systems, not more motivational noise.
-        </h1>
-        <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed mb-6">
-          This product is aimed at the backend of the tattoo business: policies, deposits, client flow, expectations, and the practical structure that keeps a busy artist from operating in constant reaction mode.
-        </p>
-        <p class="text-brand-text-muted leading-relaxed">
-          The release details are still being finalized, but the direction is clear: less chaos, less people-pleasing, and a cleaner process from inquiry to appointment.
-        </p>
+  <section class="relative overflow-hidden pt-28 sm:pt-36 pb-16 sm:pb-24 bg-brand-dark border-b border-white/10">
+    <div class="absolute inset-0 hero-wash" aria-hidden="true"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-[minmax(0,1fr)_21rem] gap-10 lg:gap-16 items-end">
+        <div class="max-w-4xl">
+          <p class="text-brand-gold text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] mb-5">
+            Tatassist Artist Systems <span class="text-brand-text-muted/70">• The Ink Hustler's Toolkit, rebuilt</span>
+          </p>
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-heading font-bold text-brand-cream leading-[0.98] tracking-tight mb-7">
+            Stop rebuilding your booking process in DMs every week.
+          </h1>
+          <p class="max-w-3xl text-lg sm:text-xl text-brand-text-muted leading-relaxed mb-8">
+            Install a cleaner path from inquiry to paid appointment, then use a ready-to-run booking campaign when your calendar needs attention.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+            <a
+              href="/artist-systems/qualify"
+              class="inline-flex items-center justify-center px-7 py-4 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors"
+              data-track="true"
+              data-track-event="tatassist_qualifier_started"
+              data-track-label="Check Founding Fit"
+              data-track-location="artist_systems_hero"
+              data-track-type="primary"
+              data-track-destination="/artist-systems/qualify"
+            >
+              Check Founding Fit
+            </a>
+            <a
+              href="#included"
+              class="inline-flex items-center justify-center px-7 py-4 border border-brand-cream/25 text-brand-cream hover:bg-white/5 font-medium rounded-lg transition-colors"
+            >
+              See what is included
+            </a>
+          </div>
+          <p class="mt-5 text-sm text-brand-text-muted/70">
+            About one minute. Your fit-check answers stay in your browser.
+          </p>
+        </div>
+
+        <aside class="bg-brand-dark-lighter/90 border border-brand-gold/30 rounded-2xl p-6 sm:p-7 shadow-2xl shadow-black/30">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-gold mb-5">Founding 15</p>
+          <div class="flex items-end gap-2 mb-2">
+            <span class="text-5xl font-heading font-bold text-brand-cream">${artistSystemsConfig.foundingPrice}</span>
+            <span class="text-brand-text-muted pb-2">reservation</span>
+          </div>
+          <p class="text-sm text-brand-text-muted leading-relaxed mb-6">
+            Refundable before delivery. Applied to the first month when you activate founding membership.
+          </p>
+          <dl class="space-y-3 pt-5 border-t border-white/10 text-sm">
+            <div class="flex justify-between gap-4">
+              <dt class="text-brand-text-muted">Access</dt>
+              <dd class="text-brand-cream font-semibold text-right">{artistSystemsConfig.foundingAccessDate}</dd>
+            </div>
+            <div class="flex justify-between gap-4">
+              <dt class="text-brand-text-muted">Founding membership</dt>
+              <dd class="text-brand-cream font-semibold">${artistSystemsConfig.foundingPrice}/month</dd>
+            </div>
+            <div class="flex justify-between gap-4">
+              <dt class="text-brand-text-muted">Availability</dt>
+              <dd class="text-brand-cream font-semibold">U.S. only</dd>
+            </div>
+          </dl>
+          <p class="mt-5 text-xs text-brand-text-muted/65 leading-relaxed">
+            Reservations are planned for July 24–31, or until all {artistSystemsConfig.foundingCapacity} places are reserved.
+          </p>
+        </aside>
       </div>
     </div>
   </section>
 
-  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-8">
-        Why the toolkit matters
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {toolkitProblems.map((problem) => (
-          <ProblemCard title={problem.title} description={problem.description} />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="py-16 sm:py-20 bg-brand-dark">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mb-10">
-        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
-          What lives inside the category
+        <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">The weekly drag</p>
+        <h2 class="text-3xl sm:text-4xl font-heading font-bold text-brand-cream leading-tight">
+          Great tattooing should not require a handmade admin process every time.
         </h2>
-        <p class="text-brand-text-muted text-lg leading-relaxed">
-          Think of the toolkit as the operating structure behind better deposits, clearer boundaries, and a more premium client experience.
-        </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {toolkitPillars.map((pillar) => (
-          <SolutionPillar
-            title={pillar.title}
-            description={pillar.description}
-            ctaLabel={pillar.ctaLabel}
-            ctaHref={pillar.ctaHref}
-            trackingLocation="toolkit_supporting_links"
-          />
+      <div class="grid md:grid-cols-3 gap-5">
+        {frictionPoints.map((point) => (
+          <article class="bg-brand-dark border border-white/10 rounded-xl p-6 sm:p-7">
+            <span class="block w-9 h-1 bg-brand-red mb-6" aria-hidden="true"></span>
+            <h3 class="text-xl font-heading font-bold text-brand-cream mb-3">{point.title}</h3>
+            <p class="text-brand-text-muted leading-relaxed">{point.description}</p>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
-  <CTABlock
-    headline="Start with the pain points the toolkit is built around."
-    body="The resource hub already covers the deposit, qualification, and professionalism problems this product is meant to solve."
-    primaryCTA={{ label: 'Browse Toolkit-Related Resources', href: '/resources/deposits' }}
-    secondaryCTA={{ label: 'See Professional Systems', href: '/resources/professional-systems' }}
-    variant="dark"
-    trackingLocation="toolkit_final_cta"
-  />
+  <section id="included" class="py-16 sm:py-24 bg-brand-dark scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-[20rem_minmax(0,1fr)] gap-10 lg:gap-16">
+        <div>
+          <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">Founding release</p>
+          <h2 class="text-3xl sm:text-4xl font-heading font-bold text-brand-cream leading-tight mb-5">
+            One working client path. One complete booking push.
+          </h2>
+          <p class="text-brand-text-muted leading-relaxed mb-6">
+            The first release stays focused on the moments that repeatedly cost artists time: collecting the right details, moving a good inquiry forward, holding boundaries, and responding to a calendar gap.
+          </p>
+          <p class="text-sm text-brand-text-muted/70 border-l-2 border-brand-gold pl-4">
+            No Procreate brushes. No tattoo-design generator. No giant folder of filler files.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden">
+          {includedSystems.map((item, index) => (
+            <article class:list={[
+              'bg-brand-dark-lighter p-6 sm:p-7',
+              index === includedSystems.length - 1 && 'sm:col-span-2',
+            ]}>
+              <p class="text-brand-red text-sm font-heading font-bold tracking-widest mb-4">{item.number}</p>
+              <h3 class="text-xl font-heading font-bold text-brand-cream mb-3">{item.title}</h3>
+              <p class="text-brand-text-muted leading-relaxed">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-blue-dark/20 border-y border-brand-blue/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-10">
+        <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">How it works</p>
+        <h2 class="text-3xl sm:text-4xl font-heading font-bold text-brand-cream">Built to be installed, not admired in Downloads.</h2>
+      </div>
+      <ol class="grid md:grid-cols-3 gap-6">
+        {steps.map((step, index) => (
+          <li class="relative bg-brand-dark/60 border border-white/10 rounded-xl p-7">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand-gold text-brand-dark font-heading font-bold mb-5">
+              {index + 1}
+            </span>
+            <h3 class="text-xl font-heading font-bold text-brand-cream mb-3">{step.title}</h3>
+            <p class="text-brand-text-muted leading-relaxed">{step.description}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="bg-brand-dark-lighter border border-white/10 rounded-2xl p-7 sm:p-9">
+          <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">What it is</p>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-6">A reusable client-flow system with fresh reasons to put it to work.</h2>
+          <ul class="space-y-4 text-brand-text-muted">
+            <li class="border-l-2 border-brand-gold pl-4">Editable building blocks you can fit to your voice and shop rules</li>
+            <li class="border-l-2 border-brand-gold pl-4">A complete monthly campaign focused on one practical booking outcome</li>
+            <li class="border-l-2 border-brand-gold pl-4">A monthly shop-floor session and replay for implementation questions</li>
+            <li class="border-l-2 border-brand-gold pl-4">Simple formats that work beside the tools you already use</li>
+          </ul>
+        </div>
+        <div class="bg-brand-dark-lighter border border-white/10 rounded-2xl p-7 sm:p-9">
+          <p class="text-brand-red text-sm font-semibold uppercase tracking-widest mb-4">What it is not</p>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-6">Software, legal advice, or a promise that your books will fill themselves.</h2>
+          <ul class="space-y-4 text-brand-text-muted">
+            <li class="border-l-2 border-brand-red pl-4">Not a replacement for your calendar, inbox, or booking platform</li>
+            <li class="border-l-2 border-brand-red pl-4">Not contracts, consent forms, medical guidance, or legal advice</li>
+            <li class="border-l-2 border-brand-red pl-4">Not an income, lead, or appointment guarantee</li>
+            <li class="border-l-2 border-brand-red pl-4">Not dependent on the Tatassist calculator</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-dark-lighter border-y border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">Founding access</p>
+        <h2 class="text-3xl sm:text-5xl font-heading font-bold text-brand-cream mb-5">Help shape the version working artists actually need.</h2>
+        <p class="max-w-2xl mx-auto text-lg text-brand-text-muted leading-relaxed">
+          The first cohort is intentionally small. Founders receive the complete September release and give focused feedback on what installs cleanly, what needs clarification, and what should come next.
+        </p>
+      </div>
+      <div class="max-w-2xl mx-auto bg-brand-dark border border-brand-gold/30 rounded-2xl p-7 sm:p-9">
+        <div class="grid sm:grid-cols-2 gap-6 sm:gap-10 mb-7">
+          <div>
+            <p class="text-sm text-brand-text-muted mb-1">Refundable reservation</p>
+            <p class="text-4xl font-heading font-bold text-brand-cream">${artistSystemsConfig.foundingPrice}</p>
+          </div>
+          <div>
+            <p class="text-sm text-brand-text-muted mb-1">Founding membership</p>
+            <p class="text-4xl font-heading font-bold text-brand-cream">${artistSystemsConfig.foundingPrice}<span class="text-base text-brand-text-muted font-body font-normal">/month</span></p>
+          </div>
+        </div>
+        <p class="text-sm text-brand-text-muted leading-relaxed mb-7">
+          Your reservation pays for September access if you activate the founding membership. Cancel before the next charge whenever you choose. Review the complete <a class="text-brand-gold underline underline-offset-2" href="/terms">reservation, refund, and membership terms</a> before paying.
+        </p>
+        <a
+          href="/artist-systems/qualify"
+          class="flex items-center justify-center w-full px-7 py-4 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors"
+          data-track="true"
+          data-track-event="tatassist_qualifier_started"
+          data-track-label="Check Founding Fit"
+          data-track-location="artist_systems_pricing"
+          data-track-type="primary"
+          data-track-destination="/artist-systems/qualify"
+        >
+          Check Founding Fit
+        </a>
+        <p class="text-center text-xs text-brand-text-muted/65 mt-4">U.S.-based working tattoo artists only for this founding release.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-brand-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="max-w-2xl mb-10">
+        <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">Questions before you check fit</p>
+        <h2 class="text-3xl sm:text-4xl font-heading font-bold text-brand-cream">Straight answers about the first release.</h2>
+      </div>
+      <div class="divide-y divide-white/10 border-y border-white/10">
+        {faqs.map(({ question, answer }) => (
+          <details class="group py-6">
+            <summary class="cursor-pointer text-lg sm:text-xl font-heading font-bold text-brand-cream">
+              {question}
+            </summary>
+            <p class="max-w-3xl pt-4 pr-10 text-brand-text-muted leading-relaxed">{answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-brand-red">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <p class="text-white/75 text-sm font-semibold uppercase tracking-widest mb-3">Founding 15</p>
+      <h2 class="text-3xl sm:text-5xl font-heading font-bold text-white mb-5">A cleaner client path can start with one minute.</h2>
+      <p class="max-w-2xl mx-auto text-white/80 text-lg leading-relaxed mb-8">
+        Check whether the founding release matches your business right now. Your answers stay on this device.
+      </p>
+      <a
+        href="/artist-systems/qualify"
+        class="inline-flex items-center justify-center px-8 py-4 bg-brand-cream hover:bg-white text-brand-dark font-semibold rounded-lg transition-colors"
+        data-track="true"
+        data-track-event="tatassist_qualifier_started"
+        data-track-label="Check Founding Fit"
+        data-track-location="artist_systems_final"
+        data-track-type="primary"
+        data-track-destination="/artist-systems/qualify"
+      >
+        Check Founding Fit
+      </a>
+    </div>
+  </section>
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .hero-wash {
+    background:
+      radial-gradient(circle at 78% 18%, rgb(212 168 67 / 0.12), transparent 27rem),
+      radial-gradient(circle at 8% 88%, rgb(192 57 43 / 0.16), transparent 24rem);
+  }
+</style>

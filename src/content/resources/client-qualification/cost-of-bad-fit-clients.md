@@ -5,7 +5,7 @@ category: "client-qualification"
 quickTake: "Most of the pain from bad-fit clients comes from weak filtering and unclear expectations upfront. Better qualification starts before your energy gets spent — not after the problem is already in your chair."
 primaryCTA: "toolkit"
 secondaryCTA: "calculator"
-ctaBridge: "The real cost of bad-fit clients is the time, energy, and money lost before you ever realize the fit was wrong. If you want systems for qualifying clients, setting expectations, and filtering problems before they reach your chair, the toolkit is built for this."
+ctaBridge: "The real cost of bad-fit clients is the time, energy, and money lost before you ever realize the fit was wrong. If you want a clearer way to qualify clients, set expectations, and filter problems before they reach your chair, Artist Systems is built for this."
 publishDate: "2026-04-04"
 featured: true
 faqs:

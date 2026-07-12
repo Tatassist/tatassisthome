@@ -1,320 +1,1700 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import OfferCard from '../components/OfferCard.astro';
-import {
-  founderStats,
-  homepageProducts,
-  resourceCategories,
-  youtubeHighlights,
-} from '../data/site';
+import { artistSystemsConfig } from '../data/artist-systems';
 
-const allArticles = await getCollection('resources');
-const categoryLabelMap = new Map(resourceCategories.map((category) => [category.slug, category.label]));
-const sortByNewest = (a: (typeof allArticles)[number], b: (typeof allArticles)[number]) =>
-  new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime();
+const clientFlowVault = [
+  'Client-flow audit + map',
+  'Inquiry form field map',
+  'Fit decision guide',
+  'Eight modular client messages',
+  'Three policy decision worksheets',
+  'Two simple trackers',
+];
 
-const topicClusters = resourceCategories.map((category) => ({
-  title: category.label,
-  description: category.description,
-  href: `/resources/${category.slug}`,
-  articles: allArticles
-    .filter((article) => article.data.category === category.slug)
-    .sort(sortByNewest)
-    .slice(0, 3)
-    .map((article) => ({
-      title: article.data.title,
-      href: `/resources/${article.id}`,
-    })),
-}));
+const monthlyBookingDrop = [
+  '14-day campaign plan',
+  'Books-open copy',
+  'Six editable layouts',
+  'Two short-video prompts',
+  'Email + DM messages',
+  'Results tracker',
+];
 
-const featuredArticles = allArticles
-  .filter((article) => article.data.featured)
-  .sort(sortByNewest)
-  .slice(0, 4)
-  .map((article) => ({
-    title: article.data.title,
-    description: article.data.description,
-    href: `/resources/${article.id}`,
-    category: categoryLabelMap.get(article.data.category) ?? article.data.category,
-  }));
+const flowSteps = ['Inquiry', 'Qualify', 'Estimate + Deposit', 'Book'];
+
+const installationSteps = [
+  {
+    number: '01',
+    title: 'Map the leak',
+    description:
+      'Audit your inquiry-to-appointment path and identify the three biggest friction points.',
+  },
+  {
+    number: '02',
+    title: 'Configure the system',
+    description:
+      'Adapt the inquiry fields, replies, deposit decisions, and boundaries to your business.',
+  },
+  {
+    number: '03',
+    title: 'Put it in motion',
+    description:
+      'Install the live path, run the first booking campaign, and measure what changes.',
+  },
+];
+
+const whatItIs = [
+  'Editable building blocks for your voice and shop rules',
+  'A reusable client-flow system',
+  'One complete booking campaign each month',
+  'Implementation walkthroughs and shop-floor support',
+];
+
+const whatItIsNot = [
+  'A replacement for your calendar, inbox, or booking software',
+  'Contracts, consent forms, legal advice, or medical guidance',
+  'A guarantee of appointments or income',
+  'Dependent on the Tatassist Pricing Calculator',
+];
+
+const depositSteps = [
+  'Estimate before design',
+  'Quote with confidence',
+  'Take a proportional deposit',
+];
+
+const founderTimeline = [
+  { year: '2008', label: 'First downturn' },
+  { year: '2020', label: 'COVID' },
+  { year: 'Now', label: 'Another slowdown' },
+];
+
+const launchResources = [
+  {
+    title: "How I 10x'd My Deposits in One Month",
+    category: 'Deposits',
+    href: '/resources/deposits/10x-deposits',
+  },
+  {
+    title: 'The Real Cost of Bad-Fit Tattoo Clients',
+    category: 'Client flow',
+    href: '/resources/client-qualification/cost-of-bad-fit-clients',
+  },
+  {
+    title: 'Professional Systems Make Premium Pricing Believable',
+    category: 'Systems',
+    href: '/resources/professional-systems/premium-pricing',
+  },
+];
 ---
 
 <BaseLayout
-  title="Tattoo Business Resources — Pricing, Deposits, and Professional Systems"
-  ogImage="/og/tatassist-home.png"
-  pageType="home"
+  title="Tatassist Artist Systems for Working Tattoo Artists"
+  description="Install a cleaner path from tattoo inquiry to paid appointment, then run one ready-to-use booking campaign each month with Tatassist Artist Systems."
+  ogImage="/og/tatassist-artist-systems-home.png"
+  pageType="artist_systems_home"
 >
   <Nav slot="header" />
 
-  <!-- Hero — positions as a knowledge hub, not a product pitch -->
-  <section class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 bg-brand-dark overflow-hidden">
-    <!-- Logo background -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <img
-        src="/logo.jpg"
-        alt=""
-        aria-hidden="true"
-        class="w-[600px] sm:w-[700px] lg:w-[800px] max-w-none opacity-[0.07]"
-      />
-    </div>
-    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
-      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">By Artists, For Artists Since 2008</p>
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-brand-cream leading-tight mb-6">
-        Tattoo business education for artists who are done winging it.
-      </h1>
-      <p class="text-lg sm:text-xl text-brand-text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
-        Resources, strategies, and tools for pricing, deposits, client management, and building a tattoo business that actually supports your life. From artists with 18+ years in the industry.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a
-          href="/resources"
-          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors text-lg"
-          data-track="true"
-          data-track-event="tatassist_cta_click"
-          data-track-label="Browse Resources"
-          data-track-location="home_hero"
-          data-track-type="primary"
-          data-track-destination="/resources"
-        >
-          Browse Resources
-        </a>
-        <a
-          href="/youtube"
-          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-brand-cream/30 text-brand-cream hover:bg-white/5 font-medium rounded-lg transition-colors text-lg"
-          data-track="true"
-          data-track-event="tatassist_cta_click"
-          data-track-label="Watch on YouTube"
-          data-track-location="home_hero"
-          data-track-type="secondary"
-          data-track-destination="/youtube"
-        >
-          Watch on YouTube
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Browse by Topic — the hub's core navigation -->
-  <section class="py-16 sm:py-20 bg-brand-dark-lighter border-y border-white/5">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-12">
-        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-3">
-          Start with the problem you're trying to solve.
-        </h2>
-        <p class="text-brand-text-muted text-lg">Practical tattoo business knowledge, organized by the issues that actually cost you money.</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {topicClusters.map((cluster) => (
-          <a href={cluster.href} class="group bg-brand-dark border border-white/10 hover:border-brand-gold/30 rounded-xl p-6 transition-all block">
-            <h3 class="text-xl font-heading font-bold text-brand-cream group-hover:text-brand-gold transition-colors mb-2">
-              {cluster.title}
-            </h3>
-            <p class="text-brand-text-muted text-sm leading-relaxed mb-4">{cluster.description}</p>
-            {cluster.articles.length > 0 ? (
-              <ul class="space-y-1.5">
-                {cluster.articles.map((article) => (
-                  <li class="text-sm text-brand-text-muted/70 leading-snug pl-3 border-l border-white/10">
-                    {article.title}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p class="text-sm text-brand-text-muted/70 leading-snug pl-3 border-l border-white/10">
-                Fresh resources for this topic are on the way.
-              </p>
-            )}
-            <p class="text-brand-gold text-sm font-medium mt-4 group-hover:translate-x-1 transition-transform">
-              Explore {cluster.title} &rarr;
-            </p>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Articles -->
-  <section class="py-16 sm:py-20 bg-brand-dark">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex items-end justify-between mb-10">
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-2">
-            Featured Resources
-          </h2>
-          <p class="text-brand-text-muted">The most important business fundamentals for tattoo artists.</p>
-        </div>
-        <a href="/resources" class="hidden sm:block text-brand-gold hover:text-brand-gold/80 text-sm font-medium transition-colors">
-          View all &rarr;
-        </a>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {featuredArticles.map((article) => (
-          <a href={article.href} class="group bg-brand-dark-lighter border border-white/10 hover:border-brand-gold/20 rounded-xl p-6 sm:p-8 transition-colors block">
-            <span class="text-xs font-semibold uppercase tracking-wider text-brand-gold/70 mb-3 block">
-              {article.category}
-            </span>
-            <h3 class="text-lg sm:text-xl font-heading font-bold text-brand-cream group-hover:text-brand-gold transition-colors mb-3 leading-snug">
-              {article.title}
-            </h3>
-            <p class="text-brand-text-muted text-sm leading-relaxed">{article.description}</p>
-          </a>
-        ))}
-      </div>
-      <div class="sm:hidden text-center mt-6">
-        <a href="/resources" class="text-brand-gold hover:text-brand-gold/80 text-sm font-medium transition-colors">
-          View all resources &rarr;
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- YouTube / Video Section -->
-  <section class="py-16 sm:py-20 bg-brand-dark-lighter">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
-            Watch on YouTube
-          </h2>
-          <p class="text-brand-text-muted text-lg leading-relaxed mb-6">
-            Tattoo business education from real artists. No fluff, no fake guru energy. Practical business reality from 18+ years in the industry.
+  <div class="launch-page">
+    <section class="print-dark launch-hero">
+      <div class="launch-shell hero-grid">
+        <div class="hero-copy">
+          <h1>Stop rebuilding your booking process in DMs every week.</h1>
+          <p class="hero-support">
+            Install a cleaner path from inquiry to paid appointment, then use a ready-to-run booking
+            campaign when your calendar needs attention.
           </p>
-          <ul class="space-y-3 mb-8">
-            {youtubeHighlights.map((video) => (
-              <li>
-                <a href="/youtube" class="group flex items-start gap-3">
-                  <span class="text-brand-red mt-1 shrink-0">&#9654;</span>
-                  <span>
-                    <span class="text-brand-cream group-hover:text-brand-gold transition-colors text-sm font-medium block">
-                      {video.title}
-                    </span>
-                    <span class="text-brand-text-muted text-sm leading-relaxed block mt-1">
-                      {video.description}
-                    </span>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <a
-            href="/youtube"
-            class="inline-flex items-center px-6 py-3 border border-brand-cream/30 text-brand-cream hover:bg-white/5 font-medium rounded-lg transition-colors text-sm"
-          >
-            Browse all videos
-          </a>
-        </div>
-        <div class="bg-brand-dark border border-white/10 rounded-xl aspect-video flex items-center justify-center">
-          <div class="text-center p-8">
-            <span class="text-4xl text-brand-red mb-3 block">&#9654;</span>
-            <p class="text-brand-text-muted text-sm">Latest video embed</p>
+
+          <div class="action-row">
+            <a
+              class="launch-button launch-button-primary"
+              href="/artist-systems/qualify"
+              data-track="true"
+              data-track-event="tatassist_qualifier_started"
+              data-track-label="Check founding fit"
+              data-track-location="home_launch_hero"
+              data-track-type="primary"
+              data-track-destination="/artist-systems/qualify"
+            >
+              Check founding fit
+              <svg aria-hidden="true" viewBox="0 0 28 18">
+                <path d="M1 9h23M17 2l7 7-7 7" />
+              </svg>
+            </a>
+            <a class="launch-link launch-link-blue" href="#included">
+              See what is included
+              <svg aria-hidden="true" viewBox="0 0 28 18">
+                <path d="M1 9h23M17 2l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="credibility-line" aria-label="Built by working tattoo artists with more than 18 years each in the industry since 2008">
+            <span>By working tattoo artists</span>
+            <span>18+ years each</span>
+            <span>Since 2008</span>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Who We Are — brief authority, not a full about page -->
-  <section class="py-16 sm:py-20 bg-brand-dark">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-4">
-            Built by tattoo artists, not business coaches.
-          </h2>
-          <p class="text-brand-text-muted leading-relaxed mb-4">
-            We've been tattooing for over 18 years each. Survived the 2008 crash, COVID, and today's slowdown. What changed our business wasn't more hustle — it was better structure.
-          </p>
-          <p class="text-brand-text-muted leading-relaxed mb-6">
-            Clearer pricing. Stronger deposits. Professional systems. Less emotional friction around money. More control over time, clients, and income.
-          </p>
-          <a
-            href="/about"
-            class="text-brand-gold hover:text-brand-gold/80 font-medium transition-colors"
-            data-track="true"
-            data-track-event="tatassist_cta_click"
-            data-track-label="Read our full story"
-            data-track-location="home_about"
-            data-track-type="supporting"
-            data-track-destination="/about"
-          >
-            Read our full story &rarr;
-          </a>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          {founderStats.map((stat) => (
-            <div class="bg-brand-dark-lighter border border-white/10 rounded-xl p-5 text-center">
-              <p class="text-2xl font-heading font-bold text-brand-gold mb-1">{stat.value}</p>
-              <p class="text-xs text-brand-text-muted">{stat.label}</p>
+        <aside class="founding-panel" aria-label="Founding offer details">
+          <p class="founding-title">Founding <strong>{artistSystemsConfig.foundingCapacity}</strong></p>
+          <dl>
+            <div>
+              <dt>Refundable reservation</dt>
+              <dd>${artistSystemsConfig.foundingPrice}</dd>
             </div>
+            <div>
+              <dt>Founding membership if activated</dt>
+              <dd>${artistSystemsConfig.foundingPrice}/month</dd>
+            </div>
+            <div>
+              <dt>Access</dt>
+              <dd>{artistSystemsConfig.foundingAccessDate}</dd>
+            </div>
+            <div>
+              <dt>Eligibility</dt>
+              <dd>U.S. working artists</dd>
+            </div>
+            <div>
+              <dt>Planned reservation window</dt>
+              <dd>July 24–31</dd>
+            </div>
+          </dl>
+        </aside>
+
+        <div class="flow-line" aria-label="Inquiry to booked appointment path">
+          {flowSteps.map((step, index) => (
+            <>
+              <span class:list={['flow-step', `flow-step-${index + 1}`]}>{step}</span>
+              {index < flowSteps.length - 1 && (
+                <svg class="flow-arrow" aria-hidden="true" viewBox="0 0 72 24">
+                  <path d="M1 12h64M54 3l11 9-11 9" />
+                </svg>
+              )}
+            </>
           ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Tools — products mentioned contextually, not as the centerpiece -->
-  <section class="py-16 sm:py-20 bg-brand-dark-lighter">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-3">
-          Tools that put the knowledge to work.
-        </h2>
-        <p class="text-brand-text-muted">When you're ready to go beyond learning and start implementing.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {homepageProducts.map((product) => (
-          <OfferCard
-            title={product.title}
-            description={product.description}
-            ctaLabel={product.ctaLabel}
-            ctaHref={product.ctaHref}
-            accent={product.accent}
-            trackingLocation="home_offer_cards"
-          />
-        ))}
-      </div>
-    </div>
-  </section>
+    <section id="included" class="paper-section product-scope scroll-target">
+      <div class="launch-shell">
+        <div class="section-intro section-intro-wide">
+          <h2>One working client path. One complete booking push.</h2>
+          <p>The founding release stays focused on the moments that cost working artists time every week.</p>
+        </div>
 
-  <!-- Final CTA — routes to resources, not a product -->
-  <section class="bg-brand-red-dark py-16 sm:py-20">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-white mb-4">
-        Tattoo business advice for artists who are done guessing.
-      </h2>
-      <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-        Done undercharging, done treating business fundamentals like an afterthought. Start with the problem that's costing you the most.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a
-          href="/resources"
-          class="inline-flex items-center px-8 py-3.5 bg-white text-brand-dark font-semibold rounded-lg hover:bg-brand-cream transition-colors text-lg"
-          data-track="true"
-          data-track-event="tatassist_cta_click"
-          data-track-label="Browse Resources"
-          data-track-location="home_final_cta"
-          data-track-type="primary"
-          data-track-destination="/resources"
-        >
-          Browse Resources
-        </a>
-        <a
-          href="/youtube"
-          class="inline-flex items-center px-8 py-3.5 border border-white/40 text-white hover:bg-white/10 font-medium rounded-lg transition-colors text-lg"
-          data-track="true"
-          data-track-event="tatassist_cta_click"
-          data-track-label="Watch on YouTube"
-          data-track-location="home_final_cta"
-          data-track-type="secondary"
-          data-track-destination="/youtube"
-        >
-          Watch on YouTube
+        <div class="engine-grid">
+          <article class="product-engine engine-vault">
+            <header>
+              <p class="section-label label-blue">The Client Flow Vault</p>
+              <h3>A reusable system for the path from inquiry to paid appointment.</h3>
+            </header>
+            <ol class="ruled-list">
+              {clientFlowVault.map((item, index) => (
+                <li><span>{String(index + 1).padStart(2, '0')}</span>{item}</li>
+              ))}
+            </ol>
+          </article>
+
+          <article class="product-engine engine-drop">
+            <header>
+              <p class="section-label label-red">The Monthly Booking Drop</p>
+              <h3>One complete campaign for a timely booking outcome.</h3>
+            </header>
+            <p class="campaign-theme">Books Open Without the DM Pileup</p>
+            <ol class="ruled-list">
+              {monthlyBookingDrop.map((item, index) => (
+                <li><span>{String(index + 1).padStart(2, '0')}</span>{item}</li>
+              ))}
+            </ol>
+          </article>
+        </div>
+
+        <div class="engine-bridge" aria-label="How the two Artist Systems parts work together">
+          <span>Cleaner client flow</span>
+          <svg aria-hidden="true" viewBox="0 0 72 24"><path d="M1 12h64M54 3l11 9-11 9" /></svg>
+          <span>Ready campaign</span>
+          <svg aria-hidden="true" viewBox="0 0 72 24"><path d="M1 12h64M54 3l11 9-11 9" /></svg>
+          <span>Implement + measure</span>
+        </div>
+        <p class="support-rule">
+          Works beside the forms, DMs, email, calendar, or booking software you already use.
+        </p>
+      </div>
+    </section>
+
+    <section id="how-it-installs" class="print-dark installation-section scroll-target">
+      <div class="launch-shell">
+        <div class="section-intro section-intro-wide section-intro-dark">
+          <h2>Built to be <span class="red-ink">installed</span>, not admired in <span class="blue-ink">Downloads</span>.</h2>
+          <p>The first hour is about putting one cleaner client path into the tools you already use.</p>
+        </div>
+
+        <ol class="installation-grid">
+          {installationSteps.map((step, index) => (
+            <li class:list={['installation-step', `installation-step-${index + 1}`]}>
+              <div class="step-heading">
+                <span>{step.number}</span>
+                <h3>{step.title}</h3>
+              </div>
+              <p>{step.description}</p>
+              {index < installationSteps.length - 1 && (
+                <svg aria-hidden="true" viewBox="0 0 120 24"><path d="M1 12h112M102 3l11 9-11 9" /></svg>
+              )}
+            </li>
+          ))}
+        </ol>
+
+        <p class="activation-statement">
+          Activation = <span>installed in a live workflow</span>, not just downloaded.
+        </p>
+        <div class="centered-action">
+          <a
+            class="launch-button launch-button-primary"
+            href="/artist-systems/qualify"
+            data-track="true"
+            data-track-event="tatassist_qualifier_started"
+            data-track-label="Check founding fit"
+            data-track-location="home_installation"
+            data-track-type="primary"
+            data-track-destination="/artist-systems/qualify"
+          >
+            Check founding fit
+            <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
+          </a>
+          <p>About one minute. Your answers stay in your browser.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="what-it-is" class="paper-section comparison-section scroll-target">
+      <div class="launch-shell">
+        <div class="section-intro section-intro-wide section-intro-centered">
+          <h2>This is <span class="red-ink">not</span> another booking app.</h2>
+          <p>
+            Artist Systems supplies tattoo-specific decisions, language, and implementation beside the
+            tools you already use.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          <article class="comparison-column comparison-is">
+            <h3>What it is</h3>
+            <ul>
+              {whatItIs.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+          <article class="comparison-column comparison-not">
+            <h3>What it is not</h3>
+            <ul>
+              {whatItIsNot.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        </div>
+
+        <a class="comparison-link" href="/toolkit">
+          Read straight answers
+          <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
         </a>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="deposit-proof" class="paper-section deposit-proof scroll-target">
+      <div class="launch-shell deposit-grid">
+        <div class="deposit-story">
+          <p class="section-label label-blue">A shop-floor result</p>
+          <h2>Clearer estimates changed what we could ask for upfront.</h2>
+          <p>
+            Pricing before design helped us move from token deposits to meaningful proportional deposits
+            and grow the amount collected 10x in one month.
+          </p>
+          <div class="action-row action-row-dark">
+            <a
+              class="launch-button launch-button-primary"
+              href="/calculator"
+              data-track="true"
+              data-track-event="tatassist_cta_click"
+              data-track-label="See the Pricing Calculator"
+              data-track-location="home_deposit_proof"
+              data-track-type="supporting"
+              data-track-destination="/calculator"
+            >
+              See the Pricing Calculator
+              <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
+            </a>
+            <a class="launch-link launch-link-blue dark-link" href="/resources/deposits/10x-deposits">
+              Read the 10x deposit story
+              <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="deposit-result">
+          <p class="deposit-number">10x</p>
+          <p class="deposit-caption">Deposit growth in one month</p>
+          <div class="deposit-path" aria-label="Estimate before design, quote with confidence, take a proportional deposit">
+            {depositSteps.map((step, index) => (
+              <>
+                <span>{step}</span>
+                {index < depositSteps.length - 1 && (
+                  <svg aria-hidden="true" viewBox="0 0 52 18"><path d="M1 9h45M37 2l8 7-8 7" /></svg>
+                )}
+              </>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="founder-proof" class="print-dark founder-proof scroll-target">
+      <div class="launch-shell founder-grid">
+        <div class="founder-copy">
+          <h2>Built by tattoo artists, not business coaches.</h2>
+          <p>
+            We have each spent more than 18 years tattooing through hard seasons. What changed our business
+            was not more hustle. It was better structure.
+          </p>
+          <a class="launch-link launch-link-blue" href="/about">
+            Read our story
+            <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
+          </a>
+        </div>
+
+        <div class="years-proof" aria-label="More than 18 years each in tattooing">
+          <strong>18+</strong>
+          <span>Years each</span>
+          <em>in tattooing</em>
+        </div>
+
+        <figure class="brand-print">
+          <img src="/logo.jpg" alt="Tatassist — By Artists, For Artists, est 2008" />
+        </figure>
+
+        <ol class="founder-timeline">
+          {founderTimeline.map((item, index) => (
+            <li class:list={[`timeline-item-${index + 1}`]}>
+              <strong>{item.year}</strong>
+              <span>{item.label}</span>
+            </li>
+          ))}
+        </ol>
+        <p class="founder-lesson">
+          The lesson stayed the same: talent matters. <span>Structure decides whether the business can breathe.</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="launch-resources" class="paper-section launch-reading scroll-target">
+      <div class="launch-shell">
+        <div class="section-intro section-intro-wide section-intro-centered">
+          <h2>Understand the leak. Then install the fix.</h2>
+          <p>
+            Our free resources explain why stronger pricing, deposits, and client flow matter. Artist Systems
+            contains the implementation.
+          </p>
+        </div>
+
+        <div class="resource-rail">
+          {launchResources.map((resource, index) => (
+            <a
+              href={resource.href}
+              class:list={['resource-row', `resource-row-${index + 1}`]}
+              data-track="true"
+              data-track-event="tatassist_resource_click"
+              data-track-label={resource.title}
+              data-track-location="home_launch_resources"
+              data-track-type="content"
+              data-track-destination={resource.href}
+            >
+              <span class="resource-number">0{index + 1}</span>
+              <span class="resource-title">{resource.title}</span>
+              <span class="resource-category">{resource.category}</span>
+              <svg aria-hidden="true" viewBox="0 0 32 20"><path d="M1 10h27M20 2l8 8-8 8" /></svg>
+            </a>
+          ))}
+        </div>
+
+        <div class="reading-links">
+          <a class="launch-link launch-link-blue dark-link" href="/resources">
+            Browse all resources
+            <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
+          </a>
+          <a class="launch-link launch-link-red dark-link" href="/youtube">
+            Watch on YouTube
+            <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit-check" class="print-dark final-launch-cta scroll-target">
+      <div class="launch-shell final-cta-inner">
+        <h2>Is Artist Systems a fit for your business?</h2>
+        <p>The founding check takes about one minute. Your answers stay in your browser.</p>
+        <div class="action-row final-actions">
+          <a
+            class="launch-button launch-button-primary"
+            href="/artist-systems/qualify"
+            data-track="true"
+            data-track-event="tatassist_qualifier_started"
+            data-track-label="Check founding fit"
+            data-track-location="home_final_launch_cta"
+            data-track-type="primary"
+            data-track-destination="/artist-systems/qualify"
+          >
+            Check founding fit
+            <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
+          </a>
+          <a class="launch-link launch-link-blue" href="/toolkit">
+            Review the full founding offer
+            <svg aria-hidden="true" viewBox="0 0 28 18"><path d="M1 9h23M17 2l7 7-7 7" /></svg>
+          </a>
+        </div>
+        <div class="final-facts">
+          <span>Founding {artistSystemsConfig.foundingCapacity}</span>
+          <span>Planned July 24–31</span>
+          <span>U.S. working artists</span>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
+  :global(body[data-page-type='artist_systems_home']) {
+    background: #11110f;
+  }
+
+  :global(body[data-page-type='artist_systems_home'] nav) {
+    border-bottom-color: rgb(192 57 43 / 0.55);
+  }
+
+  :global(body[data-page-type='artist_systems_home'] nav > div) {
+    max-width: 82rem;
+  }
+
+  .launch-page {
+    --ink: #11110f;
+    --paper: #f5f0e8;
+    --red: #c0392b;
+    --blue: #2e86c1;
+    --gold: #d4a843;
+    --muted-dark: #565047;
+    --muted-light: #c2b9a8;
+    overflow: hidden;
+  }
+
+  .launch-shell {
+    width: min(100% - 2rem, 82rem);
+    margin-inline: auto;
+  }
+
+  .print-dark,
+  .paper-section {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .print-dark {
+    color: var(--paper);
+    background-color: var(--ink);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgb(245 240 232 / 0.035) 1px, transparent 1.2px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.012), transparent 45%, rgb(255 255 255 / 0.012));
+    background-size: 5px 5px, 100% 100%;
+  }
+
+  .paper-section {
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgb(17 17 15 / 0.07) 0.8px, transparent 1px),
+      linear-gradient(92deg, rgb(192 57 43 / 0.018), transparent 38%, rgb(46 134 193 / 0.018));
+    background-size: 6px 6px, 100% 100%;
+  }
+
+  .print-dark::after,
+  .paper-section::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 10px;
+    background: linear-gradient(to bottom, var(--red) 0 45%, var(--ink) 45% 58%, var(--blue) 58% 100%);
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    text-wrap: balance;
+  }
+
+  .launch-hero {
+    min-height: 100svh;
+    padding: 8.75rem 0 3rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(22rem, 0.85fr);
+    gap: 2.75rem 4rem;
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    max-width: 12ch;
+    margin: 0;
+    color: var(--paper);
+    font-size: clamp(4rem, 6.7vw, 6.75rem);
+    font-weight: 700;
+    letter-spacing: -0.038em;
+    line-height: 0.92;
+  }
+
+  .hero-copy h1::after,
+  .section-intro h2::after,
+  .deposit-story h2::after,
+  .founder-copy h2::after,
+  .final-cta-inner h2::after {
+    content: '';
+    display: block;
+    width: min(12rem, 40%);
+    height: 4px;
+    margin-top: 1rem;
+    background: var(--red);
+    transform: rotate(-1deg);
+  }
+
+  .hero-support {
+    max-width: 39rem;
+    margin: 1.65rem 0 1.75rem;
+    color: var(--muted-light);
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    line-height: 1.55;
+  }
+
+  .action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem 1.5rem;
+    align-items: center;
+  }
+
+  .launch-button,
+  .launch-link {
+    display: inline-flex;
+    min-height: 3.6rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .launch-button svg,
+  .launch-link svg,
+  .resource-row svg {
+    width: 1.65rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    stroke-width: 2;
+  }
+
+  .launch-button-primary {
+    min-width: 14rem;
+    padding: 0.9rem 1.25rem;
+    border: 1px solid #ef6a59;
+    border-radius: 2px;
+    color: white;
+    background: var(--red);
+    box-shadow: inset 0 0 0 1px rgb(17 17 15 / 0.35);
+  }
+
+  .launch-button-primary:hover {
+    background: #a93125;
+    transform: translateY(-2px);
+  }
+
+  .launch-link {
+    padding: 0.5rem 0;
+    border-bottom: 2px solid currentColor;
+  }
+
+  .launch-link-blue {
+    color: #58a9da;
+  }
+
+  .launch-link-red {
+    color: var(--red);
+  }
+
+  .launch-link:hover {
+    color: var(--paper);
+    transform: translateX(3px);
+  }
+
+  .launch-button:focus-visible,
+  .launch-link:focus-visible,
+  .resource-row:focus-visible,
+  .comparison-link:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 4px;
+  }
+
+  .credibility-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.2rem;
+    margin-top: 1.55rem;
+    color: var(--paper);
+    font-size: 0.92rem;
+  }
+
+  .credibility-line span {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .credibility-line span:not(:last-child)::after {
+    content: '';
+    width: 0.42rem;
+    height: 0.42rem;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  .founding-panel {
+    position: relative;
+    padding: 0.25rem 0 0.25rem 2.25rem;
+    border-left: 2px solid var(--blue);
+  }
+
+  .founding-title {
+    margin: 0 0 1rem;
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 5.2vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .founding-title strong {
+    color: var(--red);
+  }
+
+  .founding-panel dl {
+    margin: 0;
+    border-top: 2px solid rgb(46 134 193 / 0.65);
+  }
+
+  .founding-panel dl > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgb(46 134 193 / 0.6);
+  }
+
+  .founding-panel dt {
+    color: var(--muted-light);
+    font-size: 0.92rem;
+  }
+
+  .founding-panel dd {
+    margin: 0;
+    color: var(--paper);
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .flow-line {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 3.4rem minmax(0, 1fr) 3.4rem minmax(0, 1.55fr) 3.4rem minmax(0, 0.75fr);
+    gap: 0.75rem;
+    align-items: center;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(46 134 193 / 0.65);
+  }
+
+  .flow-step {
+    padding: 0 0 0.55rem;
+    border-bottom: 4px solid;
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 2.6vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .flow-step-1,
+  .flow-step-4 {
+    border-color: var(--red);
+  }
+
+  .flow-step-2 {
+    border-color: var(--blue);
+  }
+
+  .flow-step-3 {
+    border-color: var(--gold);
+  }
+
+  .flow-arrow,
+  .engine-bridge svg,
+  .installation-step svg,
+  .deposit-path svg {
+    width: 100%;
+    fill: none;
+    stroke: var(--red);
+    stroke-width: 2;
+  }
+
+  .flow-line .flow-arrow:nth-of-type(2),
+  .engine-bridge svg:nth-of-type(2) {
+    stroke: var(--blue);
+  }
+
+  .scroll-target {
+    scroll-margin-top: 5rem;
+  }
+
+  .product-scope,
+  .comparison-section,
+  .deposit-proof,
+  .launch-reading {
+    padding: clamp(4.5rem, 8vw, 7.25rem) 0;
+  }
+
+  .section-intro {
+    margin-bottom: 3rem;
+  }
+
+  .section-intro-wide {
+    max-width: 72rem;
+  }
+
+  .section-intro h2,
+  .deposit-story h2,
+  .founder-copy h2,
+  .final-cta-inner h2 {
+    margin: 0;
+    font-size: clamp(3rem, 5.4vw, 5.2rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  .section-intro p {
+    max-width: 52rem;
+    margin: 1.25rem 0 0;
+    color: var(--muted-dark);
+    font-size: 1.15rem;
+    line-height: 1.55;
+  }
+
+  .section-intro-dark p {
+    color: var(--muted-light);
+  }
+
+  .section-intro-centered {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .section-intro-centered p {
+    margin-inline: auto;
+  }
+
+  .section-intro-centered h2::after {
+    margin-inline: auto;
+  }
+
+  .red-ink {
+    color: var(--red);
+  }
+
+  .blue-ink {
+    color: var(--blue);
+  }
+
+  .engine-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-engine {
+    min-width: 0;
+    padding-right: 2.5rem;
+  }
+
+  .product-engine + .product-engine {
+    padding-right: 0;
+    padding-left: 2.5rem;
+    border-left: 2px solid var(--red);
+  }
+
+  .section-label {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3vw, 2.85rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .label-blue {
+    color: #256f9f;
+  }
+
+  .label-red {
+    color: var(--red);
+  }
+
+  .product-engine h3 {
+    max-width: 34rem;
+    margin: 0 0 1.5rem;
+    color: var(--muted-dark);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .campaign-theme {
+    margin: 0 0 0.5rem;
+    padding: 0.8rem 0;
+    border-top: 2px solid var(--red);
+    border-bottom: 2px solid var(--red);
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 2.1vw, 1.7rem);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .ruled-list {
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid var(--blue);
+    list-style: none;
+  }
+
+  .engine-drop .ruled-list {
+    border-top: 0;
+  }
+
+  .ruled-list li {
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: center;
+    min-height: 3.45rem;
+    border-bottom: 1px solid rgb(46 134 193 / 0.62);
+    font-size: 1.03rem;
+    font-weight: 600;
+  }
+
+  .ruled-list li span {
+    color: var(--blue);
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+
+  .engine-drop .ruled-list li span {
+    color: var(--red);
+  }
+
+  .engine-bridge {
+    display: grid;
+    grid-template-columns: auto minmax(2.5rem, 1fr) auto minmax(2.5rem, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2.75rem;
+    padding: 1.15rem 0;
+    border-top: 2px solid var(--blue);
+    border-bottom: 2px solid var(--blue);
+    font-family: var(--font-heading);
+    font-size: clamp(1.15rem, 2.15vw, 1.8rem);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .support-rule {
+    margin: 1rem 0 0;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .installation-section {
+    padding: clamp(4.5rem, 8vw, 7.25rem) 0;
+  }
+
+  .installation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .installation-step {
+    position: relative;
+    min-width: 0;
+    padding-bottom: 3.25rem;
+  }
+
+  .step-heading {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .step-heading span {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .installation-step-1 .step-heading span {
+    color: var(--red);
+  }
+
+  .installation-step-2 .step-heading span {
+    color: var(--blue);
+  }
+
+  .installation-step-3 .step-heading span {
+    color: var(--gold);
+  }
+
+  .step-heading h3 {
+    margin: 0;
+    font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .installation-step p {
+    margin: 0.75rem 0 0 4.9rem;
+    color: var(--muted-light);
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .installation-step > svg {
+    position: absolute;
+    right: -1.5rem;
+    bottom: 0.7rem;
+    left: 1.35rem;
+    width: calc(100% + 0.5rem);
+  }
+
+  .installation-step-2 > svg {
+    stroke: var(--blue);
+  }
+
+  .activation-statement {
+    margin: 3.1rem 0 1.5rem;
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--blue);
+    border-bottom: 1px solid var(--blue);
+    font-family: var(--font-heading);
+    font-size: clamp(1.45rem, 3.15vw, 2.8rem);
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .activation-statement span {
+    color: var(--red);
+  }
+
+  .centered-action {
+    display: grid;
+    justify-items: center;
+  }
+
+  .centered-action p {
+    margin: 0.75rem 0 0;
+    color: var(--muted-light);
+    font-size: 0.9rem;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 3rem;
+  }
+
+  .comparison-column {
+    padding-right: 2.5rem;
+  }
+
+  .comparison-column + .comparison-column {
+    padding-right: 0;
+    padding-left: 2.5rem;
+    border-left: 2px solid var(--red);
+  }
+
+  .comparison-column h3 {
+    margin: 0;
+    padding-bottom: 0.85rem;
+    border-bottom: 2px solid;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .comparison-is h3 {
+    color: #256f9f;
+    border-color: var(--blue);
+  }
+
+  .comparison-not h3 {
+    color: var(--red);
+    border-color: var(--red);
+  }
+
+  .comparison-column ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .comparison-column li {
+    min-height: 4.5rem;
+    padding: 1rem 0 1rem 2.25rem;
+    border-bottom: 1px solid;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .comparison-is li {
+    border-color: rgb(46 134 193 / 0.55);
+  }
+
+  .comparison-not li {
+    border-color: rgb(192 57 43 / 0.48);
+  }
+
+  .comparison-column li::before {
+    content: '';
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-left: -2.25rem;
+    margin-right: 1.45rem;
+    border: 3px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .comparison-is li::before {
+    color: var(--blue);
+  }
+
+  .comparison-not li::before {
+    color: var(--red);
+  }
+
+  .comparison-link {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 1.5rem auto 0;
+    color: #256f9f;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .comparison-link svg {
+    width: 1.65rem;
+    fill: none;
+    stroke: var(--red);
+    stroke-width: 2;
+  }
+
+  .deposit-proof {
+    border-top: 1px solid rgb(17 17 15 / 0.12);
+  }
+
+  .deposit-grid {
+    display: grid;
+    grid-template-columns: 0.92fr 1.08fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .deposit-story h2 {
+    font-size: clamp(3rem, 5vw, 4.8rem);
+  }
+
+  .deposit-story > p:not(.section-label) {
+    max-width: 34rem;
+    margin: 1.4rem 0 1.6rem;
+    color: var(--muted-dark);
+    font-size: 1.1rem;
+    line-height: 1.55;
+  }
+
+  .action-row-dark .launch-button-primary {
+    color: white;
+  }
+
+  .dark-link:hover {
+    color: var(--ink);
+  }
+
+  .deposit-result {
+    padding-left: 3rem;
+    border-left: 2px solid var(--red);
+  }
+
+  .deposit-number {
+    margin: 0;
+    color: var(--red);
+    font-family: var(--font-heading);
+    font-size: clamp(8rem, 17vw, 15rem);
+    font-weight: 700;
+    letter-spacing: -0.07em;
+    line-height: 0.74;
+  }
+
+  .deposit-caption {
+    margin: 1rem 0 2rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.5vw, 3.1rem);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .deposit-path {
+    display: grid;
+    grid-template-columns: 1fr 2.5rem 1fr 2.5rem 1fr;
+    gap: 0.65rem;
+    align-items: center;
+    padding-top: 1.25rem;
+    border-top: 2px solid var(--blue);
+  }
+
+  .deposit-path span {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .deposit-path svg {
+    stroke: var(--blue);
+  }
+
+  .founder-proof {
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
+  }
+
+  .founder-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(12rem, 0.42fr) minmax(15rem, 0.55fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .founder-copy h2 {
+    font-size: clamp(3.1rem, 5.4vw, 5.2rem);
+  }
+
+  .founder-copy p {
+    max-width: 40rem;
+    margin: 1.4rem 0 1.25rem;
+    color: var(--muted-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .years-proof {
+    display: grid;
+    justify-items: start;
+    padding-left: 2rem;
+    border-left: 2px solid var(--gold);
+  }
+
+  .years-proof strong {
+    font-family: var(--font-heading);
+    font-size: clamp(6.5rem, 11vw, 10rem);
+    line-height: 0.75;
+  }
+
+  .years-proof span {
+    margin-top: 1.2rem;
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: 2.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .years-proof em {
+    margin-top: 0.25rem;
+    color: var(--paper);
+    font-family: Georgia, serif;
+    font-size: 1.4rem;
+  }
+
+  .brand-print {
+    margin: 0;
+    padding: 0.65rem;
+    background: #c8af8c;
+    box-shadow: 0 1.2rem 2.5rem rgb(0 0 0 / 0.38);
+    transform: rotate(-1.5deg);
+  }
+
+  .brand-print img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .founder-timeline {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 2.5rem 0 0;
+    padding: 1.8rem 0 0;
+    border-top: 2px solid var(--gold);
+    list-style: none;
+  }
+
+  .founder-timeline li {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .founder-timeline li::before {
+    content: '';
+    position: absolute;
+    top: -2.38rem;
+    width: 1rem;
+    height: 1rem;
+    border: 4px solid var(--ink);
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 0 3px var(--gold);
+  }
+
+  .founder-timeline .timeline-item-2::before {
+    background: var(--blue);
+  }
+
+  .founder-timeline strong {
+    color: var(--red);
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    text-transform: uppercase;
+  }
+
+  .founder-timeline .timeline-item-2 strong {
+    color: var(--blue);
+  }
+
+  .founder-timeline span {
+    color: var(--paper);
+    font-family: Georgia, serif;
+    font-size: 1rem;
+  }
+
+  .founder-lesson {
+    grid-column: 1 / -1;
+    margin: 1.75rem 0 0;
+    color: var(--paper);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .founder-lesson span {
+    color: var(--gold);
+  }
+
+  .resource-rail {
+    border-top: 2px solid var(--gold);
+  }
+
+  .resource-row {
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr) auto 2rem;
+    gap: 1.5rem;
+    align-items: center;
+    min-height: 6rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgb(17 17 15 / 0.28);
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 160ms ease, padding 160ms ease;
+  }
+
+  .resource-row:hover {
+    padding-inline: 0.75rem;
+  }
+
+  .resource-row-1:hover,
+  .resource-row-1 .resource-category {
+    color: var(--red);
+  }
+
+  .resource-row-2:hover,
+  .resource-row-2 .resource-category {
+    color: #256f9f;
+  }
+
+  .resource-row-3:hover,
+  .resource-row-3 .resource-category {
+    color: #9c7214;
+  }
+
+  .resource-number {
+    color: var(--muted-dark);
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .resource-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+
+  .resource-category {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .reading-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .final-launch-cta {
+    padding: clamp(4.75rem, 8vw, 7rem) 0;
+  }
+
+  .final-cta-inner {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .final-cta-inner h2 {
+    max-width: 15ch;
+  }
+
+  .final-cta-inner h2::after {
+    margin-inline: auto;
+  }
+
+  .final-cta-inner > p {
+    max-width: 38rem;
+    margin: 1.4rem 0 1.7rem;
+    color: var(--muted-light);
+    font-size: 1.1rem;
+    line-height: 1.55;
+  }
+
+  .final-actions {
+    justify-content: center;
+  }
+
+  .final-facts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem 1.4rem;
+    margin-top: 1.7rem;
+    color: var(--paper);
+    font-size: 0.9rem;
+  }
+
+  .final-facts span:not(:last-child)::after {
+    content: '';
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-left: 1.4rem;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  @media (max-width: 1050px) {
+    .hero-grid {
+      grid-template-columns: 1fr 0.9fr;
+      gap: 2.5rem;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3.65rem, 7.2vw, 5.4rem);
+    }
+
+    .founder-grid {
+      grid-template-columns: 1fr 0.55fr;
+    }
+
+    .brand-print {
+      display: none;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .launch-hero {
+      min-height: auto;
+      padding-top: 7.25rem;
+    }
+
+    .hero-grid,
+    .engine-grid,
+    .deposit-grid,
+    .founder-grid,
+    .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-copy h1 {
+      max-width: 14ch;
+    }
+
+    .founding-panel {
+      padding-left: 1.5rem;
+    }
+
+    .flow-line {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+
+    .product-engine,
+    .product-engine + .product-engine,
+    .comparison-column,
+    .comparison-column + .comparison-column {
+      padding: 0;
+      border-left: 0;
+    }
+
+    .product-engine + .product-engine,
+    .comparison-column + .comparison-column {
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 2px solid var(--red);
+    }
+
+    .engine-bridge {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .engine-bridge svg {
+      width: 3rem;
+      transform: rotate(90deg);
+    }
+
+    .installation-grid {
+      grid-template-columns: 1fr;
+      gap: 2.75rem;
+    }
+
+    .installation-step {
+      padding-bottom: 0;
+    }
+
+    .installation-step > svg {
+      display: none;
+    }
+
+    .deposit-result {
+      padding: 3rem 0 0;
+      border-top: 2px solid var(--red);
+      border-left: 0;
+    }
+
+    .deposit-number {
+      font-size: clamp(8rem, 35vw, 13rem);
+    }
+
+    .founder-grid {
+      gap: 3rem;
+    }
+
+    .years-proof {
+      padding: 2rem 0 0;
+      border-top: 2px solid var(--gold);
+      border-left: 0;
+    }
+
+    .founder-timeline,
+    .founder-lesson {
+      grid-column: auto;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .launch-shell {
+      width: min(100% - 1.25rem, 82rem);
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3.1rem, 15.5vw, 4.2rem);
+    }
+
+    .action-row,
+    .final-actions {
+      align-items: stretch;
+    }
+
+    .launch-button,
+    .launch-link {
+      width: 100%;
+    }
+
+    .launch-link {
+      justify-content: flex-start;
+    }
+
+    .launch-button-primary {
+      min-width: 0;
+    }
+
+    .founding-panel dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .founding-panel dd {
+      text-align: left;
+    }
+
+    .flow-step {
+      font-size: 1.25rem;
+    }
+
+    .section-intro h2,
+    .deposit-story h2,
+    .founder-copy h2,
+    .final-cta-inner h2 {
+      font-size: clamp(2.75rem, 13vw, 4rem);
+    }
+
+    .step-heading {
+      align-items: center;
+    }
+
+    .installation-step p {
+      margin-left: 0;
+    }
+
+    .activation-statement {
+      font-size: 1.55rem;
+    }
+
+    .deposit-path {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .deposit-path svg {
+      width: 2.25rem;
+      margin-inline: auto;
+      transform: rotate(90deg);
+    }
+
+    .founder-timeline {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 0 0 0 1.5rem;
+      border-top: 0;
+      border-left: 2px solid var(--gold);
+    }
+
+    .founder-timeline li {
+      justify-items: start;
+      text-align: left;
+    }
+
+    .founder-timeline li::before {
+      top: 0.35rem;
+      left: -2.06rem;
+    }
+
+    .resource-row {
+      grid-template-columns: 2rem minmax(0, 1fr) 1.5rem;
+      gap: 0.85rem;
+    }
+
+    .resource-category {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .resource-row svg {
+      grid-column: 3;
+      grid-row: 1 / 3;
+    }
+
+    .final-facts {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .final-facts span::after {
+      display: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(html) {
+      scroll-behavior: auto;
+    }
+
+    .launch-button,
+    .launch-link,
+    .resource-row {
+      transition: none;
+    }
+  }
+</style>

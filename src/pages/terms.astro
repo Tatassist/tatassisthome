@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const supportEmail = import.meta.env.PUBLIC_TATASSIST_SUPPORT_EMAIL || 'support@tatassist.com';
+const supportHref = `mailto:${supportEmail}`;
+---
+
+<BaseLayout
+  title="Terms of Use"
+  description="Terms for using Tatassist's website, templates, founding reservation, and monthly artist membership."
+  pageType="terms"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-12 sm:pb-16 bg-brand-dark border-b border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Clear expectations</p>
+      <h1 class="text-4xl sm:text-5xl font-heading font-bold text-brand-cream leading-tight mb-5">
+        Terms of Use
+      </h1>
+      <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed max-w-3xl">
+        These terms cover the Tatassist website, free resources, templates, founding reservation, and pilot membership. By using or buying them, you agree to these terms.
+      </p>
+      <p class="text-sm text-brand-text-muted mt-6">Effective July 9, 2026</p>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20 bg-brand-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="prose-tatassist max-w-none">
+        <h2>Business education, not professional advice</h2>
+        <p>
+          Tatassist provides informational business education, examples, worksheets, and editable templates for tattoo artists. Nothing we publish is legal, medical, tax, accounting, employment, safety, or regulatory advice. Our policy tools help you make business decisions; they are not ready-to-publish legal forms or a promise of compliance.
+        </p>
+        <p>
+          Tattoo rules and business requirements vary by state and local jurisdiction. You are responsible for reviewing, adapting, and using every asset appropriately for your own business, clients, software, and location, and for getting qualified professional advice when needed. Tatassist templates are not for collecting or hosting client health records, IDs, signatures, or consent artifacts.
+        </p>
+
+        <h2>U.S.-only pilot eligibility</h2>
+        <p>
+          The founding pilot and its first 90 days are available only to U.S.-based working tattoo artists and are billed in U.S. dollars. We may decline or refund a pilot order that does not meet that eligibility requirement. Viewing the public site from another country does not make the pilot available there.
+        </p>
+
+        <h2>Founding reservation and recurring membership</h2>
+        <p>
+          A Founding 15 reservation is a <strong>one-time $19 payment</strong> for a place in the founding cohort. It is refundable any time before the founding release is delivered. For an eligible founder who activates the private membership, that reservation covers the first month of access beginning with the planned September 1, 2026 delivery; it is not an extra membership fee.
+        </p>
+        <p>
+          Founders must separately activate a private <strong>$19-per-month recurring membership</strong> through Gumroad. The first recurring charge is expected one month after activation, generally October 1–7 for September 1–7 activations. The public beta is planned as a separate <strong>$29-per-month recurring membership</strong>. Monthly memberships renew automatically until cancelled. The exact amount and next charge date shown at checkout or in your Gumroad account control for your purchase.
+        </p>
+        <p>
+          The reservation and membership are separate Gumroad transactions. Cancelling a membership does not automatically refund a reservation, and refunding the reservation does not automatically cancel a membership. Contact Tatassist support if you need help completing both actions.
+        </p>
+
+        <h2>Refunds, cancellation, and access</h2>
+        <p>
+          Founding reservations are refundable before delivery. A 14-day satisfaction window begins when the founding release is delivered. The same 14-day satisfaction window applies to the monthly public beta unless a checkout page clearly states a different policy. To request an eligible refund, email <a href={supportHref}>{supportEmail}</a> with the email address used for purchase.
+        </p>
+        <p>
+          You may cancel recurring billing through Gumroad before your next charge. Unless a refund ends access sooner, cancellation leaves member-library access active through the end of the period already paid for. At that point, access to library updates, future monthly drops, live sessions, and replays ends.
+        </p>
+        <p>
+          Files legitimately downloaded while your membership was active may be kept and used under the individual license below. A refund ends the related member-library access when processed. A failed internal product gate does not remove paid access without delivery of the promised paid period or an applicable refund.
+        </p>
+
+        <h2>External checkout and billing</h2>
+        <p>
+          Gumroad provides checkout, payment processing, receipts, account access, subscription management, and applicable tax handling as an outside merchant-of-record service. Your purchase is also subject to Gumroad's checkout terms and privacy practices. Tatassist does not collect or store your full payment-card number on this site.
+        </p>
+        <p>
+          Prices do not include any charges your bank, card provider, or other third party may impose. If a payment fails or a platform issue interrupts access, contact support and we will use the available Gumroad records to investigate.
+        </p>
+
+        <h2>Individual license</h2>
+        <p>
+          Unless an offer expressly says otherwise, a purchase gives one working artist a limited, non-exclusive, non-transferable license to adapt and use the included assets in that artist's own tattoo business. You may customize client-facing language and working copies for your own normal business operations.
+        </p>
+        <p>
+          You may not share an individual account or library, resell or redistribute the assets, sublicense them, publish them as your own template product, upload them to a shared template library, or use them to provide access for other artists or studios. A future studio license, if offered, will have separate terms. Tatassist retains ownership of its original content, branding, and product materials.
+        </p>
+
+        <h2>No guaranteed results</h2>
+        <p>
+          Tatassist does not guarantee bookings, revenue, profit, deposits, client response, time savings, or any other business result. Campaigns and templates depend on your market, work, pricing, audience, implementation, and decisions. Examples and member stories illustrate possibilities, not typical or promised outcomes.
+        </p>
+
+        <h2>Acceptable use and availability</h2>
+        <p>
+          Do not misuse the site, interfere with its operation, attempt unauthorized access, violate another person's rights, or use Tatassist content unlawfully. We may suspend access for material misuse, nonpayment, account sharing, resale, or other breach of these terms. We may revise or retire content as the library improves, while honoring access already paid for or providing an applicable remedy.
+        </p>
+
+        <h2>Disclaimers and responsibility</h2>
+        <p>
+          The site and materials are provided on an “as available” basis to the extent permitted by law. You are responsible for your business decisions, client communications, policies, data handling, and compliance. To the extent permitted by law, Tatassist is not responsible for indirect, incidental, special, or consequential losses arising from use of the site or materials.
+        </p>
+
+        <h2>Changes and contact</h2>
+        <p>
+          We may update these terms as the pilot, platform, or offer changes. The effective date above identifies the current version. If a change materially affects an active paid period, we will provide notice before the next charge and preserve any cancellation or refund rights stated for that period.
+        </p>
+        <p>
+          Questions about these terms, billing, access, cancellation, or refunds can be sent to <a href={supportHref}>{supportEmail}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

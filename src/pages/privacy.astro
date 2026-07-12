@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const supportEmail = import.meta.env.PUBLIC_TATASSIST_SUPPORT_EMAIL || 'support@tatassist.com';
+const supportHref = `mailto:${supportEmail}`;
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How Tatassist collects, uses, and protects information on its website and during the U.S. founding pilot."
+  pageType="privacy"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-12 sm:pb-16 bg-brand-dark border-b border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">The straight version</p>
+      <h1 class="text-4xl sm:text-5xl font-heading font-bold text-brand-cream leading-tight mb-5">
+        Privacy Policy
+      </h1>
+      <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed max-w-3xl">
+        Tatassist collects the limited information needed to run this site, understand what artists find useful, and deliver the products people ask for. We do not want your clients' sensitive records.
+      </p>
+      <p class="text-sm text-brand-text-muted mt-6">Effective July 9, 2026</p>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20 bg-brand-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="prose-tatassist max-w-none">
+        <h2>Information we collect</h2>
+        <p>
+          When you browse Tatassist, our site analytics may collect technical and activity information such as your IP address, approximate location, browser and device type, referring page, pages viewed, and links or buttons used. Analytics tools may use cookies or similar identifiers to recognize visits and measure site performance.
+        </p>
+        <p>
+          If you join a waitlist, request updates, make a purchase, or contact support, we may receive the information you choose to provide, such as your name, email address, tattoo-business details, the problem you want help with, purchase status, and messages to our team.
+        </p>
+
+        <h2>Kit and Gumroad</h2>
+        <p>
+          Tatassist uses outside services instead of collecting everything directly on this website. If you follow a waitlist or email link, <strong>Kit</strong> may process the contact information and answers you submit so we can send the updates you requested. If you follow a reservation or membership checkout link, <strong>Gumroad</strong> processes checkout, payment, tax, billing, refund, and account information under its own terms and privacy practices.
+        </p>
+        <p>
+          Tatassist may receive limited subscriber and buyer records from those services—such as your email address, purchase or subscription status, transaction identifiers, and attribution data—when needed to deliver access, answer support questions, honor opt-outs, reconcile purchases, and understand the pilot. We do not receive or store your full payment-card number on this site.
+        </p>
+
+        <h2>Information we do not intentionally collect</h2>
+        <p>
+          Tatassist does not intentionally collect or host tattoo clients' health information, government-issued identification, signatures, consent or release forms, or completed consent records. Do not send that information through a Tatassist form, support email, template, or member submission. If you send it accidentally, contact us so we can take reasonable steps to remove it.
+        </p>
+
+        <h2>How we use information</h2>
+        <ul>
+          <li>Operate, secure, and improve the website and artist resources.</li>
+          <li>Deliver requested email updates, reservations, purchases, and member access.</li>
+          <li>Provide support and process eligible cancellation or refund requests.</li>
+          <li>Measure traffic, offer interest, and product use without treating a click as proof of a purchase.</li>
+          <li>Prevent fraud, enforce our terms, and meet legal or tax obligations.</li>
+        </ul>
+        <p>
+          We do not sell your personal information. We may disclose limited information to service providers that help us operate Tatassist, when required by law, or as part of a business transfer. Those providers process information under their own agreements and policies.
+        </p>
+
+        <h2>Email choices</h2>
+        <p>
+          You can unsubscribe from marketing email using the link in the message. A marketing opt-out does not prevent transaction, access, billing, refund, or support messages that are necessary to serve you. We honor applicable opt-out records from both Kit and Gumroad.
+        </p>
+
+        <h2>Retention and security</h2>
+        <p>
+          We keep information only as long as reasonably needed for the purposes above, including access records, support, fraud prevention, tax, accounting, and legal obligations. No online system is completely secure, but we use reasonable safeguards and limit the information we ask artists to provide.
+        </p>
+
+        <h2>U.S.-only founding pilot</h2>
+        <p>
+          The Tatassist founding pilot and its first 90 days are offered only to U.S.-based artists and are billed in U.S. dollars. The public website may be viewable elsewhere, but pilot reservations and memberships are not intended for people outside the United States.
+        </p>
+
+        <h2>Your choices and questions</h2>
+        <p>
+          You may ask us to review, correct, or delete personal information we control, subject to records we must keep for legitimate business or legal reasons. Email <a href={supportHref}>{supportEmail}</a> and describe your request. We may need to verify that the request concerns your information.
+        </p>
+        <p>
+          We may update this policy as the pilot and our services change. Material changes will be posted here with a new effective date.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

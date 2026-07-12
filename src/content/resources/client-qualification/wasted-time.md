@@ -5,7 +5,7 @@ category: "client-qualification"
 quickTake: "If someone was never financially, emotionally, or logistically ready to book, no amount of extra messaging would have converted them. A structured intake process helps you notice that earlier and stop bleeding time into dead-end conversations."
 primaryCTA: "toolkit"
 secondaryCTA: "calculator"
-ctaBridge: "If too much of your week disappears into back-and-forth with inquiries that never turn into real bookings, the toolkit is the next logical step. It is built around qualification, expectations, and protecting your time before the client reaches your calendar."
+ctaBridge: "If too much of your week disappears into back-and-forth with inquiries that never turn into real bookings, Artist Systems is the next logical step. It is built around qualification, expectations, and protecting your time before the client reaches your calendar."
 publishDate: "2026-04-06"
 relatedArticles:
   - "client-qualification/cost-of-bad-fit-clients"

@@ -1,0 +1,390 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { artistSystemsConfig } from '../../data/artist-systems';
+
+const reservationUrl = artistSystemsConfig.reservationUrl.trim();
+const waitlistUrl = artistSystemsConfig.waitlistUrl.trim();
+const qualifiedActionUrl = reservationUrl || waitlistUrl;
+const qualifiedActionLabel = reservationUrl ? 'Reserve founding access' : 'Join the waitlist';
+const qualifiedActionEvent = reservationUrl ? 'tatassist_checkout_started' : 'tatassist_waitlist_click';
+---
+
+<BaseLayout
+  title="Artist Systems Founding Access Check"
+  description="Check whether Tatassist Artist Systems founding access is a fit for your tattoo business. Your answers stay in your browser and are never submitted."
+  pageType="artist_systems_qualifier"
+  robots="noindex,follow"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-12 sm:pb-16 bg-brand-dark">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <a
+        href="/toolkit"
+        class="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-cream transition-colors mb-6"
+      >
+        Back to Artist Systems
+      </a>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-cream leading-tight mb-5">
+        Is founding access a fit for your business?
+      </h1>
+      <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed max-w-2xl">
+        This quick check helps us keep the first cohort focused on working artists who can put the client-flow tools and booking campaigns to use now.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-16 sm:pb-24 bg-brand-dark">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="bg-brand-dark-lighter border border-white/10 rounded-xl p-6 sm:p-10">
+        <div class="flex items-start gap-3 pb-6 mb-8 border-b border-white/10">
+          <div>
+            <p class="font-semibold text-brand-cream">Private by design</p>
+            <p id="privacy-note" class="text-sm text-brand-text-muted leading-relaxed mt-1">
+              Your answers remain in this browser. They are not submitted, stored, or sent to Tatassist. Site analytics record only that the check was completed and whether the result was qualified—not your individual answers.
+            </p>
+          </div>
+        </div>
+
+        <form id="artist-systems-qualifier" aria-describedby="privacy-note" onsubmit="return false;">
+          <div class="space-y-8">
+            <fieldset>
+              <legend class="text-lg font-heading font-bold text-brand-cream mb-3">
+                Are you currently working as a tattoo artist?
+              </legend>
+              <div class="grid grid-cols-2 gap-3 max-w-sm">
+                <label class="qualifier-choice">
+                  <input class="sr-only peer" type="radio" name="workingArtist" value="yes" required />
+                  <span class="qualifier-choice-label">Yes</span>
+                </label>
+                <label class="qualifier-choice">
+                  <input class="sr-only peer" type="radio" name="workingArtist" value="no" required />
+                  <span class="qualifier-choice-label">No</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend class="text-lg font-heading font-bold text-brand-cream mb-3">
+                Are you based in the United States?
+              </legend>
+              <div class="grid grid-cols-2 gap-3 max-w-sm">
+                <label class="qualifier-choice">
+                  <input class="sr-only peer" type="radio" name="usBased" value="yes" required />
+                  <span class="qualifier-choice-label">Yes</span>
+                </label>
+                <label class="qualifier-choice">
+                  <input class="sr-only peer" type="radio" name="usBased" value="no" required />
+                  <span class="qualifier-choice-label">No</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend class="text-lg font-heading font-bold text-brand-cream mb-3">
+                Do you personally manage your client inquiries and intake?
+              </legend>
+              <div class="grid grid-cols-2 gap-3 max-w-sm">
+                <label class="qualifier-choice">
+                  <input class="sr-only peer" type="radio" name="managesIntake" value="yes" required />
+                  <span class="qualifier-choice-label">Yes</span>
+                </label>
+                <label class="qualifier-choice">
+                  <input class="sr-only peer" type="radio" name="managesIntake" value="no" required />
+                  <span class="qualifier-choice-label">No</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div>
+              <label for="inquiries" class="block text-lg font-heading font-bold text-brand-cream mb-2">
+                How many legitimate tattoo inquiries did you receive in the last 30 days?
+              </label>
+              <p id="inquiries-help" class="text-sm text-brand-text-muted mb-3">
+                Use your best estimate. Do not include spam or obvious fake requests.
+              </p>
+              <input
+                id="inquiries"
+                class="qualifier-number"
+                type="number"
+                name="inquiries"
+                min="0"
+                step="1"
+                inputmode="numeric"
+                aria-describedby="inquiries-help"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="open-days" class="block text-lg font-heading font-bold text-brand-cream mb-2">
+                How many unwanted open appointment days did you have in the last 30 days?
+              </label>
+              <p id="open-days-help" class="text-sm text-brand-text-muted mb-3">
+                Count days you wanted to book but could not fill.
+              </p>
+              <input
+                id="open-days"
+                class="qualifier-number"
+                type="number"
+                name="openDays"
+                min="0"
+                step="1"
+                inputmode="numeric"
+                aria-describedby="open-days-help"
+                required
+              />
+            </div>
+
+            <fieldset>
+              <legend class="text-lg font-heading font-bold text-brand-cream mb-2">
+                Do you know of a specific unwanted gap in your calendar during the next 60 days?
+              </legend>
+              <p class="text-sm text-brand-text-muted mb-3">
+                This can be a slow stretch, cancellation opening, or booking gap you want to fill.
+              </p>
+              <div class="grid grid-cols-2 gap-3 max-w-sm">
+                <label class="qualifier-choice">
+                  <input class="sr-only peer" type="radio" name="knownGap" value="yes" required />
+                  <span class="qualifier-choice-label">Yes</span>
+                </label>
+                <label class="qualifier-choice">
+                  <input class="sr-only peer" type="radio" name="knownGap" value="no" required />
+                  <span class="qualifier-choice-label">No</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <button
+            type="submit"
+            class="mt-10 w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors text-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+          >
+            Check my fit
+          </button>
+        </form>
+      </div>
+
+      <section
+        id="qualifier-result"
+        class="mt-6 rounded-xl border p-6 sm:p-8 focus:outline-none"
+        aria-live="polite"
+        aria-atomic="true"
+        tabindex="-1"
+        hidden
+      >
+        <div id="qualified-result" hidden>
+          <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">You qualify</p>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-3">
+            Artist Systems was designed for a business like yours.
+          </h2>
+          <p class="text-brand-text-muted leading-relaxed mb-6">
+            Your current inquiry volume and calendar needs make you a fit for the founding cohort. The next step is to claim a place if reservations are open.
+          </p>
+
+          {qualifiedActionUrl ? (
+            <a
+              href={qualifiedActionUrl}
+              class="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors"
+              data-track="true"
+              data-track-event={qualifiedActionEvent}
+              data-track-label={qualifiedActionLabel}
+              data-track-location="artist_systems_qualifier_result"
+              data-track-type="primary"
+              data-track-destination={qualifiedActionUrl}
+            >
+              {qualifiedActionLabel}
+            </a>
+          ) : (
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+              <button
+                type="button"
+                class="inline-flex items-center justify-center px-7 py-3.5 bg-white/10 text-brand-text-muted font-semibold rounded-lg cursor-not-allowed"
+                disabled
+              >
+                Reservations not connected yet
+              </button>
+              <a href="/support" class="text-brand-gold hover:text-brand-cream font-semibold transition-colors">
+                Contact support
+              </a>
+            </div>
+          )}
+        </div>
+
+        <div id="not-qualified-result" hidden>
+          <p class="text-brand-text-muted text-sm font-semibold uppercase tracking-widest mb-3">Not a fit yet</p>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-cream mb-3">
+            The founding cohort is probably not the best next step for you.
+          </h2>
+          <p class="text-brand-text-muted leading-relaxed mb-6">
+            That is not a judgment on your work or business. This first release is intentionally narrow so every founder can test the same client-flow and calendar systems in a live workflow.
+          </p>
+          <a
+            href="/resources"
+            class="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-brand-red hover:bg-brand-red-dark text-white font-semibold rounded-lg transition-colors"
+            data-track="true"
+            data-track-event="tatassist_cta_click"
+            data-track-label="Browse free resources"
+            data-track-location="artist_systems_qualifier_result"
+            data-track-type="primary"
+            data-track-destination="/resources"
+          >
+            Browse free resources
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-x-5 gap-y-3 mt-6 pt-6 border-t border-white/10">
+          <button id="edit-answers" type="button" class="text-brand-gold hover:text-brand-cream font-semibold transition-colors">
+            Edit my answers
+          </button>
+          <button id="reset-answers" type="button" class="text-brand-text-muted hover:text-brand-cream font-semibold transition-colors">
+            Start over
+          </button>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .qualifier-choice {
+    display: block;
+    cursor: pointer;
+  }
+
+  .qualifier-choice-label {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: 0.5rem;
+    color: var(--color-brand-text-muted);
+    font-weight: 600;
+    transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+  }
+
+  .qualifier-choice:hover .qualifier-choice-label {
+    border-color: rgb(212 168 67 / 0.5);
+    color: var(--color-brand-cream);
+  }
+
+  .qualifier-choice input:checked + .qualifier-choice-label {
+    border-color: var(--color-brand-gold);
+    background-color: rgb(212 168 67 / 0.12);
+    color: var(--color-brand-cream);
+  }
+
+  .qualifier-choice input:focus-visible + .qualifier-choice-label {
+    outline: 2px solid var(--color-brand-gold);
+    outline-offset: 3px;
+  }
+
+  .qualifier-number {
+    width: 100%;
+    max-width: 12rem;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: 0.5rem;
+    background-color: var(--color-brand-dark);
+    padding: 0.75rem 1rem;
+    color: var(--color-brand-cream);
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .qualifier-number:focus-visible {
+    border-color: var(--color-brand-gold);
+    outline: 2px solid var(--color-brand-gold);
+    outline-offset: 2px;
+  }
+
+  #qualifier-result[data-result='qualified'] {
+    border-color: rgb(212 168 67 / 0.35);
+    background-color: rgb(212 168 67 / 0.08);
+  }
+
+  #qualifier-result[data-result='not-qualified'] {
+    border-color: rgb(255 255 255 / 0.12);
+    background-color: var(--color-brand-dark-lighter);
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#artist-systems-qualifier');
+  const result = document.querySelector<HTMLElement>('#qualifier-result');
+  const qualifiedResult = document.querySelector<HTMLElement>('#qualified-result');
+  const notQualifiedResult = document.querySelector<HTMLElement>('#not-qualified-result');
+  const editButton = document.querySelector<HTMLButtonElement>('#edit-answers');
+  const resetButton = document.querySelector<HTMLButtonElement>('#reset-answers');
+  const firstField = form?.querySelector<HTMLInputElement>('input');
+
+  const hideResult = () => {
+    if (!result || !qualifiedResult || !notQualifiedResult) return;
+    result.hidden = true;
+    result.removeAttribute('data-result');
+    qualifiedResult.hidden = true;
+    notQualifiedResult.hidden = true;
+  };
+
+  const track = (payload: Record<string, unknown>) => {
+    const trackingWindow = window as Window & {
+      tatassistTrack?: (eventPayload: Record<string, unknown>) => void;
+    };
+    trackingWindow.tatassistTrack?.(payload);
+  };
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.reportValidity() || !result || !qualifiedResult || !notQualifiedResult) return;
+
+    const answers = new FormData(form);
+    const workingArtist = answers.get('workingArtist') === 'yes';
+    const usBased = answers.get('usBased') === 'yes';
+    const managesIntake = answers.get('managesIntake') === 'yes';
+    const inquiries = Number(answers.get('inquiries'));
+    const openDays = Number(answers.get('openDays'));
+    const knownGap = answers.get('knownGap') === 'yes';
+    const isEligible =
+      usBased &&
+      workingArtist &&
+      managesIntake &&
+      inquiries >= 5 &&
+      (openDays >= 2 || knownGap);
+
+    qualifiedResult.hidden = !isEligible;
+    notQualifiedResult.hidden = isEligible;
+    result.dataset.result = isEligible ? 'qualified' : 'not-qualified';
+    result.hidden = false;
+
+    track({ event: 'tatassist_qualifier_completed' });
+    track({
+      event: 'tatassist_qualifier_result',
+      qualification_result: isEligible ? 'qualified' : 'not_qualified',
+    });
+
+    result.focus({ preventScroll: true });
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  form?.addEventListener('input', () => {
+    if (result && !result.hidden) hideResult();
+  });
+
+  editButton?.addEventListener('click', () => {
+    hideResult();
+    firstField?.focus({ preventScroll: true });
+    form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  resetButton?.addEventListener('click', () => {
+    form?.reset();
+    hideResult();
+    firstField?.focus({ preventScroll: true });
+    form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

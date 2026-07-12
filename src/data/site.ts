@@ -24,20 +24,20 @@ export const resourceCategories = [
     label: 'Client Qualification',
     description:
       'How stronger structure improves client quality, reduces wasted time, and stops bad-fit situations before they start.',
-    offer: "Ink Hustler's Toolkit",
+    offer: 'Tatassist Artist Systems',
     offerHref: '/toolkit',
     offerSummary:
-      'Policies, templates, and business systems that help you filter hard clients before they drain your energy.',
+      'Install a cleaner intake, qualification, and communication system before difficult clients drain your energy.',
   },
   {
     slug: 'professional-systems',
     label: 'Professional Systems',
     description:
       'Why professional structure creates premium pricing power, better clients, and less chaos.',
-    offer: "Ink Hustler's Toolkit",
+    offer: 'Tatassist Artist Systems',
     offerHref: '/toolkit',
     offerSummary:
-      'Build the backend systems that make your pricing, boundaries, and client experience feel premium.',
+      'Build the client-flow systems that make your boundaries and booking experience feel deliberate.',
   },
   {
     slug: 'coverups',
@@ -53,7 +53,7 @@ export const resourceCategories = [
 
 export const articleCTAs = {
   calculator: { label: 'See the Calculator', href: '/calculator' },
-  toolkit: { label: 'Explore the Toolkit', href: '/toolkit' },
+  toolkit: { label: 'Check Artist Systems', href: '/toolkit' },
   ebook: { label: 'Read about the Ebook', href: '/coverup-ebook' },
 } as const;
 
@@ -67,10 +67,10 @@ export const homepageProducts = [
     accent: 'red',
   },
   {
-    title: "Ink Hustler's Toolkit",
+    title: 'Tatassist Artist Systems',
     description:
-      'Templates, policies, and systems for deposits, boundaries, and client flow. The business infrastructure most artists never set up.',
-    ctaLabel: 'Explore the Toolkit',
+      'Tattoo-specific intake tools, client messages, booking decisions, and a ready-to-run monthly campaign.',
+    ctaLabel: 'Check Founding Fit',
     ctaHref: '/toolkit',
     accent: 'blue',
   },

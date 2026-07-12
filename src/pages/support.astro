@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const supportEmail = import.meta.env.PUBLIC_TATASSIST_SUPPORT_EMAIL || 'support@tatassist.com';
+const supportHref = `mailto:${supportEmail}`;
+---
+
+<BaseLayout
+  title="Support"
+  description="Get help with Tatassist billing, product access, cancellations, refunds, and founding-pilot questions."
+  pageType="support"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-12 sm:pb-16 bg-brand-dark border-b border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Real help, clear next steps</p>
+      <h1 class="text-4xl sm:text-5xl font-heading font-bold text-brand-cream leading-tight mb-5">
+        Tatassist Support
+      </h1>
+      <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed max-w-3xl mb-8">
+        Need help with a reservation, billing, access, cancellation, or refund? Send us the details and we will trace the right record.
+      </p>
+      <a
+        href={supportHref}
+        class="inline-flex items-center justify-center rounded-lg bg-brand-red px-6 py-3 font-semibold text-white hover:bg-brand-red-dark transition-colors"
+        data-track="true"
+        data-track-event="tatassist_support_email_click"
+        data-track-label="Email Tatassist Support"
+        data-track-location="support_hero"
+        data-track-type="email"
+        data-track-destination={supportHref}
+      >
+        Email {supportEmail}
+      </a>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20 bg-brand-dark-lighter border-b border-white/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="bg-brand-dark border border-white/10 rounded-xl p-6">
+          <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">Billing</p>
+          <h2 class="text-xl font-heading font-bold text-brand-cream mb-3">Charges and cancellation</h2>
+          <p class="text-brand-text-muted leading-relaxed">
+            Gumroad handles Tatassist checkout and recurring billing. Your Gumroad receipt or account shows the exact amount, renewal date, and cancellation controls for your purchase.
+          </p>
+        </article>
+
+        <article class="bg-brand-dark border border-white/10 rounded-xl p-6">
+          <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">Access</p>
+          <h2 class="text-xl font-heading font-bold text-brand-cream mb-3">Missing files or library</h2>
+          <p class="text-brand-text-muted leading-relaxed">
+            First check the Gumroad receipt and library tied to the email used at checkout. If access is still missing, send us that email address and the product name—never your card number.
+          </p>
+        </article>
+
+        <article class="bg-brand-dark border border-white/10 rounded-xl p-6">
+          <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-3">Refunds</p>
+          <h2 class="text-xl font-heading font-bold text-brand-cream mb-3">Eligible refund requests</h2>
+          <p class="text-brand-text-muted leading-relaxed">
+            Founding reservations are refundable before delivery. The founding release and monthly public beta include a 14-day satisfaction window, subject to the terms shown for the offer.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20 bg-brand-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="prose-tatassist max-w-none">
+        <h2>Founding reservation and membership</h2>
+        <p>
+          The $19 Founding 15 reservation and the private $19 monthly membership are separate Gumroad records. The reservation covers the founder's first month after membership activation; the membership then renews monthly until cancelled. Because the records are separate, cancelling one does not automatically refund or cancel the other.
+        </p>
+        <p>
+          If you want to leave during an eligible refund window, email us so we can check both the reservation and subscription. To prevent a future recurring charge, also cancel the membership through Gumroad before the charge date shown in your account.
+        </p>
+
+        <h2>What happens after cancellation</h2>
+        <p>
+          Unless a refund ends access sooner, you keep member-library access through the end of the period already paid for. Updated library access, future drops, live sessions, and replays end when that period closes. Files legitimately downloaded while active may still be used by the purchasing artist under the individual license; they may not be shared or resold.
+        </p>
+
+        <h2>What to include in a support email</h2>
+        <ul>
+          <li>The email address used at checkout.</li>
+          <li>The product or membership name.</li>
+          <li>What you expected to happen and what happened instead.</li>
+          <li>The Gumroad receipt or transaction identifier, if available.</li>
+        </ul>
+        <p>
+          Do not email payment-card details, government ID, tattoo-client health information, signatures, or completed consent records. We do not need those details to investigate a Tatassist purchase.
+        </p>
+
+        <h2>Contact Tatassist</h2>
+        <p>
+          Email <a href={supportHref}>{supportEmail}</a>. We will respond as soon as practical and may ask you to verify the purchase email before changing access or discussing a transaction.
+        </p>
+      </div>
+
+      <div class="mt-10 bg-brand-dark-lighter border border-white/10 rounded-xl p-6 sm:p-8">
+        <h2 class="text-2xl font-heading font-bold text-brand-cream mb-3">Before you send sensitive information</h2>
+        <p class="text-brand-text-muted leading-relaxed">
+          Tatassist support is for our products and artist-business resources. It is not a channel for client consent files, medical details, identification, legal advice, or emergency help.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

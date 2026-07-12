@@ -154,7 +154,7 @@ export const landingPages = [
     audience:
       'For artists who are tired of weak leads, exhausting communication, and clients who consume too much time before they commit.',
     ogImage: '/og/tatassist-toolkit.png',
-    cta: { label: "Explore the Toolkit", href: '/toolkit' },
+    cta: { label: 'Check Artist Systems', href: '/toolkit' },
     secondaryCTA: { label: 'Read Qualification Resources', href: '/resources/client-qualification' },
     proof: [
       'Filter weak-fit inquiries earlier with a better intake process.',
