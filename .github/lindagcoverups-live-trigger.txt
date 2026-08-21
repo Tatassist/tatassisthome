@@ -1,0 +1,1 @@
+Verify the deployed production route and all 17 tattoo images.
