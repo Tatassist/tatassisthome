@@ -1,9 +1,10 @@
 name: Verify Linda hero and qualification fix
 
 on:
-  push:
+  pull_request:
     branches:
-      - fix-linda-hero-qualification
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
