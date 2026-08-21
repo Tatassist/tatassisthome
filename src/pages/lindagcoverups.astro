@@ -11,8 +11,8 @@ const heroRail = [
 	},
 	{
 		src: '/lindagcoverups/elephant-healed.jpg',
-		alt: 'Healed blue botanical elephant cover-up tattoo by Linda G',
-		label: 'Botanical elephant',
+		alt: 'Healed sapphire-blue botanical cover-up tattoo by Linda G',
+		label: 'Sapphire botanical cover-up',
 	},
 	{
 		src: '/lindagcoverups/story-finished.jpg',
@@ -38,22 +38,23 @@ const transformations = [
 		afterAlt: 'Finished sunflower collarbone cover-up tattoo by Linda G',
 	},
 	{
-		label: 'Shoulder transformation',
+		label: 'Winter-world transformation',
 		title: 'A faded tattoo becomes an entire world.',
 		copy: 'The finished winter scene changes the scale, mood, and visual language of the placement.',
 		before: '/lindagcoverups/story-before.jpg',
-		beforeAlt: 'Faded shoulder tattoo before Linda G designed the cover-up',
+		beforeAlt: 'Original tattoo before Linda G created the winter-world cover-up',
+		cropBefore: true,
 		after: '/lindagcoverups/story-finished.jpg',
-		afterAlt: 'Finished detailed winter snow globe shoulder cover-up tattoo',
+		afterAlt: 'Finished detailed winter snow globe cover-up tattoo',
 	},
 	{
-		label: 'Botanical elephant',
-		title: 'Rebuilt for color, scale, and flow.',
-		copy: 'Structure controls the coverage. Saturated blue and botanical detail create the new focal point.',
+		label: 'Sapphire botanical transformation',
+		title: 'Saturated color. A completely new focal point.',
+		copy: 'Layered blue florals and sweeping leaves turn the entire placement into one cohesive, saturated composition.',
 		before: '/lindagcoverups/elephant-before.jpg',
 		beforeAlt: 'Original faded elephant tattoo before its cover-up',
 		after: '/lindagcoverups/elephant-healed.jpg',
-		afterAlt: 'Healed blue botanical elephant cover-up tattoo',
+		afterAlt: 'Healed sapphire-blue botanical cover-up tattoo',
 	},
 	{
 		label: 'Color, memory & music',
@@ -182,7 +183,13 @@ const fitPoints = [
 					<article class:list={['lg-transform-card', item.featured && 'is-featured']}>
 						<div class="lg-transform-pair">
 							<div class="lg-transform-image">
-								<img src={item.before} alt={item.beforeAlt} loading="lazy" decoding="async" />
+								<img
+									class:list={{ 'lg-story-before-crop': item.cropBefore }}
+									src={item.before}
+									alt={item.beforeAlt}
+									loading="lazy"
+									decoding="async"
+								/>
 								<span>Before</span>
 							</div>
 							<div class="lg-transform-image">
