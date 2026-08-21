@@ -1,0 +1,68 @@
+name: Verify live Linda coverup route
+
+on:
+  push:
+    branches:
+      - lindagcoverups-deploy
+    paths:
+      - '.github/lindagcoverups-live-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out verification branch
+        uses: actions/checkout@v4
+        with:
+          ref: lindagcoverups-deploy
+          fetch-depth: 0
+
+      - name: Verify production HTML and every tattoo image
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://tatassist.com'
+          route="$base/lindagcoverups"
+
+          curl --fail --silent --show-error --location \
+            --retry 24 --retry-delay 5 --retry-all-errors \
+            "$route" --output /tmp/lindagcoverups.html
+
+          grep -q 'Your old tattoo' /tmp/lindagcoverups.html
+          grep -q 'Request a coverup consultation' /tmp/lindagcoverups.html
+          grep -q 'https://www.wixforms.com/f/7421014711090545664' /tmp/lindagcoverups.html
+
+          mapfile -t images < <(grep -oE '/lindagcoverups/[A-Za-z0-9._-]+\.jpg' /tmp/lindagcoverups.html | sort -u)
+          test "${#images[@]}" -eq 17
+
+          for image in "${images[@]}"; do
+            curl --fail --silent --show-error --location \
+              --retry 8 --retry-delay 2 --retry-all-errors \
+              "$base$image" --output /dev/null
+          done
+
+          status="$(curl --silent --output /dev/null --write-out '%{http_code}' --location "$route")"
+          test "$status" = '200'
+
+          mkdir -p qa
+          {
+            echo 'Production verification: passed'
+            echo "URL: $route"
+            echo "HTTP status: $status"
+            echo "Verified tattoo images: ${#images[@]}"
+            echo 'Wix intake destination: verified'
+            echo "Verified at: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          } > qa/lindagcoverups-production-live.txt
+
+      - name: Record successful live verification on the non-production branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Tatassist Deployment Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add qa/lindagcoverups-production-live.txt
+          git commit -m 'Record live /lindagcoverups production verification'
+          git push origin HEAD:lindagcoverups-deploy
