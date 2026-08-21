@@ -1,0 +1,20 @@
+/* Content-specific presentation fixes */
+.lg-transform-image img.lg-story-before-crop {
+	object-position: center 51%;
+	transform: scale(1.64);
+	transform-origin: center 51%;
+}
+
+.lg-transform-card:hover .lg-transform-image img.lg-story-before-crop {
+	transform: scale(1.69);
+}
+
+@media (max-width: 680px) {
+	.lg-transform-image img.lg-story-before-crop {
+		transform: scale(1.72);
+	}
+
+	.lg-transform-card:hover .lg-transform-image img.lg-story-before-crop {
+		transform: scale(1.76);
+	}
+}
