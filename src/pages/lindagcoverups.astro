@@ -3,305 +3,310 @@ import Layout from '../layouts/LindaCoverupLayout.astro';
 
 const intakeUrl = 'https://www.wixforms.com/f/7421014711090545664';
 
-const storyStages = [
-	{ label: 'Before', src: '/lindagcoverups/story-before.jpg', alt: 'Faded shoulder tattoo before Linda designed the coverup' },
-	{ label: 'In progress', src: '/lindagcoverups/story-progress.jpg', alt: 'Winter scene coverup design in progress' },
+const heroRail = [
+	{
+		src: '/lindagcoverups/collarbone-after.jpg',
+		alt: 'Finished sunflower collarbone cover-up tattoo by Linda G',
+		label: 'Sunflower collarbone',
+	},
+	{
+		src: '/lindagcoverups/elephant-healed.jpg',
+		alt: 'Healed blue botanical elephant cover-up tattoo by Linda G',
+		label: 'Botanical elephant',
+	},
+	{
+		src: '/lindagcoverups/story-finished.jpg',
+		alt: 'Finished winter snow globe shoulder cover-up tattoo by Linda G',
+		label: 'Winter scene',
+	},
+	{
+		src: '/lindagcoverups/flag-finished.jpg',
+		alt: 'Finished floral and music cover-up tattoo by Linda G',
+		label: 'Color, memory & music',
+	},
 ];
 
-const elephantStages = [
-	{ number: '01', label: 'Before', src: '/lindagcoverups/elephant-before.jpg', alt: 'Original faded elephant tattoo before its coverup' },
-	{ number: '02', label: 'Structure', src: '/lindagcoverups/elephant-stencil.jpg', alt: 'Botanical coverup stencil placed over the original tattoo' },
-	{ number: '03', label: 'Color', src: '/lindagcoverups/elephant-fresh.jpg', alt: 'Botanical elephant coverup partially completed in color' },
-	{ number: '04', label: 'Healed', src: '/lindagcoverups/elephant-healed.jpg', alt: 'Healed blue botanical elephant coverup tattoo' },
+const transformations = [
+	{
+		featured: true,
+		label: 'Collarbone transformation',
+		title: 'Small marks. A new focal point.',
+		copy: 'A sunflower composition follows the collarbone, redirects the eye, and gives the placement a completely new identity.',
+		before: '/lindagcoverups/collarbone-before.jpg',
+		beforeAlt: 'Two small hearts on the collarbone before Linda G designed the cover-up',
+		after: '/lindagcoverups/collarbone-after.jpg',
+		afterAlt: 'Finished sunflower collarbone cover-up tattoo by Linda G',
+	},
+	{
+		label: 'Shoulder transformation',
+		title: 'A faded tattoo becomes an entire world.',
+		copy: 'The finished winter scene changes the scale, mood, and visual language of the placement.',
+		before: '/lindagcoverups/story-before.jpg',
+		beforeAlt: 'Faded shoulder tattoo before Linda G designed the cover-up',
+		after: '/lindagcoverups/story-finished.jpg',
+		afterAlt: 'Finished detailed winter snow globe shoulder cover-up tattoo',
+	},
+	{
+		label: 'Botanical elephant',
+		title: 'Rebuilt for color, scale, and flow.',
+		copy: 'Structure controls the coverage. Saturated blue and botanical detail create the new focal point.',
+		before: '/lindagcoverups/elephant-before.jpg',
+		beforeAlt: 'Original faded elephant tattoo before its cover-up',
+		after: '/lindagcoverups/elephant-healed.jpg',
+		afterAlt: 'Healed blue botanical elephant cover-up tattoo',
+	},
+	{
+		label: 'Color, memory & music',
+		title: 'Personal meaning without visual compromise.',
+		copy: 'A larger composition gives the new artwork enough presence to stand completely on its own.',
+		before: '/lindagcoverups/flag-before.jpg',
+		beforeAlt: 'Small American flag tattoo before the cover-up',
+		after: '/lindagcoverups/flag-finished.jpg',
+		afterAlt: 'Finished flower, clover, and musical cover-up tattoo',
+	},
 ];
 
-const flagStages = [
-	{ label: 'Before', src: '/lindagcoverups/flag-before.jpg', alt: 'Small American flag tattoo before the coverup' },
-	{ label: 'Mapped', src: '/lindagcoverups/flag-progress.jpg', alt: 'Flower and music coverup stencil mapped over the original flag' },
-	{ label: 'Finished', src: '/lindagcoverups/flag-finished.jpg', alt: 'Finished flower, clover and musical coverup tattoo' },
-];
-
-const principles = [
-	{ number: '01', title: 'Scale', copy: 'Enough room for the new composition to control what came before it.' },
-	{ number: '02', title: 'Color', copy: 'Contrast and saturation placed with purpose, never simply made darker.' },
-	{ number: '03', title: 'Meaning', copy: 'A new piece with its own identity, built around the person wearing it.' },
-];
-
-const process = [
-	{ number: '01', title: 'Review', copy: 'Linda studies the existing tattoo, skin, placement and realistic possibilities.' },
-	{ number: '02', title: 'Reimagine', copy: 'A new concept is built around flow, coverage and the story you want next.' },
-	{ number: '03', title: 'Refine', copy: 'Scale, shape and focal points are resolved before tattooing begins.' },
-	{ number: '04', title: 'Transform', copy: 'The new artwork becomes the focus—not the tattoo underneath it.' },
+const fitPoints = [
+	{
+		number: '01',
+		title: 'Strong transformation potential',
+		copy: 'Enough freedom in the size, placement, and subject to create a completely new focal point.',
+	},
+	{
+		number: '02',
+		title: 'A project worthy of custom design',
+		copy: 'Large, detailed work where color and composition can replace the old visual story instead of merely darkening it.',
+	},
+	{
+		number: '03',
+		title: 'Commitment to the process',
+		copy: 'The right cover-up may require scale, multiple sessions, and trust in Linda’s design direction.',
+	},
 ];
 ---
 
 <Layout
-	title="Linda G | Custom Tattoo Coverups in Las Vegas"
-	description="Custom color tattoo coverups by Linda G in Las Vegas. Original transformations designed to stand on their own."
+	title="Linda G | Premium Color Cover-Up Tattoos in Las Vegas"
+	description="Get the tattoo you’re actually proud to wear. Premium custom color cover-ups by Linda G in Las Vegas, with projects personally selected for transformation potential."
 >
-	<header class="site-header" data-header>
-		<a class="wordmark" href="#top" aria-label="Linda G coverup tattoos home">
-			<span>Linda G</span>
-			<small>Coverup artist</small>
+	<header class="lg-header" data-lg-header>
+		<a class="lg-brand" href="#top" aria-label="Linda G cover-up tattoos home">
+			<strong>LINDA G</strong>
+			<span>Custom cover-up tattoos</span>
 		</a>
-		<nav class="desktop-nav" aria-label="Primary navigation">
-			<a href="#transformations">Transformations</a>
-			<a href="#process">Process</a>
-			<a class="nav-consult" href={intakeUrl}>Submit your project</a>
+
+		<nav class="lg-nav" aria-label="Primary navigation">
+			<a href="#gallery">Gallery</a>
+			<a href="#story">Approach</a>
+			<a href="#fit">Project fit</a>
+			<a class="lg-nav-cta" href={intakeUrl}>Submit your project</a>
 		</nav>
-		<button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>
-			<span></span><span></span>
+
+		<button
+			class="lg-menu-toggle"
+			type="button"
+			aria-label="Open navigation"
+			aria-expanded="false"
+			data-lg-menu-toggle
+		>
+			<span></span>
+			<span></span>
 		</button>
 	</header>
 
-	<div class="mobile-menu" data-mobile-menu hidden>
-		<a href="#transformations">Transformations</a>
-		<a href="#process">Process</a>
+	<div class="lg-mobile-menu" data-lg-mobile-menu hidden>
+		<a href="#gallery">Gallery</a>
+		<a href="#story">Approach</a>
+		<a href="#fit">Project fit</a>
 		<a href={intakeUrl}>Submit your project</a>
 	</div>
 
 	<main id="main">
-		<section class="hero" id="top">
-			<div class="hero-copy">
-				<div class="hero-meta" aria-label="Coverup specialist in Las Vegas">
-					<span>Coverup specialist</span>
+		<section class="lg-hero" id="top">
+			<div class="lg-hero-media" aria-hidden="true">
+				<img
+					src="/lindagcoverups/hero-purple-rose.jpg"
+					alt=""
+					width="1196"
+					height="1678"
+					fetchpriority="high"
+					decoding="async"
+				/>
+			</div>
+
+			<div class="lg-hero-copy">
+				<div class="lg-hero-eyebrow">
+					<span>Custom cover-up tattoos</span>
 					<span>Las Vegas</span>
 				</div>
+
 				<h1>
-					<span>Your old tattoo</span>
-					<em>isn’t the final word.</em>
+					<span>Get the tattoo</span>
+					<span>you’re actually</span>
+					<em>proud to wear.</em>
 				</h1>
-				<p class="hero-intro">Linda personally selects cover-up projects where her color work can create a complete transformation—not simply make the old tattoo darker.</p>
-				<div class="hero-actions">
-					<a class="button button-primary" href={intakeUrl}>See if your project qualifies</a>
-					<a class="text-link" href="#transformations">See the transformations <span aria-hidden="true">↓</span></a>
-				</div>
-				<p class="hero-qualification">Every submission is reviewed personally. Consultations are offered only to projects Linda selects.</p>
-			</div>
-			<figure class="hero-art">
-				<div class="hero-frame">
-					<img src="/lindagcoverups/hero-purple-rose.jpg" alt="Purple rose and blue forget-me-not tattoo by Linda G" width="1196" height="1678" fetchpriority="high" />
-				</div>
-				<figcaption><span>Original artwork</span><span>Built beyond the old tattoo</span></figcaption>
-			</figure>
-			<div class="hero-number" aria-hidden="true">LG</div>
-		</section>
 
-		<section class="manifesto dark-surface">
-			<div class="manifesto-statement" data-reveal>
-				<p>A coverup is not the art of hiding.</p>
-				<h2>It is the art of <em>rebuilding.</em></h2>
-			</div>
-			<div class="manifesto-copy" data-reveal>
-				<p>The strongest coverups are designed as complete tattoos first. Scale, movement, contrast and color work together until the old piece stops defining what comes next.</p>
-				<div class="manifesto-proof">
-					<span>Original compositions</span>
-					<span>Intentional coverage</span>
-					<span>Work made to heal beautifully</span>
-				</div>
-			</div>
-		</section>
+				<p class="lg-hero-lead">Replace the old story with custom cover-up artwork designed to be seen.</p>
+				<p class="lg-hero-body">Linda creates intentional color cover-ups for clients ready to move from regret to a piece they love wearing.</p>
 
-		<section class="gallery-intro" id="transformations">
-			<p class="section-index" data-reveal>Selected transformations / 01—04</p>
-			<div class="gallery-intro-grid" data-reveal>
-				<h2>Judge the coverup by the tattoo it <em>becomes.</em></h2>
-				<p>Every project begins with a limitation. The finished work should feel like it began with possibility.</p>
-			</div>
-		</section>
+				<div class="lg-hero-actions">
+					<a class="lg-button lg-button-primary" href={intakeUrl}>See if your project qualifies</a>
+				</div>
 
-		<section class="case case-collarbone">
-			<div class="case-heading" data-reveal>
-				<span class="case-number">01</span>
-				<div>
-					<p>Collarbone transformation</p>
-					<h3>Small marks.<br />A new focal point.</h3>
-				</div>
+				<p class="lg-hero-note">Submissions are personally reviewed. Consultations are offered by invitation only.</p>
 			</div>
-			<div class="collarbone-layout">
-				<figure class="image-block collarbone-before" data-reveal>
-					<div class="image-shell"><img src="/lindagcoverups/collarbone-before.jpg" alt="Two small hearts on the collarbone before the coverup" width="960" height="1280" loading="lazy" /></div>
-					<figcaption><span>Before</span><span>The starting point</span></figcaption>
-				</figure>
-				<div class="case-note" data-reveal>
-					<p>A sunflower composition redirects the eye, uses the collarbone’s movement and gives the placement a completely new identity.</p>
-				</div>
-				<figure class="image-block collarbone-after" data-reveal>
-					<div class="image-shell"><img src="/lindagcoverups/collarbone-after.jpg" alt="Finished sunflower collarbone coverup tattoo" width="1536" height="2048" loading="lazy" /></div>
-					<figcaption><span>Finished</span><span>Artwork first</span></figcaption>
-				</figure>
-			</div>
-		</section>
 
-		<section class="case story-case dark-surface">
-			<div class="story-copy" data-reveal>
-				<span class="case-number">02</span>
-				<p>Shoulder transformation</p>
-				<h3>A faded tattoo becomes an entire <em>world.</em></h3>
-				<p class="case-description">The new scene does more than cover the original. It changes the scale, mood and visual language of the placement.</p>
-			</div>
-			<div class="story-layout">
-				<figure class="story-finished" data-reveal>
-					<div class="image-shell"><img src="/lindagcoverups/story-finished.jpg" alt="Finished detailed winter snow globe shoulder tattoo" width="1536" height="2048" loading="lazy" /></div>
-					<figcaption>Finished transformation</figcaption>
-				</figure>
-				<div class="story-stages">
-					{storyStages.map((stage) => (
-						<figure data-reveal>
-							<div class="image-shell"><img class:list={{ 'story-before-image': stage.label === 'Before' }} src={stage.src} alt={stage.alt} loading="lazy" /></div>
-							<figcaption>{stage.label}</figcaption>
-						</figure>
-					))}
-				</div>
-			</div>
-		</section>
+			<div class="lg-hero-seal" aria-hidden="true">LG</div>
 
-		<section class="case elephant-case violet-surface">
-			<div class="sequence-heading" data-reveal>
-				<div>
-					<span class="case-number">03</span>
-					<p>Botanical elephant</p>
-				</div>
-				<h3>Built in stages.<br />Resolved as one piece.</h3>
-				<p>Structure controls coverage. Color creates depth. The healed result is what matters.</p>
-			</div>
-			<div class="sequence-track" aria-label="Four stages of the botanical elephant coverup">
-				{elephantStages.map((stage) => (
-					<figure data-reveal>
-						<div class="sequence-image"><img src={stage.src} alt={stage.alt} loading="lazy" /></div>
-						<figcaption><span>{stage.number}</span><strong>{stage.label}</strong></figcaption>
+			<div class="lg-hero-rail" aria-label="Selected tattoos by Linda G">
+				{heroRail.map((item) => (
+					<figure>
+						<img src={item.src} alt={item.alt} loading="eager" decoding="async" />
+						<figcaption>{item.label}</figcaption>
 					</figure>
 				))}
 			</div>
 		</section>
 
-		<section class="case flag-case">
-			<div class="flag-heading" data-reveal>
-				<span class="case-number">04</span>
-				<p>Color, memory &amp; music</p>
-				<h3>The goal is never simply darker.<br />The goal is <em>better.</em></h3>
+		<section class="lg-gallery" id="gallery">
+			<div class="lg-gallery-header">
+				<div>
+					<p class="lg-kicker violet">Transformations you’ll be proud to wear</p>
+					<h2>The Cover-Up Gallery</h2>
+				</div>
+				<p>The finished tattoo leads. The old tattoo appears only to show how far the work traveled.</p>
 			</div>
-			<div class="flag-layout">
-				{flagStages.map((stage, index) => (
-					<figure class:list={{ 'flag-finished': index === 2 }} data-reveal>
-						<div class="image-shell"><img src={stage.src} alt={stage.alt} loading="lazy" /></div>
-						<figcaption>{stage.label}</figcaption>
-					</figure>
+
+			<div class="lg-transform-grid">
+				{transformations.map((item) => (
+					<article class:list={['lg-transform-card', item.featured && 'is-featured']}>
+						<div class="lg-transform-pair">
+							<div class="lg-transform-image">
+								<img src={item.before} alt={item.beforeAlt} loading="lazy" decoding="async" />
+								<span>Before</span>
+							</div>
+							<div class="lg-transform-image">
+								<img src={item.after} alt={item.afterAlt} loading="lazy" decoding="async" />
+								<span>After</span>
+							</div>
+						</div>
+						<div class="lg-transform-copy">
+							<small>{item.label}</small>
+							<h3>{item.title}</h3>
+							<p>{item.copy}</p>
+						</div>
+					</article>
 				))}
-				<div class="flag-note" data-reveal>
-					<p>A personal composition with enough scale and saturation to stand completely on its own.</p>
+			</div>
+		</section>
+
+		<section class="lg-feature" id="story">
+			<div class="lg-feature-media">
+				<img
+					src="/lindagcoverups/story-finished.jpg"
+					alt="Finished winter snow globe shoulder cover-up tattoo by Linda G"
+					loading="lazy"
+					decoding="async"
+				/>
+				<div class="lg-feature-detail">
+					<img
+						src="/lindagcoverups/story-progress.jpg"
+						alt="Winter scene cover-up tattoo in progress"
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+
+			<div class="lg-feature-copy">
+				<p class="lg-kicker">Art that replaces the old story</p>
+				<h2>The cover-up should read as a complete tattoo—not a solution.</h2>
+				<p>The existing ink shapes the technical problem. It does not have to dictate the finished artwork. Linda designs forward, using scale, contrast, color, and body flow until the new piece owns the placement.</p>
+				<div class="lg-feature-points">
+					<span>Finished artwork first</span>
+					<span>Coverage built into the composition</span>
+					<span>Designed for the body and the healed result</span>
 				</div>
 			</div>
 		</section>
 
-		<section class="craft dark-surface">
-			<div class="craft-copy" data-reveal>
-				<p class="section-index">Craft in the details</p>
-				<h2>Every stage serves the final tattoo.</h2>
-				<p>Coverage is only one requirement. The work still needs dimension, clean structure and a finish that reads clearly from across the room.</p>
+		<section class="lg-healed">
+			<div class="lg-healed-copy">
+				<p class="lg-kicker violet">Healed proof</p>
+				<h2>Color that still has something to say.</h2>
+				<p>Fresh work gets attention. Healed work earns trust. This piece was photographed again more than six years later.</p>
 			</div>
-			<div class="craft-images">
-				<figure class="craft-progress" data-reveal>
-					<div class="image-shell"><img src="/lindagcoverups/truck-progress.jpg" alt="Black and grey truck tattoo in progress" width="1536" height="2048" loading="lazy" /></div>
-					<figcaption>In progress</figcaption>
-				</figure>
-				<figure class="craft-finished" data-reveal>
-					<div class="image-shell"><img src="/lindagcoverups/truck-finished.jpg" alt="Finished blue truck tattoo" width="1536" height="2048" loading="lazy" /></div>
-					<figcaption>Finished</figcaption>
-				</figure>
-			</div>
-		</section>
 
-		<section class="healed-proof">
-			<div class="healed-heading" data-reveal>
-				<p class="section-index">Healed proof</p>
-				<h2>Beautiful on day one.<br /><em>Still alive six years later.</em></h2>
-			</div>
-			<div class="six-years" aria-hidden="true">6 YEARS</div>
-			<div class="healed-grid">
-				<figure data-reveal>
-					<div class="image-shell"><img src="/lindagcoverups/cherry-fresh.jpg" alt="Fresh cherry blossom leg tattoo" width="1536" height="2048" loading="lazy" /></div>
+			<div class="lg-healed-images">
+				<figure>
+					<div>
+						<img src="/lindagcoverups/cherry-fresh.jpg" alt="Fresh cherry blossom leg tattoo by Linda G" loading="lazy" decoding="async" />
+					</div>
 					<figcaption><span>Fresh</span><span>Day one</span></figcaption>
 				</figure>
-				<figure data-reveal>
-					<div class="image-shell"><img src="/lindagcoverups/cherry-healed-6-years.jpg" alt="Same cherry blossom leg tattoo healed six years later" width="2105" height="2807" loading="lazy" /></div>
+				<figure>
+					<div>
+						<img src="/lindagcoverups/cherry-healed-6-years.jpg" alt="Cherry blossom leg tattoo healed more than six years" loading="lazy" decoding="async" />
+					</div>
 					<figcaption><span>Healed</span><span>Six years later</span></figcaption>
 				</figure>
 			</div>
-			<p class="healing-note" data-reveal>Photographed more than six years later after substantial sun exposure. Consistent aftercare and UV protection can help tattoos retain color and detail longer.</p>
 		</section>
 
-		<section class="principles dark-surface">
-			<div class="principles-heading" data-reveal>
-				<p class="section-index">Linda’s coverup principles</p>
-				<h2>Designed forward.<br />Never trapped by the past.</h2>
+		<section class="lg-fit" id="fit">
+			<div class="lg-fit-copy">
+				<p class="lg-kicker">Selected projects only</p>
+				<h2>Linda reviews every submission personally.</h2>
+				<p>Cover-up consultations are reserved for projects Linda selects based on artistic fit, transformation potential, scope, and availability.</p>
 			</div>
-			<div class="principle-list">
-				{principles.map((principle) => (
-					<div class="principle" data-reveal>
-						<span>{principle.number}</span>
-						<h3>{principle.title}</h3>
-						<p>{principle.copy}</p>
+
+			<div class="lg-fit-list">
+				{fitPoints.map((point) => (
+					<div class="lg-fit-item">
+						<span>{point.number}</span>
+						<div>
+							<h3>{point.title}</h3>
+							<p>{point.copy}</p>
+						</div>
 					</div>
 				))}
 			</div>
 		</section>
 
-		<section class="process" id="process">
-			<div class="process-heading" data-reveal>
-				<p class="section-index">For selected projects</p>
-				<h2>A thoughtful transformation,<br />built around you.</h2>
+		<section class="lg-apply">
+			<div class="lg-apply-inner">
+				<p class="lg-kicker">Your next piece can be the one you keep showing people</p>
+				<h2>Ready to wear the tattoo you actually wanted?</h2>
+				<p>Send clear photos of the existing tattoo, your placement, and the direction you want to explore. Linda will review the project and determine whether it is a fit for her cover-up work.</p>
+				<a class="lg-button lg-button-primary" href={intakeUrl}>See if your project qualifies</a>
+				<div class="lg-apply-note">If selected, the studio will invite you to the next step.</div>
 			</div>
-			<ol class="process-list">
-				{process.map((step) => (
-					<li data-reveal>
-						<span>{step.number}</span>
-						<h3>{step.title}</h3>
-						<p>{step.copy}</p>
-					</li>
-				))}
-			</ol>
-		</section>
-
-		<section class="consult dark-surface" id="consult">
-			<div class="consult-topline" data-reveal>
-				<span>Project review</span>
-				<span>Consultations by invitation</span>
-			</div>
-			<div class="consult-grid">
-				<div data-reveal>
-					<h2>See if your cover-up is a fit for Linda’s work.</h2>
-				</div>
-				<div class="consult-action" data-reveal>
-					<p>Every submission is reviewed for artistic fit, scope, and availability before a consultation is offered. If Linda selects the project, the studio will contact you with the next step.</p>
-					<a class="button button-primary" href={intakeUrl}>Submit your project</a>
-				</div>
-			</div>
-			<p class="consult-signoff" aria-hidden="true">Project received. Next step by invitation.</p>
 		</section>
 	</main>
 
-	<footer class="site-footer">
-		<a class="footer-wordmark" href="#top">Linda G</a>
-		<p>Custom color tattoo coverups / Las Vegas</p>
-		<a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+	<footer class="lg-footer">
+		<a href="#top">Linda G</a>
+		<span>Premium color cover-ups / Las Vegas</span>
+		<a href="#top">Back to top ↑</a>
 	</footer>
 
 	<script is:inline>
-		const header = document.querySelector('[data-header]');
-		const menuButton = document.querySelector('[data-menu-toggle]');
-		const mobileMenu = document.querySelector('[data-mobile-menu]');
+		const header = document.querySelector('[data-lg-header]');
+		const menuButton = document.querySelector('[data-lg-menu-toggle]');
+		const mobileMenu = document.querySelector('[data-lg-mobile-menu]');
 
 		const closeMenu = () => {
 			if (!menuButton || !mobileMenu) return;
 			menuButton.setAttribute('aria-expanded', 'false');
 			mobileMenu.hidden = true;
+			document.body.classList.remove('menu-open');
 		};
 
 		menuButton?.addEventListener('click', () => {
 			const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
 			menuButton.setAttribute('aria-expanded', String(!isOpen));
 			if (mobileMenu) mobileMenu.hidden = isOpen;
+			document.body.classList.toggle('menu-open', !isOpen);
 		});
 
 		mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
@@ -309,20 +314,5 @@ const process = [
 		const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
 		updateHeader();
 		window.addEventListener('scroll', updateHeader, { passive: true });
-
-		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		if (!reduceMotion && 'IntersectionObserver' in window) {
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('is-visible');
-						observer.unobserve(entry.target);
-					}
-				});
-			}, { threshold: 0.1, rootMargin: '0px 0px -4% 0px' });
-			document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
-		} else {
-			document.querySelectorAll('[data-reveal]').forEach((element) => element.classList.add('is-visible'));
-		}
 	</script>
 </Layout>
