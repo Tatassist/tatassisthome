@@ -1,7 +1,0 @@
-Linda coverup landing verification: passed
-Route: /lindagcoverups
-Build command: npm ci && npm run build
-Generated HTML: dist/lindagcoverups/index.html
-Scoped JPEG assets verified: 17
-Verified source commit: e036f4bc9e259a3e9e409c8dbc7621bce74cc808
-Verified at: 2026-08-21T01:26:18Z
