@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { bookedArtistSystemConfig } from '../data/booked-artist-system';
+
+const { supportEmail, price, guaranteeDays } = bookedArtistSystemConfig;
+const supportHref = `mailto:${supportEmail}`;
+const priceLabel = `$${price}`;
+---
+
+<BaseLayout
+  title="The Booked Artist System — Product Terms"
+  description="Purchase, refund, license, and use terms for The Booked Artist System digital product."
+  pageType="booked_artist_system_terms"
+  robots="noindex,follow"
+>
+  <Nav slot="header" />
+
+  <section class="pt-28 sm:pt-36 pb-12 sm:pb-16 bg-brand-dark border-b border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Clear expectations</p>
+      <h1 class="text-4xl sm:text-5xl font-heading font-bold text-brand-cream leading-tight mb-5">
+        The Booked Artist System — Product Terms
+      </h1>
+      <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed max-w-3xl">
+        These terms apply to the one-time digital purchase of The Booked Artist System. They are separate from any Tatassist membership or other offer.
+      </p>
+      <p class="text-sm text-brand-text-muted mt-6">Effective August 30, 2026</p>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20 bg-brand-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="prose-tatassist max-w-none">
+        <h2>What you are buying</h2>
+        <p>
+          The Booked Artist System is a one-time digital product for tattoo artists. The founding release is offered at <strong>{priceLabel}</strong> unless a different price is displayed at checkout. The purchase includes the files and materials listed on the sales page at the time of purchase. It is not a subscription.
+        </p>
+
+        <h2>Delivery and access</h2>
+        <p>
+          Digital delivery instructions are provided after successful payment or by email. Keep your receipt and download the files promptly. Contact <a href={supportHref}>{supportEmail}</a> if a valid purchase is not delivered or a download is unavailable.
+        </p>
+
+        <h2 id="refunds">{guaranteeDays}-day satisfaction guarantee</h2>
+        <p>
+          A {guaranteeDays}-day satisfaction period begins on the purchase date. To request an eligible refund, email <a href={supportHref}>{supportEmail}</a> from the address used for purchase within that period. Refund abuse, duplicate requests, redistribution, resale, chargeback fraud, or other material misuse may make a request ineligible.
+        </p>
+        <p>
+          A refund ends the license to use the product. You must stop using and delete the downloaded files after the refund is processed.
+        </p>
+
+        <h2>Individual business license</h2>
+        <p>
+          Unless the checkout expressly states otherwise, one purchase gives one working tattoo artist a limited, non-exclusive, non-transferable license to adapt and use the included materials in that artist's own tattoo business.
+        </p>
+        <p>
+          You may customize working copies and client-facing language for your business. You may not resell, redistribute, sublicense, publish, upload to a shared library, give the files to another artist or studio, or present the product as your own. Contact support for multi-artist studio licensing.
+        </p>
+
+        <h2>Education, not professional advice</h2>
+        <p>
+          The materials provide business education, examples, worksheets, and adaptable language. They are not legal, medical, tax, accounting, employment, safety, or regulatory advice. You are responsible for reviewing and adapting the materials for your business, clients, software, and jurisdiction.
+        </p>
+
+        <h2>No guaranteed business result</h2>
+        <p>
+          The Booked Artist System does not guarantee bookings, revenue, deposits, response rates, profit, or any other business result. Results depend on your work, market, reputation, pricing, implementation, availability, communication, and decisions.
+        </p>
+
+        <h2>External checkout and privacy</h2>
+        <p>
+          Payment may be processed by an external checkout provider. That provider's checkout terms and privacy practices also apply. Tatassist does not collect or store your full payment-card number on this website. See the <a href="/privacy">Tatassist Privacy Policy</a> for website-data practices.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about delivery, licensing, or refunds can be sent to <a href={supportHref}>{supportEmail}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
