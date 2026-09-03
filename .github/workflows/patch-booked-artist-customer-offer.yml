@@ -1,0 +1,71 @@
+name: Patch Booked Artist customer offer
+
+on:
+  push:
+    paths:
+      - .github/workflows/patch-booked-artist-customer-offer.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-offer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Remove internal lesson scripts from buyer-facing copy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('src/pages/lp/booked-artist-system.astro')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = [
+              (
+                  "A full library of artist-facing worksheets, scripts, maps, checklists, and decision tools built for real tattoo inquiries—not generic service-business filler.",
+                  "A library of 37 artist-facing forms, client-message scripts, maps, checklists, and decision tools built for real tattoo inquiries—not generic service-business filler.",
+              ),
+              (
+                  "  {\n    number: '04',\n    title: 'The lesson scripts',\n    body: 'Eight structured lessons that can be read, studied, or recorded as the companion training for the system.',\n    meta: 'Ready scripts',\n  },",
+                  "  {\n    number: '04',\n    title: 'The client script library',\n    body: 'Ready-to-adapt language for inquiry, missing information, estimates, deposits, onboarding, follow-up, reactivation, and clean exits—all built into the Template Vault.',\n    meta: 'Client-message scripts',\n  },",
+              ),
+              (
+                  "The founding release includes the playbook, implementation guides, lesson scripts, the complete standalone PNG template library, and an XLSX deposit calculator. Everything is delivered digitally.",
+                  "The founding release includes the Core Playbook, Implementation Guides, 37 standalone PNG templates—including ready-to-adapt client-message scripts—and an XLSX Deposit Calculator. Everything is delivered digitally.",
+              ),
+              (
+                  "A complete tattoo-client process built by a working tattoo artist, including a playbook, visual template vault, implementation guides, lesson scripts, and deposit calculator.",
+                  "A complete tattoo-client process built by a working tattoo artist, including a Core Playbook, 37-template visual vault with ready-to-adapt client-message scripts, Implementation Guides, and a Deposit Calculator.",
+              ),
+              (
+                  "<li>Implementation guides and lesson scripts</li>",
+                  "<li>Implementation guides and ready-to-adapt client-message scripts</li>",
+              ),
+          ]
+
+          for old, new in replacements:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'Expected exactly one match, found {count}: {old[:90]}')
+              text = text.replace(old, new)
+
+          if 'lesson script' in text.lower():
+              raise SystemExit('Internal lesson-script language remains in the customer-facing landing page.')
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit customer-facing correction
+        shell: bash
+        run: |
+          git config user.name "Tatassist"
+          git config user.email "syd@tatassist.com"
+          git add src/pages/lp/booked-artist-system.astro
+          git commit -m "Remove internal lesson scripts from customer offer"
+          git push origin HEAD:main
