@@ -1,0 +1,31 @@
+body[data-page-type="booked_artist_system_landing"] .bas-sheet,
+body[data-page-type="booked_artist_system_landing"] .bas-template-surface,
+body[data-page-type="booked_artist_system_landing"] .bas-lightbox-preview {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+body[data-page-type="booked_artist_system_landing"] .asset-inquiry {
+  background-image: url("/booked-artist-system/inquiry-form.webp");
+}
+
+body[data-page-type="booked_artist_system_landing"] .asset-body-map {
+  background-image: url("/booked-artist-system/body-map-guide.webp");
+}
+
+body[data-page-type="booked_artist_system_landing"] .asset-consultation {
+  background-image: url("/booked-artist-system/consultation-clarity.webp");
+}
+
+body[data-page-type="booked_artist_system_landing"] .asset-estimate {
+  background-image: url("/booked-artist-system/estimate-deposit.webp");
+}
+
+body[data-page-type="booked_artist_system_landing"] .asset-follow-up {
+  background-image: url("/booked-artist-system/follow-up-cadence.webp");
+}
+
+body[data-page-type="booked_artist_system_landing"] .asset-review {
+  background-image: url("/booked-artist-system/monthly-review.webp");
+}

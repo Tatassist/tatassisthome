@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import '../../../styles/booked-artist-system.css';
+
+const supportEmail = import.meta.env.PUBLIC_TATASSIST_SUPPORT_EMAIL || 'support@tatassist.com';
+const supportHref = `mailto:${supportEmail}?subject=${encodeURIComponent('Booked Artist System download help')}`;
+const downloadUrl = 'https://drive.google.com/file/d/1GKb1hAb2_iwssvgTGxjHWHKQoWjquh0c/view?usp=sharing';
+---
+
+<BaseLayout
+  title="Your Booked Artist System Is Ready"
+  description="Download The Booked Artist System founding release."
+  pageType="booked_artist_system_delivery"
+  robots="noindex,nofollow"
+>
+  <section class="bas-delivery">
+    <div class="bas-delivery-grid" aria-hidden="true"></div>
+    <div class="bas-delivery-card">
+      <a class="bas-brand" href="/lp/booked-artist-system" aria-label="The Booked Artist System">
+        <span class="bas-brand-mark" aria-hidden="true">T/A</span>
+        <span><b>TATASSIST</b><small>ARTIST SYSTEMS</small></span>
+      </a>
+
+      <p class="bas-kicker">PAYMENT COMPLETE</p>
+      <h1>YOUR SYSTEM<br />IS READY.</h1>
+      <p class="bas-delivery-lead">
+        Download the complete founding release, save the ZIP somewhere permanent, and begin with
+        <strong>00_START_HERE.pdf</strong>.
+      </p>
+
+      <a
+        class="bas-button bas-button-primary bas-button-wide"
+        href={downloadUrl}
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        data-track="true"
+        data-track-event="booked_artist_package_downloaded"
+        data-track-label="Download founding release"
+        data-track-location="booked_artist_order_complete"
+        data-track-type="download"
+        data-track-destination={downloadUrl}
+      >
+        DOWNLOAD THE FOUNDING RELEASE <span aria-hidden="true">↓</span>
+      </a>
+
+      <div class="bas-delivery-details">
+        <div>
+          <span>01</span>
+          <p><b>Download the ZIP.</b> The package is approximately 67 MB.</p>
+        </div>
+        <div>
+          <span>02</span>
+          <p><b>Open Start Here.</b> It gives you the recommended implementation sequence.</p>
+        </div>
+        <div>
+          <span>03</span>
+          <p><b>Keep your receipt.</b> Your purchase is licensed for one working tattoo artist.</p>
+        </div>
+      </div>
+
+      <p class="bas-delivery-help">
+        Trouble downloading or opening the package? Email <a href={supportHref}>{supportEmail}</a> from the address used at checkout.
+      </p>
+
+      <div class="bas-signature">
+        <strong>JOKER INK</strong>
+        <span>BLACK DIAMOND CUSTOM TATTOOS · NORTH LAS VEGAS</span>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .bas-delivery {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: clamp(2rem, 7vw, 6rem) clamp(1rem, 4vw, 3rem);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(112, 70, 163, 0.2), transparent 26rem),
+        radial-gradient(circle at 10% 90%, rgba(226, 73, 55, 0.13), transparent 24rem),
+        #0a0a0a;
+      color: #f2eee5;
+    }
+
+    .bas-delivery-grid {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 7rem 7rem;
+    }
+
+    .bas-delivery-card {
+      width: min(100%, 860px);
+      padding: clamp(1.5rem, 5vw, 4.5rem);
+      border: 1px solid rgba(242, 238, 229, 0.2);
+      background: rgba(15, 15, 15, 0.9);
+      box-shadow: 1rem 1rem 0 #7046a3;
+    }
+
+    .bas-delivery-card .bas-brand {
+      margin-bottom: clamp(3.5rem, 8vw, 6rem);
+    }
+
+    .bas-delivery-card h1 {
+      margin: 0;
+      font-family: "Oswald", "Arial Narrow", sans-serif;
+      font-size: clamp(4rem, 13vw, 9rem);
+      font-weight: 700;
+      letter-spacing: -0.055em;
+      line-height: 0.8;
+      text-transform: uppercase;
+    }
+
+    .bas-delivery-lead {
+      max-width: 660px;
+      margin: 2rem 0;
+      color: rgba(242, 238, 229, 0.75);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      line-height: 1.55;
+    }
+
+    .bas-delivery-lead strong {
+      color: #f2eee5;
+    }
+
+    .bas-delivery-details {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 3rem;
+      background: rgba(242, 238, 229, 0.16);
+    }
+
+    .bas-delivery-details > div {
+      padding: 1.4rem;
+      background: #111;
+    }
+
+    .bas-delivery-details span {
+      color: #e24937;
+      font-family: "Oswald", "Arial Narrow", sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .bas-delivery-details p {
+      margin: 0.8rem 0 0;
+      color: rgba(242, 238, 229, 0.68);
+      line-height: 1.45;
+    }
+
+    .bas-delivery-details b {
+      display: block;
+      color: #f2eee5;
+      margin-bottom: 0.2rem;
+    }
+
+    .bas-delivery-help {
+      margin: 2rem 0 0;
+      color: rgba(242, 238, 229, 0.66);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .bas-delivery-help a {
+      color: #f2eee5;
+      text-underline-offset: 0.2em;
+    }
+
+    .bas-delivery-card .bas-signature {
+      border-top-color: rgba(242, 238, 229, 0.7);
+    }
+
+    .bas-delivery-card .bas-signature span {
+      color: rgba(242, 238, 229, 0.5);
+    }
+
+    @media (max-width: 680px) {
+      .bas-delivery-card {
+        box-shadow: 0.55rem 0.55rem 0 #7046a3;
+      }
+
+      .bas-delivery-details {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>

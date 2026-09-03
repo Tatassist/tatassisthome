@@ -1,0 +1,615 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/booked-artist-system.css';
+import {
+  bookedArtistSystemConfig,
+  bookedArtistSystemPurchaseUrl,
+} from '../../data/booked-artist-system';
+
+const {
+  checkoutUrl,
+  supportEmail,
+  price,
+  nextPrice,
+  guaranteeDays,
+} = bookedArtistSystemConfig;
+
+const checkoutConfigured = Boolean(checkoutUrl);
+const purchaseUrl = bookedArtistSystemPurchaseUrl;
+const priceLabel = `$${price}`;
+const nextPriceLabel = `$${nextPrice}`;
+const supportHref = `mailto:${supportEmail}`;
+const purchaseLabel = checkoutConfigured ? 'Get the system' : 'Request founding access';
+const purchaseEvent = checkoutConfigured
+  ? 'booked_artist_checkout_started'
+  : 'booked_artist_access_requested';
+const year = new Date().getFullYear();
+
+const templatePreviews = [
+  {
+    className: 'asset-inquiry',
+    stage: 'Entry 01',
+    title: 'Inquiry Form',
+    alt: 'The Booked Artist System inquiry form',
+  },
+  {
+    className: 'asset-body-map',
+    stage: 'Entry 03',
+    title: 'Show the Canvas',
+    alt: 'Tattoo placement photo and body map guide',
+  },
+  {
+    className: 'asset-consultation',
+    stage: 'Consultation 02',
+    title: 'Tell Me About the Tattoo',
+    alt: 'Tattoo consultation clarity worksheet',
+  },
+  {
+    className: 'asset-estimate',
+    stage: 'Commitment 02',
+    title: 'Present the Number',
+    alt: 'Estimate and deposit presentation worksheet',
+  },
+  {
+    className: 'asset-follow-up',
+    stage: 'Follow-Up 02',
+    title: 'Reason to Return',
+    alt: 'Follow-up cadence builder',
+  },
+  {
+    className: 'asset-review',
+    stage: 'Operations 03',
+    title: 'Review the System',
+    alt: 'Monthly client-system review worksheet',
+  },
+];
+
+const deliverables = [
+  {
+    number: '01',
+    title: 'The operating system',
+    body: 'The complete logic behind the journey from first inquiry to meaningful commitment, including the mindset shift that keeps every lead from feeling like an audition.',
+    meta: 'Core playbook',
+  },
+  {
+    number: '02',
+    title: 'The template vault',
+    body: 'A full library of artist-facing worksheets, scripts, maps, checklists, and decision tools built for real tattoo inquiries—not generic service-business filler.',
+    meta: 'Standalone PNGs',
+  },
+  {
+    number: '03',
+    title: 'The install guides',
+    body: 'Pricing confidence, deposits, customization, implementation, follow-up, and boundary-setting guides that explain what each tool is trying to accomplish.',
+    meta: 'PDF guides',
+  },
+  {
+    number: '04',
+    title: 'The lesson scripts',
+    body: 'Eight structured lessons that can be read, studied, or recorded as the companion training for the system.',
+    meta: 'Ready scripts',
+  },
+  {
+    number: '05',
+    title: 'The deposit calculator',
+    body: 'A practical spreadsheet for turning estimated project value into a meaningful, customizable deposit range.',
+    meta: 'XLSX tool',
+  },
+];
+
+const principles = [
+  {
+    number: '01',
+    title: 'Gather context before conversation.',
+    body: 'Get the idea, placement, scale, references, timing, and investment range before spending live attention.',
+  },
+  {
+    number: '02',
+    title: 'Let behavior reveal intent.',
+    body: 'Serious prospects participate. The system gives them a chance to show it instead of making you guess.',
+  },
+  {
+    number: '03',
+    title: 'Build desire before friction.',
+    body: 'Talk about the tattoo, its meaning, and the finished piece before turning price into the center of the relationship.',
+  },
+  {
+    number: '04',
+    title: 'Present price as information.',
+    body: 'Project. Estimate. Deposit. Next step. Clear and calm, without an apology spiral.',
+  },
+  {
+    number: '05',
+    title: 'Follow up without chasing.',
+    body: 'Keep worthwhile paused projects available while letting poor-fit inquiries exit naturally.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is this only for new tattoo artists?',
+    answer:
+      'No. It is strongest for working artists who already receive inquiries but handle them reactively through DMs, texts, email, or scattered forms.',
+  },
+  {
+    question: 'Does this guarantee more bookings?',
+    answer:
+      'No. It is not a lead generator or a magic closing script. It gives you a deliberate process for gathering context, recognizing intent, running clearer consultations, presenting price, and following up without chasing.',
+  },
+  {
+    question: 'Can I rewrite the scripts in my own voice?',
+    answer:
+      'Yes. The system explains what each message is trying to accomplish. The examples are starting language, not a personality transplant.',
+  },
+  {
+    question: 'Is it only for large-scale or expensive work?',
+    answer:
+      'No. The principles apply at different project sizes. You can simplify the path for smaller pieces and use more of the system when the commitment is larger.',
+  },
+  {
+    question: 'What files do I receive?',
+    answer:
+      'The founding release includes the playbook, implementation guides, lesson scripts, the complete standalone PNG template library, and an XLSX deposit calculator. Everything is delivered digitally.',
+  },
+  {
+    question: 'Can I share it with other artists?',
+    answer:
+      'Your purchase is licensed for use in your own tattoo business. The files may not be resold, uploaded, or redistributed. Contact support for multi-artist studio use.',
+  },
+];
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'The Booked Artist System',
+    description:
+      'A complete tattoo-client process built by a working tattoo artist, including a playbook, visual template vault, implementation guides, lesson scripts, and deposit calculator.',
+    brand: { '@type': 'Brand', name: 'Tatassist | Artist Systems' },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USD',
+      price: price.toFixed(2),
+      availability: 'https://schema.org/InStock',
+      url: checkoutUrl || new URL('/lp/booked-artist-system', Astro.site).toString(),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ question, answer }) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="The Booked Artist System"
+  description="Stop auditioning for every DM. Install a deliberate tattoo-client process from first inquiry to meaningful deposit. Founding release: $49."
+  pageType="booked_artist_system_landing"
+  structuredData={structuredData}
+>
+  <Fragment slot="header">
+    <a class="bas-skip" href="#bas-main">Skip to content</a>
+
+    <div class="bas-launch-strip" role="status">
+      <span class="bas-live-dot" aria-hidden="true"></span>
+      <strong>Founding release</strong>
+      <span>One payment. No subscription.</span>
+      <a href="#buy">Get it for {priceLabel}</a>
+    </div>
+
+    <header class="bas-header" aria-label="Landing page navigation">
+      <a class="bas-brand" href="#top" aria-label="The Booked Artist System home">
+        <span class="bas-brand-mark" aria-hidden="true">T/A</span>
+        <span><b>TATASSIST</b><small>ARTIST SYSTEMS</small></span>
+      </a>
+      <nav aria-label="Page sections">
+        <a href="#system">The system</a>
+        <a href="#inside">What you get</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a
+        class="bas-button bas-button-small"
+        data-checkout
+        data-location="header"
+        href={purchaseUrl}
+        data-track="true"
+        data-track-event={purchaseEvent}
+        data-track-label="The Booked Artist System"
+        data-track-location="booked_artist_header"
+        data-track-type="primary"
+        data-track-destination={purchaseUrl}
+      >
+        {purchaseLabel} <span>{priceLabel}</span>
+      </a>
+    </header>
+  </Fragment>
+
+  <div id="bas-main">
+    <section class="bas-hero" id="top">
+      <div class="bas-grid-texture" aria-hidden="true"></div>
+      <div class="bas-hero-copy">
+        <h1>
+          <span>STOP</span>
+          <span class="bas-outline">AUDITIONING</span>
+          <span>FOR EVERY DM.</span>
+        </h1>
+        <p>
+          Install the client process that gets the right information, makes intent visible, builds desire before price, and moves good projects toward a meaningful deposit.
+        </p>
+        <div class="bas-hero-actions">
+          <a
+            class="bas-button bas-button-primary"
+            data-checkout
+            data-location="hero"
+            href={purchaseUrl}
+            data-track="true"
+            data-track-event={purchaseEvent}
+            data-track-label="The Booked Artist System"
+            data-track-location="booked_artist_hero"
+            data-track-type="primary"
+            data-track-destination={purchaseUrl}
+          >
+            {purchaseLabel} <span aria-hidden="true">↗</span>
+          </a>
+          <a class="bas-text-link" href="#inside">See the actual system</a>
+        </div>
+        <div class="bas-price-line" aria-label={`Founding price ${priceLabel}`}>
+          <strong>{priceLabel}</strong>
+          <span>Founding price</span>
+          <i aria-hidden="true"></i>
+          <span>{checkoutConfigured ? 'Instant digital access' : 'Checkout connection pending'}</span>
+        </div>
+      </div>
+
+      <div class="bas-product-stack" aria-label="Actual pages from The Booked Artist System">
+        <button
+          class="bas-sheet bas-sheet-back asset-body-map"
+          type="button"
+          data-lightbox="asset-body-map"
+          data-alt="Tattoo placement photo and body map guide"
+          aria-label="Open body map guide preview"
+        ></button>
+        <button
+          class="bas-sheet bas-sheet-mid asset-consultation"
+          type="button"
+          data-lightbox="asset-consultation"
+          data-alt="Tattoo consultation clarity worksheet"
+          aria-label="Open consultation worksheet preview"
+        ></button>
+        <button
+          class="bas-sheet bas-sheet-front asset-inquiry"
+          type="button"
+          data-lightbox="asset-inquiry"
+          data-alt="The Booked Artist System inquiry form"
+          aria-label="Open inquiry form preview"
+        ></button>
+        <span>ACTUAL PAGES. NOT A MOCKUP.</span>
+      </div>
+    </section>
+
+    <div class="bas-proof-rail" aria-label="Product credibility">
+      <p>BUILT FROM 18 YEARS OF TATTOOING</p>
+      <p>DEVELOPED INSIDE AN APPOINTMENT-ONLY STUDIO</p>
+      <p>MADE FOR REAL CLIENT CONVERSATIONS</p>
+    </div>
+
+    <section class="bas-problem bas-paper bas-section" aria-labelledby="problem-title">
+      <div class="bas-index" aria-hidden="true">01 / THE PROBLEM</div>
+      <div class="bas-problem-grid">
+        <div class="bas-problem-head" data-reveal>
+          <h2 id="problem-title">YOUR DM IS NOT A BOOKING SYSTEM.</h2>
+          <p>
+            You did not become a tattoo artist to answer the same questions, quote a sleeve from three blurry references, and chase somebody who was never serious.
+          </p>
+        </div>
+        <div class="bas-reactive-flow" data-reveal>
+          <p class="bas-label">WHAT MOST ARTISTS ARE RUNNING</p>
+          <div class="bas-broken-flow" aria-label="A reactive inquiry process">
+            <span>DM</span><b>→</b><span>HOW MUCH?</span><b>→</b><span>20 QUESTIONS</span><b>→</b><span>FREE CONSULT</span><b>→</b><span class="bas-crossout">GHOSTED</span>
+          </div>
+          <ol>
+            <li><span>01</span> Price becomes the opening frame.</li>
+            <li><span>02</span> Serious and low-intent leads consume the same attention.</li>
+            <li><span>03</span> Every inquiry starts to feel like an audition.</li>
+            <li><span>04</span> Good projects disappear into the scroll.</li>
+          </ol>
+          <strong class="bas-hard-line">IT IS NOT A TALENT PROBLEM. IT IS A PROCESS PROBLEM.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="bas-system bas-section" id="system" aria-labelledby="system-title">
+      <div class="bas-index bas-index-light" aria-hidden="true">02 / THE SYSTEM</div>
+      <div class="bas-system-grid">
+        <div class="bas-system-copy">
+          <p class="bas-kicker">THE PROCESS DOES THE FILTERING.</p>
+          <h2 id="system-title">BUILD A CLIENT JOURNEY YOU CAN RUN ON PURPOSE.</h2>
+          <p class="bas-system-intro">
+            The Booked Artist System replaces a reactive conversation with a clear path that still feels human.
+          </p>
+          <div class="bas-journey" aria-label="The Booked Artist client journey">
+            <span>INTEREST</span><i>→</i><span>INQUIRY</span><i>→</i><span>ENGAGEMENT</span><i>→</i><span>CONSULTATION</span><i>→</i><span>ESTIMATE</span><i>→</i><span>COMMITMENT</span><i>→</i><span>DEPOSIT</span><i>→</i><span>ONBOARDING</span>
+          </div>
+          <div class="bas-side-paths">
+            <p><b>NOT NOW</b><span>Follow-up pipeline</span></p>
+            <p><b>BAD FIT</b><span>Clean exit</span></p>
+          </div>
+        </div>
+
+        <ol class="bas-principles">
+          {principles.map((principle) => (
+            <li data-reveal>
+              <span>{principle.number}</span>
+              <div>
+                <h3>{principle.title}</h3>
+                <p>{principle.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="bas-inside bas-paper bas-section" id="inside" aria-labelledby="inside-title">
+      <div class="bas-index" aria-hidden="true">03 / ACTUAL PRODUCT</div>
+      <header class="bas-inside-head" data-reveal>
+        <h2 id="inside-title">NOT AN EBOOK YOU NEVER OPEN.</h2>
+        <p>
+          Forms, decision tools, scripts, consultation worksheets, pipeline pages, and implementation guides built to be used in a real tattoo business.
+        </p>
+      </header>
+
+      <div class="bas-gallery" aria-label="Template previews">
+        {templatePreviews.map((template) => (
+          <figure class="bas-gallery-card" data-reveal>
+            <button
+              type="button"
+              class={`bas-template-surface ${template.className}`}
+              data-lightbox={template.className}
+              data-alt={template.alt}
+              aria-label={`Open ${template.title} preview`}
+            ></button>
+            <figcaption><span>{template.stage}</span>{template.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="bas-swipe-hint">SWIPE THE ACTUAL PAGES →</p>
+    </section>
+
+    <section class="bas-manifest bas-section" aria-labelledby="manifest-title">
+      <div class="bas-index bas-index-light" aria-hidden="true">04 / WHAT YOU GET</div>
+      <div class="bas-manifest-head" data-reveal>
+        <p class="bas-kicker">THE COMPLETE FOUNDING RELEASE</p>
+        <h2 id="manifest-title">EVERYTHING NEEDED TO INSTALL THE PROCESS.</h2>
+      </div>
+      <ol class="bas-manifest-list">
+        {deliverables.map((item) => (
+          <li data-reveal>
+            <span class="bas-manifest-number">{item.number}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+            <b>{item.meta}</b>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="bas-founder bas-paper" aria-labelledby="founder-title">
+      <div class="bas-founder-black" aria-hidden="true">
+        <span>NO GURU</span>
+        <span>THEORY.</span>
+      </div>
+      <div class="bas-founder-copy" data-reveal>
+        <p class="bas-label">BUILT BY A WORKING TATTOO ARTIST</p>
+        <h2 id="founder-title">I DID NOT BUILD THIS BECAUSE I WANTED TO BECOME A BUSINESS COACH.</h2>
+        <p>
+          I built it after roughly 18 years tattooing and years running an appointment-only studio—dealing with real inquiries, consultations, pricing, deposits, large projects, ghosting, great clients, bad fits, and everything between them.
+        </p>
+        <p>
+          Tattoo artists do not need another generic funnel built by somebody who has never tattooed. They need a better process.
+        </p>
+        <div class="bas-signature">
+          <strong>JOKER INK</strong>
+          <span>BLACK DIAMOND CUSTOM TATTOOS · NORTH LAS VEGAS</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="bas-mindset bas-section" aria-labelledby="mindset-title">
+      <div class="bas-index bas-index-light" aria-hidden="true">05 / THE SHIFT</div>
+      <div class="bas-mindset-inner">
+        <p data-reveal><span>STOP ASKING</span>“WILL THIS PERSON CHOOSE ME?”</p>
+        <i aria-hidden="true"></i>
+        <h2 id="mindset-title" data-reveal><span>START ASKING</span>“ARE WE A GOOD FIT FOR EACH OTHER AND FOR THIS PROJECT?”</h2>
+        <small data-reveal>That shift changes how you communicate, price, follow up, and decide where your limited attention goes.</small>
+      </div>
+    </section>
+
+    <section class="bas-offer bas-paper bas-section" id="buy" aria-labelledby="offer-title">
+      <div class="bas-offer-shell">
+        <div class="bas-offer-copy" data-reveal>
+          <p class="bas-kicker bas-kicker-dark">FOUNDING RELEASE</p>
+          <h2 id="offer-title">INSTALL THE SYSTEM FOR LESS THAN THE PRICE OF ONE MISSED DEPOSIT.</h2>
+          <ul>
+            <li>Complete playbook and visual template vault</li>
+            <li>Implementation guides and lesson scripts</li>
+            <li>Deposit calculator and client journey framework</li>
+            <li>One payment. No subscription.</li>
+          </ul>
+        </div>
+        <div class="bas-price-panel" data-reveal>
+          <p>FOUNDING PRICE</p>
+          <strong>{priceLabel}</strong>
+          <span>Next price: {nextPriceLabel} after early sales prove demand.</span>
+          <a
+            class="bas-button bas-button-primary bas-button-wide"
+            data-checkout
+            data-location="offer"
+            href={purchaseUrl}
+            data-track="true"
+            data-track-event={purchaseEvent}
+            data-track-label="The Booked Artist System"
+            data-track-location="booked_artist_offer"
+            data-track-type="primary"
+            data-track-destination={purchaseUrl}
+          >
+            {purchaseLabel}
+          </a>
+          <div class="bas-purchase-notes">
+            <span>{checkoutConfigured ? 'Instant digital delivery' : 'Checkout URL still needs connection'}</span>
+            <span>{guaranteeDays}-day satisfaction guarantee</span>
+            <span>Individual artist license</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bas-faq bas-section" id="faq" aria-labelledby="faq-title">
+      <div class="bas-index bas-index-light" aria-hidden="true">06 / FAQ</div>
+      <div class="bas-faq-grid">
+        <div class="bas-faq-head">
+          <h2 id="faq-title">QUESTIONS BEFORE YOU PULL THE TRIGGER.</h2>
+          <p>Still unsure? Email <a href={supportHref}>{supportEmail}</a>.</p>
+        </div>
+        <div class="bas-faq-list">
+          {faqs.map((faq) => (
+            <details>
+              <summary>{faq.question}<span aria-hidden="true">+</span></summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bas-final" aria-label="Final purchase call to action">
+      <div class="bas-marquee" aria-hidden="true">
+        <span>BETTER PROCESS · BETTER CLIENTS · BETTER TATTOOS ·</span>
+        <span>BETTER PROCESS · BETTER CLIENTS · BETTER TATTOOS ·</span>
+      </div>
+      <div class="bas-final-inner">
+        <h2>STOP AUDITIONING.<br>START OPERATING.</h2>
+        <a
+          class="bas-button bas-button-primary"
+          data-checkout
+          data-location="final"
+          href={purchaseUrl}
+          data-track="true"
+          data-track-event={purchaseEvent}
+          data-track-label="The Booked Artist System"
+          data-track-location="booked_artist_final"
+          data-track-type="primary"
+          data-track-destination={purchaseUrl}
+        >
+          {purchaseLabel} <span>{priceLabel}</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <div class="bas-mobile-bar" aria-label="Purchase The Booked Artist System">
+    <div><span>FOUNDING RELEASE</span><strong>{priceLabel}</strong></div>
+    <a
+      class="bas-button bas-button-primary bas-button-small"
+      data-checkout
+      data-location="mobile_sticky"
+      href={purchaseUrl}
+      data-track="true"
+      data-track-event={purchaseEvent}
+      data-track-label="The Booked Artist System"
+      data-track-location="booked_artist_mobile_sticky"
+      data-track-type="primary"
+      data-track-destination={purchaseUrl}
+    >
+      {checkoutConfigured ? 'GET IT NOW' : 'REQUEST ACCESS'}
+    </a>
+  </div>
+
+  <dialog class="bas-lightbox" id="bas-template-lightbox" aria-label="Template preview">
+    <button class="bas-lightbox-close" type="button" aria-label="Close preview">CLOSE ×</button>
+    <div class="bas-lightbox-preview" role="img" aria-label="Template preview"></div>
+  </dialog>
+
+  <footer slot="footer" class="bas-footer">
+    <a class="bas-brand" href="#top" aria-label="Return to top">
+      <span class="bas-brand-mark" aria-hidden="true">T/A</span>
+      <span><b>TATASSIST</b><small>ARTIST SYSTEMS</small></span>
+    </a>
+    <p>Built from the real client process used at Black Diamond Custom Tattoos.</p>
+    <nav aria-label="Legal links">
+      <a href="/privacy">Privacy</a>
+      <a href="/booked-artist-system-terms">Product terms</a>
+      <a href="/booked-artist-system-terms#refunds">Refunds</a>
+    </nav>
+    <p>© {year} Tatassist.</p>
+  </footer>
+
+  <script is:inline define:vars={{ checkoutConfigured }}>
+    (() => {
+      if (checkoutConfigured) {
+        const source = new URL(window.location.href);
+        document.querySelectorAll('[data-checkout]').forEach((link) => {
+          try {
+            const target = new URL(link.href);
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref'].forEach((key) => {
+              const value = source.searchParams.get(key);
+              if (value && !target.searchParams.has(key)) target.searchParams.set(key, value);
+            });
+            link.href = target.toString();
+          } catch (_) {
+            // Attribution should never interrupt checkout.
+          }
+        });
+      }
+
+      const dialog = document.querySelector('#bas-template-lightbox');
+      const preview = dialog?.querySelector('.bas-lightbox-preview');
+      const closeButton = dialog?.querySelector('.bas-lightbox-close');
+
+      document.querySelectorAll('[data-lightbox]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (!dialog || !preview || typeof dialog.showModal !== 'function') return;
+          const assetClass = button.dataset.lightbox || '';
+          preview.className = `bas-lightbox-preview ${assetClass}`;
+          preview.setAttribute('aria-label', button.dataset.alt || 'Template preview');
+          dialog.showModal();
+          document.body.style.overflow = 'hidden';
+          window.tatassistTrack?.({
+            event: 'booked_artist_template_previewed',
+            template_name: button.dataset.alt || 'Template preview',
+          });
+        });
+      });
+
+      const closeDialog = () => {
+        if (!dialog?.open) return;
+        dialog.close();
+        document.body.style.overflow = '';
+        if (preview) preview.className = 'bas-lightbox-preview';
+      };
+
+      closeButton?.addEventListener('click', closeDialog);
+      dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog) closeDialog();
+      });
+      dialog?.addEventListener('close', () => {
+        document.body.style.overflow = '';
+      });
+
+      const heroCta = document.querySelector('[data-location="hero"]');
+      const mobileBar = document.querySelector('.bas-mobile-bar');
+      if (heroCta && mobileBar && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(([entry]) => {
+          mobileBar.classList.toggle('is-visible', !entry.isIntersecting && window.scrollY > 320);
+        });
+        observer.observe(heroCta);
+      }
+    })();
+  </script>
+</BaseLayout>
