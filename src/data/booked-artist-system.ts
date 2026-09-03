@@ -17,8 +17,12 @@ const normalizeEmail = (value: string | undefined) => {
     : 'support@tatassist.com';
 };
 
+const liveFoundingCheckoutUrl = 'https://buy.stripe.com/00weVfc8laWR6168C473G00';
+
 export const bookedArtistSystemConfig = {
-  checkoutUrl: normalizeHttpsUrl(import.meta.env.PUBLIC_BOOKED_ARTIST_SYSTEM_CHECKOUT_URL),
+  checkoutUrl:
+    normalizeHttpsUrl(import.meta.env.PUBLIC_BOOKED_ARTIST_SYSTEM_CHECKOUT_URL) ||
+    liveFoundingCheckoutUrl,
   supportEmail: normalizeEmail(import.meta.env.PUBLIC_TATASSIST_SUPPORT_EMAIL),
   price: 49,
   nextPrice: 79,
