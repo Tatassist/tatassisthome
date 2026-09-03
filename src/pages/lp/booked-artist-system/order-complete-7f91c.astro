@@ -69,6 +69,40 @@ const downloadUrl = 'https://drive.google.com/file/d/1GKb1hAb2_iwssvgTGxjHWHKQoW
     </div>
   </section>
 
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      const sessionId = new URLSearchParams(window.location.search).get('session_id');
+      if (!sessionId) return;
+
+      const storageKey = `booked-artist-purchase:${sessionId}`;
+      if (window.sessionStorage.getItem(storageKey)) return;
+
+      window.tatassistTrack?.({
+        event: 'purchase',
+        transaction_id: sessionId,
+        value: 49,
+        currency: 'USD',
+        items: [
+          {
+            item_id: 'booked_artist_system_founding_release',
+            item_name: 'The Booked Artist System — Founding Release',
+            price: 49,
+            quantity: 1,
+          },
+        ],
+      });
+
+      window.tatassistTrack?.({
+        event: 'booked_artist_purchase_completed',
+        transaction_id: sessionId,
+        value: 49,
+        currency: 'USD',
+      });
+
+      window.sessionStorage.setItem(storageKey, '1');
+    });
+  </script>
+
   <style>
     .bas-delivery {
       position: relative;
