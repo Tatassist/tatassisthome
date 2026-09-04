@@ -27,6 +27,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
 const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 const hasGTM = Boolean(gtmId);
 const isBookedArtistLanding = pageType === 'booked_artist_system_landing';
+const isBeforeYouQuoteLanding = pageType === 'before_you_quote_landing';
 const baseStructuredData = [
   {
     '@context': 'https://schema.org',
@@ -90,6 +91,13 @@ const structuredDataScripts = [
     {isBookedArtistLanding && (
       <link rel="stylesheet" href="/booked-artist-system/assets.css" />
     )}
+    {isBeforeYouQuoteLanding && (
+      <style is:inline>
+        .byq-skip-survey {
+          display: none !important;
+        }
+      </style>
+    )}
     {gaMeasurementId && !hasGTM && (
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
     )}
@@ -146,6 +154,11 @@ const structuredDataScripts = [
         <!-- Footer injected per page or via component -->
       </footer>
     </slot>
+    {isBeforeYouQuoteLanding && (
+      <script is:inline>
+        document.querySelector('[data-skip-survey]')?.remove();
+      </script>
+    )}
     <script is:inline define:vars={{ pageTitle: title, pagePath: Astro.url.pathname, pageType, hasGTM }}>
       window.dataLayer = window.dataLayer || [];
       window.tatassistTrack = function (payload) {

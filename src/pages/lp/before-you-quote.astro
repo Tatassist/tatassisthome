@@ -1,0 +1,544 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/before-you-quote.css';
+import {
+  bookedArtistSystemConfig,
+  bookedArtistSystemPurchaseUrl,
+} from '../../data/booked-artist-system';
+
+const { price } = bookedArtistSystemConfig;
+const priceLabel = `$${price}`;
+const productPageUrl = '/lp/booked-artist-system';
+const purchaseUrl = bookedArtistSystemPurchaseUrl;
+const guideUrl =
+  import.meta.env.PUBLIC_BEFORE_YOU_QUOTE_GUIDE_URL?.trim() ||
+  'https://drive.google.com/uc?export=download&id=1nHX99Gb3AEEmufmOJr0aPzungDI-MQu-';
+const year = new Date().getFullYear();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'DigitalDocument',
+  name: 'Before You Quote',
+  description:
+    'A free guide for working tattoo artists about why good tattoo leads sometimes disappear after price and what to fix before sending the number.',
+  author: {
+    '@type': 'Person',
+    name: 'Joker Ink',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Tatassist',
+  },
+  isAccessibleForFree: true,
+  url: new URL('/lp/before-you-quote', Astro.site).toString(),
+};
+---
+
+<BaseLayout
+  title="Before You Quote — Free Guide for Tattoo Artists"
+  description="Getting ghosted as soon as you quote a price? Take the 60-second client-process check and get Before You Quote free."
+  ogImage="/og/tatassist-home.png"
+  pageType="before_you_quote_landing"
+  structuredData={structuredData}
+>
+  <Fragment slot="header">
+    <a class="byq-skip" href="#byq-main">Skip to content</a>
+    <header class="byq-header" aria-label="Before You Quote navigation">
+      <a class="byq-brand" href="#top" aria-label="Tatassist Before You Quote home">
+        <span class="byq-brand-mark" aria-hidden="true">T/A</span>
+        <span><b>TATASSIST</b><small>ARTIST SYSTEMS</small></span>
+      </a>
+      <nav aria-label="Offer links">
+        <a
+          class="byq-header-link"
+          href={productPageUrl}
+          data-track="true"
+          data-track-event="before_you_quote_product_page_clicked"
+          data-track-label="See the full system"
+          data-track-location="before_you_quote_header"
+          data-track-type="secondary"
+          data-track-destination={productPageUrl}
+        >See the full system</a>
+        <a
+          class="byq-buy-link"
+          href={purchaseUrl}
+          data-track="true"
+          data-track-event="before_you_quote_checkout_started"
+          data-track-label="Get the system"
+          data-track-location="before_you_quote_header"
+          data-track-type="primary"
+          data-track-destination={purchaseUrl}
+        >Get it <span>{priceLabel}</span></a>
+      </nav>
+    </header>
+  </Fragment>
+
+  <div id="byq-main" class="byq-page">
+    <div class="byq-noise" aria-hidden="true"></div>
+
+    <div class="byq-survey-shell" id="top">
+      <div class="byq-survey-topline" aria-hidden="true">
+        <span>BEFORE YOU QUOTE</span>
+        <span data-progress-label>FREE GUIDE</span>
+      </div>
+      <div class="byq-progress" aria-hidden="true"><span data-progress-bar></span></div>
+
+      <form class="byq-survey" data-survey novalidate>
+        <input class="byq-honey" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <section class="byq-step byq-step-intro is-active" data-step="0" aria-labelledby="byq-title">
+          <div class="byq-copy-column">
+            <p class="byq-overline">A 60-SECOND CLIENT-PROCESS CHECK</p>
+            <h1 id="byq-title" tabindex="-1">GETTING GHOSTED AS SOON AS YOU QUOTE A PRICE?</h1>
+            <p class="byq-lead">
+              The number may not be the real problem. Answer four quick questions, see where the client journey may be breaking, and get the free guide.
+            </p>
+
+            <div class="byq-start-actions">
+              <button class="byq-primary" type="button" data-next data-start-survey>
+                Start the 60-second check <span aria-hidden="true">→</span>
+              </button>
+              <button class="byq-skip-survey" type="button" data-skip-survey>
+                Skip the check. Just send me the guide.
+              </button>
+            </div>
+            <p class="byq-no-obligation">No obligation. No sales call. Your guide appears immediately after you submit.</p>
+
+            <div class="byq-proof-line" aria-label="Guide details">
+              <span>4 QUICK QUESTIONS</span>
+              <i aria-hidden="true"></i>
+              <span>1 PRACTICAL GUIDE</span>
+              <i aria-hidden="true"></i>
+              <span>FREE</span>
+            </div>
+          </div>
+
+          <div class="byq-cover-column" aria-label="Before You Quote guide cover">
+            <div class="byq-cover-frame">
+              <div class="byq-guide-cover">
+                <div class="byq-cover-top"><span>TATASSIST</span><span>FREE GUIDE</span></div>
+                <div class="byq-cover-rule"></div>
+                <p class="byq-cover-kicker">FOR WORKING TATTOO ARTISTS</p>
+                <h2>BEFORE<br />YOU QUOTE</h2>
+                <p class="byq-cover-deck">Why good tattoo leads disappear after the price — and what to fix before you send the number.</p>
+                <div class="byq-cover-path" aria-hidden="true"><span>DM</span><i>→</i><span>QUOTE</span><i>→</i><span class="byq-cover-ghost">?</span></div>
+                <p class="byq-cover-bottom">BY JOKER INK</p>
+              </div>
+            </div>
+            <p>BEFORE YOU QUOTE / JOKER INK</p>
+          </div>
+        </section>
+
+        <section class="byq-step" data-step="1" data-question="quote_outcome" aria-labelledby="question-1" hidden>
+          <div class="byq-question-layout">
+            <div class="byq-question-copy">
+              <p class="byq-step-count">QUESTION 01 / 04</p>
+              <h2 id="question-1" tabindex="-1">WHAT USUALLY HAPPENS AFTER YOU SEND THE PRICE?</h2>
+              <p>Choose the closest answer. There is no “right” one.</p>
+            </div>
+            <fieldset class="byq-options">
+              <legend class="sr-only">What usually happens after you send the price?</legend>
+              <label><input type="radio" name="quote_outcome" value="They disappear" /><span><b>01</b>They disappear</span></label>
+              <label><input type="radio" name="quote_outcome" value="They say they need to think" /><span><b>02</b>They say they need to think</span></label>
+              <label><input type="radio" name="quote_outcome" value="They negotiate or shrink the project" /><span><b>03</b>They negotiate or shrink the project</span></label>
+              <label><input type="radio" name="quote_outcome" value="A healthy mix" /><span><b>04</b>A healthy mix — some book, some do not</span></label>
+            </fieldset>
+          </div>
+          <aside class="byq-insight" data-insight hidden>
+            <span>WHAT THIS MAY SIGNAL</span>
+            <p data-insight-text></p>
+          </aside>
+          <div class="byq-controls"><button type="button" data-back>Back</button><button class="byq-primary" type="button" data-next disabled>Continue <span aria-hidden="true">→</span></button></div>
+        </section>
+
+        <section class="byq-step" data-step="2" data-question="price_timing" aria-labelledby="question-2" hidden>
+          <div class="byq-question-layout">
+            <div class="byq-question-copy">
+              <p class="byq-step-count">QUESTION 02 / 04</p>
+              <h2 id="question-2" tabindex="-1">WHEN DOES PRICE ENTER THE CONVERSATION?</h2>
+              <p>This is often where the relationship changes.</p>
+            </div>
+            <fieldset class="byq-options">
+              <legend class="sr-only">When does price enter the conversation?</legend>
+              <label><input type="radio" name="price_timing" value="In the first reply" /><span><b>01</b>In the first reply</span></label>
+              <label><input type="radio" name="price_timing" value="After a few messages" /><span><b>02</b>After a few messages</span></label>
+              <label><input type="radio" name="price_timing" value="After a form or consultation" /><span><b>03</b>After a form or consultation</span></label>
+              <label><input type="radio" name="price_timing" value="It depends on the project" /><span><b>04</b>It depends on the project</span></label>
+            </fieldset>
+          </div>
+          <aside class="byq-insight" data-insight hidden><span>WHY TIMING MATTERS</span><p data-insight-text></p></aside>
+          <div class="byq-controls"><button type="button" data-back>Back</button><button class="byq-primary" type="button" data-next disabled>Continue <span aria-hidden="true">→</span></button></div>
+        </section>
+
+        <section class="byq-step" data-step="3" data-question="inquiry_process" aria-labelledby="question-3" hidden>
+          <div class="byq-question-layout">
+            <div class="byq-question-copy">
+              <p class="byq-step-count">QUESTION 03 / 04</p>
+              <h2 id="question-3" tabindex="-1">HOW ARE YOU HANDLING INQUIRIES RIGHT NOW?</h2>
+              <p>The process does not need to feel corporate. It does need to be repeatable.</p>
+            </div>
+            <fieldset class="byq-options">
+              <legend class="sr-only">How are you handling inquiries right now?</legend>
+              <label><input type="radio" name="inquiry_process" value="Entirely in DMs or text" /><span><b>01</b>Entirely in DMs or text</span></label>
+              <label><input type="radio" name="inquiry_process" value="A form, then mostly improvised" /><span><b>02</b>A form, then mostly improvised</span></label>
+              <label><input type="radio" name="inquiry_process" value="A loose process I follow most of the time" /><span><b>03</b>A loose process I follow most of the time</span></label>
+              <label><input type="radio" name="inquiry_process" value="A defined process from inquiry to deposit" /><span><b>04</b>A defined process from inquiry to deposit</span></label>
+            </fieldset>
+          </div>
+          <aside class="byq-insight" data-insight hidden><span>THE HIDDEN COST</span><p data-insight-text></p></aside>
+          <div class="byq-controls"><button type="button" data-back>Back</button><button class="byq-primary" type="button" data-next disabled>Continue <span aria-hidden="true">→</span></button></div>
+        </section>
+
+        <section class="byq-step" data-step="4" data-question="biggest_cost" aria-labelledby="question-4" hidden>
+          <div class="byq-question-layout">
+            <div class="byq-question-copy">
+              <p class="byq-step-count">QUESTION 04 / 04</p>
+              <h2 id="question-4" tabindex="-1">WHAT IS THE CURRENT PROCESS COSTING YOU MOST?</h2>
+              <p>Your answer shapes the result you see next.</p>
+            </div>
+            <fieldset class="byq-options">
+              <legend class="sr-only">What is the current process costing you most?</legend>
+              <label><input type="radio" name="biggest_cost" value="Good clients disappearing" /><span><b>01</b>Good clients disappearing</span></label>
+              <label><input type="radio" name="biggest_cost" value="Too much unpaid conversation" /><span><b>02</b>Too much unpaid conversation</span></label>
+              <label><input type="radio" name="biggest_cost" value="Weak deposits or price negotiation" /><span><b>03</b>Weak deposits or price negotiation</span></label>
+              <label><input type="radio" name="biggest_cost" value="No clear way to follow up" /><span><b>04</b>No clear way to follow up</span></label>
+            </fieldset>
+          </div>
+          <aside class="byq-insight" data-insight hidden><span>YOUR PROCESS GAP</span><p data-insight-text></p></aside>
+          <div class="byq-controls"><button type="button" data-back>Back</button><button class="byq-primary" type="button" data-next disabled>See my result <span aria-hidden="true">→</span></button></div>
+        </section>
+
+        <section class="byq-step byq-step-capture" data-step="5" aria-labelledby="capture-title" hidden>
+          <div class="byq-result-grid">
+            <div class="byq-result-copy">
+              <p class="byq-step-count">YOUR RESULT</p>
+              <h2 id="capture-title" tabindex="-1">THE QUOTE MAY NOT BE WHERE THE PROCESS IS BREAKING.</h2>
+              <p data-result-text>
+                Good clients make decisions from the full experience: how clearly you lead the conversation, how well you understand the project, and whether the next step feels defined.
+              </p>
+              <div class="byq-mini-map" aria-label="A deliberate client journey">
+                <span>INQUIRY</span><i>→</i><span>CONTEXT</span><i>→</i><span>DESIRE</span><i>→</i><span>PRICE</span><i>→</i><span>COMMITMENT</span>
+              </div>
+              <p class="byq-result-note">The free guide explains five places the journey commonly breaks before the deposit.</p>
+            </div>
+
+            <div class="byq-capture-card">
+              <p class="byq-capture-number">FREE / NO OBLIGATION</p>
+              <h3>WHERE SHOULD WE SEND IT?</h3>
+              <label for="first-name">First name</label>
+              <input id="first-name" name="firstName" type="text" autocomplete="given-name" maxlength="80" required />
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="160" required />
+              <p class="byq-form-error" data-form-error role="alert" hidden></p>
+              <button class="byq-primary byq-submit" type="submit">Send me the free guide <span aria-hidden="true">→</span></button>
+              <p class="byq-consent">By submitting, you agree to receive the guide and occasional practical Tatassist emails. Unsubscribe anytime. See our <a href="/privacy">privacy policy</a>.</p>
+            </div>
+          </div>
+          <div class="byq-controls byq-controls-solo"><button type="button" data-back>Back</button></div>
+        </section>
+
+        <section class="byq-step byq-step-success" data-step="6" aria-labelledby="success-title" hidden>
+          <div class="byq-success-mark" aria-hidden="true">✓</div>
+          <p class="byq-step-count">YOU'RE IN</p>
+          <h2 id="success-title" tabindex="-1">YOUR FREE GUIDE IS READY.</h2>
+          <p>Start with the guide. The complete system is there only if you decide you want the implementation tools too.</p>
+          <div class="byq-success-actions">
+            <a
+              class="byq-primary"
+              href={guideUrl}
+              target="_blank"
+              rel="noopener"
+              data-guide-download
+              data-track="true"
+              data-track-event="before_you_quote_guide_downloaded"
+              data-track-label="Download Before You Quote"
+              data-track-location="before_you_quote_success"
+              data-track-type="primary"
+              data-track-destination={guideUrl}
+            >Open the free guide <span aria-hidden="true">↗</span></a>
+            <a
+              class="byq-outline-button"
+              href={productPageUrl}
+              data-track="true"
+              data-track-event="before_you_quote_product_page_clicked"
+              data-track-label="See The Booked Artist System"
+              data-track-location="before_you_quote_success"
+              data-track-type="secondary"
+              data-track-destination={productPageUrl}
+            >See the complete system</a>
+          </div>
+          <a
+            class="byq-direct-buy"
+            href={purchaseUrl}
+            data-track="true"
+            data-track-event="before_you_quote_checkout_started"
+            data-track-label="Get The Booked Artist System"
+            data-track-location="before_you_quote_success"
+            data-track-type="primary"
+            data-track-destination={purchaseUrl}
+          >Already know you want it? Get The Booked Artist System for {priceLabel}.</a>
+        </section>
+      </form>
+
+      <aside class="byq-persistent-offer" aria-label="Optional paid offer">
+        <span>THE FULL SYSTEM IS AVAILABLE ANYTIME.</span>
+        <div>
+          <a
+            href={productPageUrl}
+            data-track="true"
+            data-track-event="before_you_quote_product_page_clicked"
+            data-track-label="Review the system"
+            data-track-location="before_you_quote_survey_footer"
+            data-track-type="secondary"
+            data-track-destination={productPageUrl}
+          >Review the system</a>
+          <a
+            href={purchaseUrl}
+            data-track="true"
+            data-track-event="before_you_quote_checkout_started"
+            data-track-label={`Get it ${priceLabel}`}
+            data-track-location="before_you_quote_survey_footer"
+            data-track-type="primary"
+            data-track-destination={purchaseUrl}
+          >Get it {priceLabel}</a>
+        </div>
+      </aside>
+    </div>
+
+    <section class="byq-why" aria-labelledby="why-title">
+      <div>
+        <p class="byq-section-index">THE IDEA IN 20 SECONDS</p>
+        <h2 id="why-title">PRICE IS A MOMENT. THE CLIENT EXPERIENCE STARTS BEFORE IT.</h2>
+      </div>
+      <div class="byq-why-copy">
+        <p>A serious client can still lose confidence when the process feels improvised, rushed, or centered on price before the project has been understood.</p>
+        <p>The guide shows how to recognize that problem without turning your personality into a sales script.</p>
+      </div>
+    </section>
+
+    <footer class="byq-footer">
+      <p>© {year} Tatassist. By artists, for artists.</p>
+      <nav aria-label="Footer links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/support">Support</a></nav>
+    </footer>
+  </div>
+
+  <script is:inline define:vars={{ guideUrl, productPageUrl, purchaseUrl }}>
+    (() => {
+      const survey = document.querySelector('[data-survey]');
+      if (!(survey instanceof HTMLFormElement)) return;
+
+      const steps = Array.from(survey.querySelectorAll('[data-step]'));
+      const progressBar = document.querySelector('[data-progress-bar]');
+      const progressLabel = document.querySelector('[data-progress-label]');
+      const resultText = survey.querySelector('[data-result-text]');
+      const formError = survey.querySelector('[data-form-error]');
+      const submitButton = survey.querySelector('.byq-submit');
+      const startedAt = Date.now();
+      let currentStep = 0;
+      let surveySkipped = false;
+
+      const answerInsights = {
+        quote_outcome: {
+          'They disappear': 'Silence after a quote does not automatically mean the price was wrong. The client may never have reached enough clarity or confidence to evaluate the number.',
+          'They say they need to think': '“I need to think” often means the next decision was never clearly defined. A deliberate process gives the client something concrete to decide.',
+          'They negotiate or shrink the project': 'When price arrives before scope and value are clear, the easiest thing to discuss is subtraction. The process should define the project before the number.',
+          'A healthy mix': 'Some people will not book, and that is normal. The useful question is whether good-fit clients receive a clear path from interest to commitment.',
+        },
+        price_timing: {
+          'In the first reply': 'An early number can make price the entire frame before the client understands the project, the artist, or the experience.',
+          'After a few messages': 'A few messages can still be too early when the important context is missing. Sequence matters more than message count.',
+          'After a form or consultation': 'That structure helps, but the form or consultation still needs to build clarity rather than simply delay the quote.',
+          'It depends on the project': 'Flexibility is useful when the decision is deliberate. The risk is improvising a different process for every lead without knowing why.',
+        },
+        inquiry_process: {
+          'Entirely in DMs or text': 'DMs are useful for contact, but weak as a complete operating system. Context gets scattered and every response starts from zero.',
+          'A form, then mostly improvised': 'The form solves collection. The gap is what happens next: how you evaluate fit, build clarity, present price, and define the next step.',
+          'A loose process I follow most of the time': 'A loose process is a strong starting point. The next gain is making the key decisions repeatable without making the conversation robotic.',
+          'A defined process from inquiry to deposit': 'A defined process gives you something to evaluate and improve. The guide can help you check where price and commitment enter that path.',
+        },
+        biggest_cost: {
+          'Good clients disappearing': 'The largest risk is not only losing time. A strong client may leave because the experience does not match the quality of the work.',
+          'Too much unpaid conversation': 'The fix is not becoming cold. It is gathering the right context and asking prospects to participate before more artist time is invested.',
+          'Weak deposits or price negotiation': 'A deposit works best when it follows a clearly defined project and represents meaningful commitment from both sides.',
+          'No clear way to follow up': 'Follow-up becomes easier when every paused lead has a reason, a next action, and a date instead of living indefinitely in the inbox.',
+        },
+      };
+
+      const resultMessages = {
+        'Good clients disappearing': 'Your biggest risk is not simply low conversion. A serious client may be evaluating whether the experience matches the quality of the work. The guide shows what should happen before price becomes the center of the conversation.',
+        'Too much unpaid conversation': 'Your process may be asking you to invest too much before the prospect has shown intent. The guide explains how to gather context and let participation reveal who is serious.',
+        'Weak deposits or price negotiation': 'The quote and deposit are strongest when they follow a clearly defined project. The guide shows how the earlier conversation changes how the number is received.',
+        'No clear way to follow up': 'A lead should not live forever in your inbox. The guide introduces a cleaner distinction between active interest, a deliberate pause, and a finished inquiry.',
+      };
+
+      const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid', 'msclkid'];
+      const query = new URLSearchParams(window.location.search);
+      const storedAttribution = {};
+      attributionKeys.forEach((key) => {
+        const value = query.get(key) || sessionStorage.getItem(`byq_${key}`) || '';
+        if (value) {
+          storedAttribution[key] = value;
+          sessionStorage.setItem(`byq_${key}`, value);
+        }
+      });
+
+      const track = (event, detail = {}) => {
+        if (typeof window.tatassistTrack === 'function') {
+          window.tatassistTrack({ event, ...detail });
+        }
+      };
+
+      const selectedAnswers = () => {
+        const data = {};
+        ['quote_outcome', 'price_timing', 'inquiry_process', 'biggest_cost'].forEach((name) => {
+          const input = survey.querySelector(`input[name="${name}"]:checked`);
+          data[name] = input instanceof HTMLInputElement ? input.value : '';
+        });
+        return data;
+      };
+
+      const updateProgress = () => {
+        const progress = currentStep === 0 ? 0 : Math.min(100, (currentStep / 5) * 100);
+        if (progressBar instanceof HTMLElement) progressBar.style.width = `${progress}%`;
+        if (progressLabel instanceof HTMLElement) {
+          progressLabel.textContent = currentStep === 0 ? 'FREE GUIDE' : currentStep >= 5 ? 'COMPLETE' : `${currentStep} OF 4`;
+        }
+      };
+
+      const showStep = (index) => {
+        currentStep = Math.max(0, Math.min(index, steps.length - 1));
+        steps.forEach((step, stepIndex) => {
+          const active = stepIndex === currentStep;
+          step.toggleAttribute('hidden', !active);
+          step.classList.toggle('is-active', active);
+        });
+        updateProgress();
+        const activeStep = steps[currentStep];
+        const heading = activeStep?.querySelector('h1, h2');
+        if (heading instanceof HTMLElement) window.setTimeout(() => heading.focus({ preventScroll: true }), 80);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (currentStep > 0 && currentStep < 5) {
+          track('before_you_quote_survey_step_viewed', { survey_step: currentStep });
+        }
+      };
+
+      survey.querySelectorAll('input[type="radio"]').forEach((input) => {
+        input.addEventListener('change', () => {
+          if (!(input instanceof HTMLInputElement)) return;
+          const step = input.closest('[data-question]');
+          if (!(step instanceof HTMLElement)) return;
+          const question = step.dataset.question || '';
+          const insight = step.querySelector('[data-insight]');
+          const insightText = step.querySelector('[data-insight-text]');
+          const next = step.querySelector('[data-next]');
+          const copy = answerInsights[question]?.[input.value] || '';
+          if (insightText instanceof HTMLElement) insightText.textContent = copy;
+          if (insight instanceof HTMLElement) insight.hidden = false;
+          if (next instanceof HTMLButtonElement) next.disabled = false;
+          track('before_you_quote_survey_answered', {
+            survey_question: question,
+            survey_answer: input.value,
+            survey_step: currentStep,
+          });
+        });
+      });
+
+      survey.querySelectorAll('[data-next]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (button.hasAttribute('data-start-survey')) {
+            track('before_you_quote_survey_started', { entry_method: 'survey' });
+          }
+          if (currentStep === 4) {
+            const answer = selectedAnswers().biggest_cost;
+            if (resultText instanceof HTMLElement && resultMessages[answer]) resultText.textContent = resultMessages[answer];
+          }
+          showStep(currentStep + 1);
+        });
+      });
+
+      survey.querySelectorAll('[data-back]').forEach((button) => {
+        button.addEventListener('click', () => showStep(Math.max(0, currentStep - 1)));
+      });
+
+      const skipButton = survey.querySelector('[data-skip-survey]');
+      skipButton?.addEventListener('click', () => {
+        surveySkipped = true;
+        track('before_you_quote_survey_skipped', { entry_method: 'skip' });
+        if (resultText instanceof HTMLElement) {
+          resultText.textContent = 'The guide explains why the quote may not be the real problem and shows five places the client journey can break before the deposit.';
+        }
+        showStep(5);
+      });
+
+      survey.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const firstNameInput = survey.elements.namedItem('firstName');
+        const emailInput = survey.elements.namedItem('email');
+        const honeyInput = survey.elements.namedItem('website');
+        if (!(firstNameInput instanceof HTMLInputElement) || !(emailInput instanceof HTMLInputElement)) return;
+
+        firstNameInput.value = firstNameInput.value.trim();
+        emailInput.value = emailInput.value.trim();
+        if (!firstNameInput.value || !emailInput.validity.valid) {
+          if (formError instanceof HTMLElement) {
+            formError.textContent = 'Enter your first name and a valid email address.';
+            formError.hidden = false;
+          }
+          (!firstNameInput.value ? firstNameInput : emailInput).focus();
+          return;
+        }
+
+        if (formError instanceof HTMLElement) formError.hidden = true;
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Sending…';
+        }
+
+        try {
+          const response = await fetch('/api/before-you-quote-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+              firstName: firstNameInput.value,
+              email: emailInput.value,
+              website: honeyInput instanceof HTMLInputElement ? honeyInput.value : '',
+              answers: selectedAnswers(),
+              skipped: surveySkipped,
+              elapsedMs: Date.now() - startedAt,
+              attribution: {
+                ...storedAttribution,
+                landing_url: window.location.href,
+                referrer: document.referrer,
+              },
+            }),
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok || !data.ok) throw new Error(data.message || 'Submission failed');
+
+          track('before_you_quote_lead_submitted', {
+            lead_magnet: 'Before You Quote',
+            survey_completed: surveySkipped ? 'no' : 'yes',
+            survey_biggest_cost: selectedAnswers().biggest_cost,
+          });
+          history.replaceState({}, '', `${window.location.pathname}?guide=ready`);
+          showStep(6);
+        } catch (error) {
+          if (formError instanceof HTMLElement) {
+            formError.textContent = error instanceof Error ? error.message : 'We could not save your information. Please try again.';
+            formError.hidden = false;
+          }
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Send me the free guide <span aria-hidden="true">→</span>';
+          }
+        }
+      });
+
+      track('before_you_quote_page_viewed', {
+        lead_magnet: 'Before You Quote',
+        page_variant: 'survey_v1',
+      });
+      updateProgress();
+    })();
+  </script>
+</BaseLayout>
