@@ -91,6 +91,13 @@ const structuredDataScripts = [
     {isBookedArtistLanding && (
       <link rel="stylesheet" href="/booked-artist-system/assets.css" />
     )}
+    {isBeforeYouQuoteLanding && (
+      <style is:inline>
+        .byq-skip-survey {
+          display: none !important;
+        }
+      </style>
+    )}
     {gaMeasurementId && !hasGTM && (
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
     )}
@@ -149,32 +156,7 @@ const structuredDataScripts = [
     </slot>
     {isBeforeYouQuoteLanding && (
       <script is:inline>
-        document.addEventListener(
-          'click',
-          function (event) {
-            const target = event.target instanceof Element ? event.target : null;
-            const survey = document.querySelector('[data-survey]');
-            if (!target || !(survey instanceof HTMLElement)) return;
-
-            if (target.closest('[data-skip-survey]')) {
-              survey.dataset.skippedRoute = 'true';
-              return;
-            }
-
-            if (target.closest('[data-start-survey]')) {
-              delete survey.dataset.skippedRoute;
-              return;
-            }
-
-            const skippedBackButton = target.closest('.byq-step-capture [data-back]');
-            if (skippedBackButton && survey.dataset.skippedRoute === 'true') {
-              event.preventDefault();
-              event.stopImmediatePropagation();
-              window.location.reload();
-            }
-          },
-          true,
-        );
+        document.querySelector('[data-skip-survey]')?.remove();
       </script>
     )}
     <script is:inline define:vars={{ pageTitle: title, pagePath: Astro.url.pathname, pageType, hasGTM }}>
