@@ -27,6 +27,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
 const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 const hasGTM = Boolean(gtmId);
 const isBookedArtistLanding = pageType === 'booked_artist_system_landing';
+const isBeforeYouQuoteLanding = pageType === 'before_you_quote_landing';
 const baseStructuredData = [
   {
     '@context': 'https://schema.org',
@@ -146,6 +147,36 @@ const structuredDataScripts = [
         <!-- Footer injected per page or via component -->
       </footer>
     </slot>
+    {isBeforeYouQuoteLanding && (
+      <script is:inline>
+        document.addEventListener(
+          'click',
+          function (event) {
+            const target = event.target instanceof Element ? event.target : null;
+            const survey = document.querySelector('[data-survey]');
+            if (!target || !(survey instanceof HTMLElement)) return;
+
+            if (target.closest('[data-skip-survey]')) {
+              survey.dataset.skippedRoute = 'true';
+              return;
+            }
+
+            if (target.closest('[data-start-survey]')) {
+              delete survey.dataset.skippedRoute;
+              return;
+            }
+
+            const skippedBackButton = target.closest('.byq-step-capture [data-back]');
+            if (skippedBackButton && survey.dataset.skippedRoute === 'true') {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+              window.location.reload();
+            }
+          },
+          true,
+        );
+      </script>
+    )}
     <script is:inline define:vars={{ pageTitle: title, pagePath: Astro.url.pathname, pageType, hasGTM }}>
       window.dataLayer = window.dataLayer || [];
       window.tatassistTrack = function (payload) {
