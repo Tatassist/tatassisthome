@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": { "api/booking-check.js": { "maxDuration": 30 } },
+  "redirects": [
+    { "source": "/lp/10x-deposits/download", "destination": "/lp/10x-deposits", "permanent": false },
+    { "source": "/lead-magnet/how-i-10xd-my-deposits.pdf", "destination": "/lp/10x-deposits", "permanent": false }
+  ]
+}
