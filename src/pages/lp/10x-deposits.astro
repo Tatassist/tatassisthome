@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { tenxGuide } from '../../data/tenx-guide';
+import { tatassistOffer } from '../../data/tatassist-offer';
+import '../../styles/tenx-guide.css';
+const { accessUrl, coverPath, productPath } = tenxGuide;
+const supportEmail = tatassistOffer.supportEmail;
+---
+<BaseLayout title="How I 10x'd My Deposits in One Month: Free Guide" description="I didn't get more talented. I didn't get more famous. I stopped letting good clients slip through my fingers. Get Joker Ink's free guide for tattoo artists." pageType="tenx_guide_landing">
+  <div class="tenx">
+    <a class="tenx-skip" href="#guide-main">Skip to content</a>
+    <div class="tenx-wrap"><header class="tenx-nav"><a class="tenx-brand" href="/" aria-label="Tatassist home">JOKER INK <span>/</span> TATASSIST</a><span class="tenx-nav-note">Free guide for tattoo artists</span></header></div>
+    <div id="guide-main">
+      <section class="tenx-hero tenx-wrap" aria-labelledby="guide-title">
+        <div>
+          <h1 id="guide-title"><span>HOW I <em>10X'D</em></span><span>MY DEPOSITS</span><span>IN ONE MONTH</span></h1>
+          <p class="tenx-deck">I didn't get more talented. I didn't get more famous. I stopped letting good clients slip through my fingers.</p>
+          <p class="tenx-intro">One month. Same portfolio, same prices, same city. The problem wasn't my art. It was everything that happened <em>after</em> someone said "I love your work."</p>
+          <div class="tenx-actions"><a class="tenx-button" href={accessUrl} data-attribution data-track="true" data-track-event="tatassist_guide_access_clicked" data-track-label="Get the free guide" data-track-location="tenx_hero" data-track-type="guide_access">Get the free guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+          <p class="tenx-small">4-page PDF. No payment required.</p>
+          <p class="tenx-disclosure">My 10x result is my experience, not a forecast of yours. Your work, demand, pricing, and how you implement all matter.</p>
+        </div>
+        <figure class="tenx-cover"><img src={coverPath} alt="Cover of the free guide: How I 10x'd My Deposits in One Month, by Joker Ink and Tatassist" width="612" height="792" fetchpriority="high"/><figcaption><span>The actual guide</span><span>4 pages / free PDF</span></figcaption></figure>
+      </section>
+      <div class="tenx-wrap"><div class="tenx-statement"><b>Good at tattooing. Still losing bookings?</b><span>This is about what happens after the inquiry.</span></div></div>
+      <section class="tenx-light tenx-section" aria-labelledby="problem-title"><div class="tenx-wrap tenx-two-col">
+        <div><p class="tenx-section-index">The part nobody teaches you</p><h2 id="problem-title">THEY LOVED<br/>YOUR WORK.<br/>THEN NOTHING.</h2></div>
+        <div class="tenx-pain"><blockquote>"They ghosted."<br/>"They couldn't afford it."<br/>"They weren't serious."</blockquote><p>Maybe. Or maybe you handed a serious client a messy, inconsistent experience and they quietly moved on to someone who felt easier to book.</p><p>Being great at tattooing and being great at <em>booking</em> are two completely different skills. One fills your portfolio. The other fills your calendar.</p><a class="tenx-inline" href={accessUrl} data-attribution data-track="true" data-track-event="tatassist_guide_access_clicked" data-track-label="Read the free guide" data-track-location="tenx_problem">Read the free guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+      </div></section>
+      <section class="tenx-section tenx-wrap" aria-labelledby="inside-title"><div class="tenx-inside">
+        <div class="tenx-inside-head"><p class="tenx-section-index">Inside the guide</p><h2 id="inside-title">NOT A MAGIC<br/>SENTENCE.<br/>A DIFFERENT<br/>WAY TO THINK.</h2><p>This is about why you're losing people you already have, and why you keep blaming the wrong thing.</p></div>
+        <ol class="tenx-chapters"><li><span class="tenx-number">01</span><div><h3>Stop blaming the client</h3><p>Silence doesn't come with a reason attached. Look at the experience you gave them before deciding they weren't serious.</p></div></li><li><span class="tenx-number">02</span><div><h3>What "no system" actually costs you</h3><p>A side-by-side look at running your booking from memory versus working from a repeatable process.</p></div></li><li><span class="tenx-number">03</span><div><h3>The real shift</h3><p>Your time, your work, and your energy are the product, not just the tattoo.</p></div></li><li><span class="tenx-number">04</span><div><h3>Your next move</h3><p>Build the how yourself, or start from a system with the implementation guides and templates included.</p></div></li></ol>
+      </div><div class="tenx-callout"><p>"The moment I started treating my booking process as something worth designing instead of something I survived, the whole business changed."</p><div class="tenx-signature">JOKER INK<br/>TATASSIST</div></div></section>
+      <section class="tenx-close" aria-labelledby="download-title"><div class="tenx-wrap tenx-close-inner"><div><h2 id="download-title">STOP LOSING<br/>THE ONES YOU<br/>ALREADY HAVE.</h2><p>Start with the free guide. Think about your system before you spend more time chasing the next inquiry.</p></div><div class="tenx-close-action"><a class="tenx-button" href={accessUrl} data-attribution data-track="true" data-track-event="tatassist_guide_access_clicked" data-track-label="Get the free guide" data-track-location="tenx_final">Get the free guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><p class="tenx-small">Free PDF. For tattoo artists, not tattoo clients.</p></div></div></section>
+      <section class="tenx-faq tenx-wrap" aria-label="Questions about the free guide"><details><summary>Is the guide really free?</summary><p>Yes. All four pages are free. There is no payment required to read the guide.</p></details><details><summary>Does the guide include the templates?</summary><p>No. The free guide is about the mindset and the need for a system. The implementation guides and templates are in <a href={productPath} data-attribution>The Booked Artist System</a>, available for {tatassistOffer.priceLabel} at launch. One payment, no subscription.</p></details><details><summary>Does this promise that my deposits will go up 10x?</summary><p>No. This is Joker Ink's personal experience, not a forecast of yours. Your work, demand, pricing, and how you implement all matter. What you're buying in the paid product is a practical starting system, not a guaranteed number of deposits.</p></details></section>
+    </div>
+    <footer class="tenx-footer tenx-wrap"><div class="tenx-footer-top"><span class="tenx-brand">JOKER INK <span>/</span> TATASSIST</span><nav class="tenx-footer-links" aria-label="Footer"><a href={`mailto:${supportEmail}`}>{supportEmail}</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><p class="tenx-footer-disclaimer">My 10x result is my real, documented experience, not a forecast of yours. Your work, demand, pricing, and how you implement all matter. What you're buying is a practical starting system, not a guaranteed number of deposits.</p><p class="tenx-footer-copy">© {new Date().getFullYear()} Tatassist. All rights reserved.</p></footer>
+  </div>
+  <script is:inline src="/lead-magnet/attribution.js"></script>
+</BaseLayout>
