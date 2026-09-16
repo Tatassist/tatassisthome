@@ -1,0 +1,9 @@
+---
+import BrandLogo from './BrandLogo.astro';
+interface Props { light?: boolean; }
+const {light=false}=Astro.props;
+---
+<header class:list={['fq-header',{'fq-light':light}]}>
+  <a class="fq-logo-link" href="/lp/before-you-quote" aria-label="Tatassist home"><BrandLogo class="fq-logo" /></a>
+  <div class="fq-header-identity"><a href="https://www.instagram.com/jokerinkx3/" target="_blank" rel="noopener noreferrer">@jokerinkx3</a><span>18 years tattooing</span><span>Studio owner</span></div>
+</header>

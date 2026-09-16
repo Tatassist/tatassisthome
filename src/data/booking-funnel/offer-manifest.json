@@ -1,0 +1,213 @@
+{
+  "product": "The Booked Artist System",
+  "brand": "Tatassist",
+  "founder": "Joker Ink",
+  "version": "2.0",
+  "releaseDate": "2026-09-15",
+  "supportEmail": "syd@tatassist.com",
+  "currency": "USD",
+  "guaranteeDays": 30,
+  "tiers": [
+    {
+      "id": "essentials",
+      "name": "Essentials",
+      "level": 1,
+      "price": 27,
+      "count": 6,
+      "recommended": false,
+      "promise": "Put your inquiry and consultation process into a repeatable flow.",
+      "description": "Six core tools to collect the inquiry, assess the project, clarify what matters, prepare the consultation, and summarize the agreement.",
+      "assetIds": [
+        "inquiry",
+        "review",
+        "story",
+        "ready",
+        "prep",
+        "summary"
+      ],
+      "fileName": "The_Booked_Artist_System_Essentials.zip"
+    },
+    {
+      "id": "working",
+      "name": "Working System",
+      "level": 2,
+      "price": 47,
+      "count": 13,
+      "recommended": true,
+      "promise": "Keep large projects, unclear references, scope changes, and pauses organized.",
+      "description": "Everything in Essentials plus seven tools for project complexity, placement photos, reference clarity, scope changes, paused leads, and deposit confirmation.",
+      "assetIds": [
+        "inquiry",
+        "large-project",
+        "placement",
+        "review",
+        "story",
+        "references",
+        "ready",
+        "prep",
+        "summary",
+        "scope",
+        "client-pause",
+        "paused-lead",
+        "deposit"
+      ],
+      "fileName": "The_Booked_Artist_System_Working_System.zip"
+    },
+    {
+      "id": "complete",
+      "name": "Complete System",
+      "level": 3,
+      "price": 77,
+      "count": 22,
+      "recommended": false,
+      "promise": "Run the complete inquiry-to-deposit workflow with dedicated tools for each major decision.",
+      "description": "Everything in Working System plus nine tools for body mapping, first replies, engagement, consultation notes, creative freedom, estimating, closing, and follow-up.",
+      "assetIds": [
+        "inquiry",
+        "large-project",
+        "placement",
+        "male-map",
+        "female-map",
+        "review",
+        "first-response",
+        "story",
+        "references",
+        "engagement",
+        "ready",
+        "prep",
+        "notes",
+        "creative",
+        "estimate",
+        "summary",
+        "close",
+        "scope",
+        "client-pause",
+        "paused-lead",
+        "follow-up",
+        "deposit"
+      ],
+      "fileName": "The_Booked_Artist_System_Complete_System.zip"
+    }
+  ],
+  "assets": [
+    {
+      "id": "inquiry",
+      "title": "Inquiry Form",
+      "minimumTier": 1
+    },
+    {
+      "id": "large-project",
+      "title": "Large-Project Inquiry Add-On",
+      "minimumTier": 2
+    },
+    {
+      "id": "placement",
+      "title": "Photograph the Placement",
+      "minimumTier": 2
+    },
+    {
+      "id": "male-map",
+      "title": "Male Body Map",
+      "minimumTier": 3
+    },
+    {
+      "id": "female-map",
+      "title": "Female Body Map",
+      "minimumTier": 3
+    },
+    {
+      "id": "review",
+      "title": "Inquiry Review",
+      "minimumTier": 1
+    },
+    {
+      "id": "first-response",
+      "title": "First Response Builder",
+      "minimumTier": 3
+    },
+    {
+      "id": "story",
+      "title": "Ask for the Story",
+      "minimumTier": 1
+    },
+    {
+      "id": "references",
+      "title": "Clarify the References",
+      "minimumTier": 2
+    },
+    {
+      "id": "engagement",
+      "title": "Engagement Observation Card",
+      "minimumTier": 3
+    },
+    {
+      "id": "ready",
+      "title": "Ready for a Consultation?",
+      "minimumTier": 1
+    },
+    {
+      "id": "prep",
+      "title": "Prep the Consultation",
+      "minimumTier": 1
+    },
+    {
+      "id": "notes",
+      "title": "Consultation Notes",
+      "minimumTier": 3
+    },
+    {
+      "id": "creative",
+      "title": "Creative Freedom",
+      "minimumTier": 3
+    },
+    {
+      "id": "estimate",
+      "title": "Estimate Prep",
+      "minimumTier": 3
+    },
+    {
+      "id": "summary",
+      "title": "Project Summary",
+      "minimumTier": 1
+    },
+    {
+      "id": "close",
+      "title": "Consultation Close",
+      "minimumTier": 3
+    },
+    {
+      "id": "scope",
+      "title": "Scope Change",
+      "minimumTier": 2
+    },
+    {
+      "id": "client-pause",
+      "title": "Client Pause",
+      "minimumTier": 2
+    },
+    {
+      "id": "paused-lead",
+      "title": "Paused Lead",
+      "minimumTier": 2
+    },
+    {
+      "id": "follow-up",
+      "title": "Follow-Up Plan",
+      "minimumTier": 3
+    },
+    {
+      "id": "deposit",
+      "title": "Deposit Received",
+      "minimumTier": 2
+    }
+  ],
+  "includedFormats": [
+    "Original PNG templates",
+    "Numbered printable PDFs",
+    "Combined numbered workbook",
+    "Start Here",
+    "Core Playbook",
+    "Tier-specific Implementation Guide",
+    "License and Support"
+  ]
+}

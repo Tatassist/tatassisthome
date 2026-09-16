@@ -1,0 +1,70 @@
+---
+import FunnelLayout from '../../layouts/FunnelLayout.astro';
+import FunnelHeader from '../../components/FunnelHeader.astro';
+import BrandLogo from '../../components/BrandLogo.astro';
+import '../../styles/offer-funnel.css';
+import { bookedArtistSystemTiers } from '../../data/booking-funnel/booked-artist-system';
+import { tatassistOffer } from '../../data/booking-funnel/tatassist-offer';
+import { EDITIONS } from '../../../lib/offer-quiz.mjs';
+const tiers=[...bookedArtistSystemTiers].sort((a,b)=>Number(b.recommended)-Number(a.recommended));
+const {assets}=tatassistOffer;
+const faqs=[
+  {question:'What do I get?',answer:'Your selected tools as original PNGs, individual numbered PDFs, and one numbered workbook, plus Start Here, the Core Playbook, your Implementation Guide, and License + Support. Print the pages or annotate them in your own app.'},
+  {question:'How are the editions different?',answer:'Essentials has six core inquiry and consultation tools. Working System adds seven tools for project complexity, changes, pauses, and deposit confirmation. Complete System adds nine tools for replies, body maps, estimates, closing, and follow-up. Each higher edition includes everything below it.'},
+  {question:'Is there a subscription?',answer:'No. Pay once for the edition you choose: Essentials $27, Working System $47, or Complete System $77. Prices are in USD.'},
+  {question:'What if it’s not a fit?',answer:'You have a 30-day satisfaction guarantee. Email syd@tatassist.com from your purchase address to request a refund. See the product terms for details.'},
+  {question:'Can my whole studio use it?',answer:'Each purchase covers one working artist. Email syd@tatassist.com for multi-artist use.'},
+];
+const structuredData=[
+ {'@context':'https://schema.org','@type':'Product',name:'The Booked Artist System',description:'Numbered tattoo inquiry and booking tools by Joker Ink. Essentials: 6 tools. Working System: 13 tools. Complete System: 22 tools.',brand:{'@type':'Brand',name:'Tatassist'},offers:tiers.map(t=>({'@type':'Offer',name:t.name,priceCurrency:'USD',price:t.price.toFixed(2),availability:t.checkoutUrl?'https://schema.org/InStock':'https://schema.org/PreOrder',url:new URL(`/lp/booked-artist?edition=${t.id}`,Astro.site).toString()}))},
+ {'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map(({question,answer})=>({'@type':'Question',name:question,acceptedAnswer:{'@type':'Answer',text:answer}}))},
+];
+---
+<FunnelLayout title="The Booked Artist System | Tattoo Booking Tools" description="Stop letting good projects die in your DMs. Joker Ink’s numbered tools for client intake. Working System: 13 tools and guides, $47 once." pageType="booked_artist_system_landing" structuredData={structuredData}>
+  <Fragment slot="header"><a class="fq-skip" href="#bas-main">Skip to the system</a><FunnelHeader /></Fragment>
+  <div class="fq-page" id="bas-main">
+    <div class="fq-container">
+      <div class="fq-guide-access" id="fq-guide-access" hidden><span>Your free guide is ready.</span><a id="fq-guide-link" href="/lp/before-you-quote">Open Before You Quote</a></div>
+      <section class="fq-sales-intro" aria-labelledby="sales-title">
+        <h1 class="fq-sales-heading" id="sales-title">STOP LETTING GOOD<br />PROJECTS <em>DIE IN YOUR DMs.</em></h1>
+        <p id="fq-personal-intro">The sleeve that went quiet. The project buried in messages. Put a process behind the inquiries you’re already getting.</p>
+      </section>
+      <div id="buy">
+        {tiers.map(tier=><section class="fq-main-offer" id={`tier-${tier.id}`} data-offer={tier.id} hidden={!tier.recommended} aria-labelledby={`title-${tier.id}`}>
+          <div>{tier.id==='working' ? <img class="fq-cover" src="/booked-artist-system/working-system-cover.png" width="1086" height="1448" alt="The Booked Artist System, Working System edition, 13 tools and guides" /> : <BrandLogo class="fq-cover" alt="Tatassist, by artists, for artists" />}</div>
+          <div class="fq-offer-copy">
+            <p class="fq-match-label" data-match-label>{tier.recommended ? 'OUR RECOMMENDATION':'YOUR SELECTED EDITION'}</p>
+            <h2 class="fq-offer-title" id={`title-${tier.id}`}>{tier.name.toUpperCase()}</h2>
+            <p class="fq-offer-price">${tier.price}</p>
+            <p class="fq-offer-count">{tier.count} numbered tools + guides</p>
+            <p class="fq-offer-description">{EDITIONS[tier.id as keyof typeof EDITIONS].description}</p>
+            <a class="fq-button" href={tier.checkoutUrl || '#fq-checkout-status'} data-checkout={Boolean(tier.checkoutUrl)} data-tier={tier.id} data-track="true" data-track-event={tier.checkoutUrl?'booked_artist_checkout_started':'booked_artist_checkout_unavailable'} data-track-label={tier.name} data-track-location="matched_offer" data-track-destination={tier.checkoutUrl || '#fq-checkout-status'}>GET {tier.name.toUpperCase()} · ${tier.price}</a>
+            <p class="fq-guarantee">One payment. 30-day guarantee.</p>
+            <p class="fq-offer-reason" data-match-reason hidden></p>
+          </div>
+        </section>)}
+      </div>
+      {!tiers.every(t=>t.checkoutUrl) && <p class="fq-small" id="fq-checkout-status" style="padding-bottom:24px;text-align:center">Checkout is not open yet. <a href="mailto:syd@tatassist.com" style="text-decoration:underline">Ask about access</a>.</p>}
+    </div>
+    <section class="fq-loss-band" aria-labelledby="cost-title"><div class="fq-container"><h2 id="cost-title">MORE LEADS. SAME MESS. <em>BIGGER BILL.</em></h2><p>If the process is losing clients now, paying for more inquiries gives that problem more room to grow.</p></div></section>
+    <section class="fq-founder fq-container" aria-labelledby="founder-title">
+      <h2 id="founder-title">JOKER INK. 18 YEARS IN THE CHAIR.</h2>
+      <p>I spent years sharpening my drawing and design. My biggest level up came when I got intake out of DMs and started protecting my time for clients who fit my work.</p>
+      <a href="https://www.instagram.com/jokerinkx3/" target="_blank" rel="noopener noreferrer">@jokerinkx3</a>
+      <span aria-hidden="true"> · </span><a href="https://www.bdcustomtattoos.com/joker" target="_blank" rel="noopener noreferrer">See my tattoo work</a>
+      <BrandLogo class="fq-watermark" alt="" loading="lazy" />
+    </section>
+    <footer class="fq-sales-footer"><div class="fq-container">
+      <p class="fq-formats"><span>Original PNGs</span><span>Numbered PDFs</span><span>Workbook</span><span>Setup guides</span><span>Individual artist license</span></p>
+      <div class="fq-secondary-row">{tiers.map(t=><a href={`?edition=${t.id}#buy`} data-edition-link={t.id} hidden={t.recommended}>{t.name} · {t.count} tools · ${t.price}</a>)}<a class="fq-terms" href="/lp/booked-artist/terms">30-day satisfaction guarantee</a></div>
+      <details class="fq-sales-details" id="included-tools"><summary>What’s included in <span id="fq-included-name">Working System</span>?</summary>
+        {tiers.map(t=><ul class="fq-included-list" data-inventory={t.id} hidden={!t.recommended}>{assets.filter(a=>a.minimumTier<=t.level).map(a=><li>{a.title}</li>)}</ul>)}
+        <p class="fq-small">Every edition includes Start Here, the Core Playbook, an Implementation Guide, and License + Support. These are static PDF and PNG pages for printing or annotation.</p>
+      </details>
+      <details class="fq-sales-details"><summary>A few questions before you buy</summary>{faqs.map(f=><div class="fq-faq-item"><h3>{f.question}</h3><p>{f.answer}</p></div>)}</details>
+      <div class="fq-quiz-footer"><BrandLogo class="fq-footer-logo" loading="lazy" /><a href="/lp/before-you-quote">Take the free booking check</a><a href="/privacy">Privacy</a></div>
+    </div></footer>
+    <div class="fq-mobile-buy"><a class="fq-button" id="fq-mobile-cta" href="#tier-working">GET WORKING SYSTEM · $47</a></div>
+  </div>
+  <script>import '../../scripts/offer-result.js';</script>
+</FunnelLayout>
