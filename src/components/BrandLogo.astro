@@ -1,0 +1,22 @@
+---
+interface Props {
+  class?: string;
+  alt?: string;
+  loading?: 'eager' | 'lazy';
+}
+const { class: className, alt = 'Tatassist', loading = 'eager' } = Astro.props;
+---
+
+<img
+  src="/brand/tatassist-logo-watermark.png"
+  width="1536"
+  height="1024"
+  class:list={['tatassist-logo', className]}
+  alt={alt}
+  loading={loading}
+  decoding="async"
+/>
+
+<style>
+  .tatassist-logo { display: block; max-width: 100%; object-fit: contain; }
+</style>

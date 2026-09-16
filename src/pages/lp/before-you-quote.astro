@@ -1,0 +1,37 @@
+---
+import FunnelLayout from '../../layouts/FunnelLayout.astro';
+import FunnelHeader from '../../components/FunnelHeader.astro';
+import BrandLogo from '../../components/BrandLogo.astro';
+import { QUESTIONS } from '../../../lib/offer-quiz.mjs';
+import '../../styles/offer-funnel.css';
+const first=QUESTIONS[0];
+---
+<FunnelLayout title="Before You Quote | Free Tattoo Booking Check" description="Your inbox could be costing you thousands. Take Joker Ink’s booking check, get Before You Quote free, and find the Booked Artist System edition for you." pageType="before_you_quote">
+  <Fragment slot="header"><a class="fq-skip" href="#quiz-main">Skip to the booking check</a><FunnelHeader light /></Fragment>
+  <div class="fq-page fq-light" id="quiz-main">
+    <div class="fq-container fq-quiz-page">
+      <section class="fq-intro" aria-labelledby="quiz-title">
+        <h1 id="quiz-title">YOUR INBOX COULD BE<br /><em>COSTING YOU THOUSANDS.</em></h1>
+        <p class="fq-lead">The sleeve that went quiet. The quote that went nowhere.<br class="fq-desktop" /> The hours you spent on someone who was never a fit.<br class="fq-desktop" /> Find the weak spot in your booking process.</p>
+        <div class="fq-red-rule" aria-hidden="true"></div>
+        <p class="fq-hook">Take the booking check. Get Before You Quote free.</p>
+        <p class="fq-author">By Joker Ink · 18 years tattooing · Studio owner</p>
+      </section>
+      <noscript><p class="fq-alert">Turn on JavaScript to take the booking check, or <a href="mailto:syd@tatassist.com">email us for the guide</a>.</p></noscript>
+      <form id="fq-form" class="fq-quiz" novalidate>
+        <div class="fq-progress-row"><p id="fq-step-label" aria-live="polite">1 OF {QUESTIONS.length} / YOUR GOAL</p><div class="fq-progress" aria-label="Quiz progress">{QUESTIONS.map((_,i)=><span class:list={{'is-current':i===0}} data-progress-step={i}></span>)}</div></div>
+        <div id="fq-question">
+          <fieldset><legend id="fq-question-title" tabindex="-1">{first.title}</legend><div class="fq-options">{first.options.map(o=><label class="fq-option"><input type="radio" name="goal" value={o.value} /><span>{o.label}</span></label>)}</div></fieldset>
+        </div>
+        <p id="fq-error" class="fq-error" role="alert" hidden></p>
+        <div class="fq-quiz-actions"><button class="fq-button" id="fq-next" type="submit">LET’S FIND THE GAP</button><button class="fq-back" id="fq-back" type="button" hidden>Back</button></div>
+      </form>
+      <section class="fq-guide-teaser" id="fq-guide-teaser" aria-labelledby="guide-title">
+        <div><p class="fq-eyebrow">YOUR GUIDE + YOUR STARTING POINT</p><h2 id="guide-title">BEFORE YOU QUOTE. YOURS FREE.</h2><p>Answer five quick questions, then tell us where to send your guide. We’ll show you the edition that fits your booking process.</p><p class="fq-small">Why good tattoo inquiries go quiet after the price, and what to change before your next quote.</p></div>
+        <img src="/lead-magnet/before-you-quote-cover.png" width="420" height="560" alt="Before You Quote free PDF guide by Joker Ink" loading="eager" />
+      </section>
+      <footer class="fq-quiz-footer"><BrandLogo class="fq-footer-logo" loading="lazy" /><a href="https://www.instagram.com/jokerinkx3/" target="_blank" rel="noopener noreferrer">@jokerinkx3</a><a href="/privacy">Privacy</a></footer>
+    </div>
+  </div>
+  <script>import '../../scripts/offer-quiz.js';</script>
+</FunnelLayout>

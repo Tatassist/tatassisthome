@@ -1,0 +1,26 @@
+{
+  "essentials": {
+    "url": "https://buy.stripe.com/cNi8wRc8l7KFdty7y073G01",
+    "paymentLinkId": "plink_1UFljMPQzammyKtspLgU4GXg",
+    "productId": "prod_VGI6X8wrm1bIA3",
+    "priceId": "price_1UFlWOPQzammyKtslWipQbSq",
+    "unitAmount": 2700,
+    "enabled": false
+  },
+  "working": {
+    "url": "https://buy.stripe.com/eVq7sN4FT8OJ4X26tW73G02",
+    "paymentLinkId": "plink_1UFljxPQzammyKtsTdTeMzM9",
+    "productId": "prod_VGI79SsmucxrL2",
+    "priceId": "price_1UFlXNPQzammyKtsk2O605xg",
+    "unitAmount": 4700,
+    "enabled": false
+  },
+  "complete": {
+    "url": "https://buy.stripe.com/cNi3cxa0d0id616bOg73G03",
+    "paymentLinkId": "plink_1UFlkAPQzammyKtsvoQW9LZY",
+    "productId": "prod_VGI7UjsELH3ZHO",
+    "priceId": "price_1UFlXSPQzammyKtsufz2c3MD",
+    "unitAmount": 7700,
+    "enabled": false
+  }
+}
