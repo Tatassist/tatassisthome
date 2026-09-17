@@ -25,7 +25,7 @@ if (form) {
     $('fq-step-label').textContent=q ? `${step+1} OF ${QUESTIONS.length} / ${q.label.toUpperCase()}` : 'FINAL STEP / GET YOUR GUIDE';
     document.querySelectorAll('[data-progress-step]').forEach((el,i)=>el.classList.toggle('is-current',i<=step));
     $('fq-back').hidden=step===0;
-    $('fq-next').textContent=q ? (step===0 ? 'LET’S FIND THE GAP':'CONTINUE') : 'SEND MY GUIDE & SHOW MY MATCH';
+    $('fq-next').textContent=q ? (step===0 ? 'START MY BOOKING CHECK':'CONTINUE') : 'SEND MY GUIDE & SHOW MY MATCH';
     $('fq-guide-teaser').hidden=!q;
     if (q) {
       $('fq-question').innerHTML=`<fieldset><legend id="fq-question-title" tabindex="-1">${esc(q.title)}</legend>${q.hint ? `<p class="fq-hint">${esc(q.hint)}</p>`:''}<div class="fq-options">${q.options.map(o=>`<label class="fq-option"><input type="radio" name="${q.id}" value="${o.value}" ${answers[q.id]===o.value ? 'checked':''}/><span>${esc(o.label)}</span></label>`).join('')}</div></fieldset>`;
