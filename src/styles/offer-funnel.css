@@ -74,6 +74,12 @@ body[data-page-type="booked_artist_system_landing"]{background:var(--fq-ink);col
 .fq-loss-band h2{font-size:clamp(30px,4vw,51px);font-family:var(--fq-font);font-weight:700;line-height:1.1;margin:0 0 12px;letter-spacing:-.025em}
 .fq-loss-band h2 em{font-style:normal;color:var(--fq-red)}
 .fq-loss-band p{font-size:23px;line-height:1.4;margin:0}
+.fq-framework{padding-block:30px 38px;border-top:1px solid #45413b}
+.fq-framework h2{font-family:var(--fq-font);font-size:clamp(28px,4vw,42px);font-weight:700;line-height:1.15;margin:0 0 16px}
+.fq-framework>p{font-size:20px;line-height:1.5;max-width:950px;margin:0 0 18px}
+.fq-framework-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px;margin:26px 0}
+.fq-framework-grid h3{font-family:var(--fq-font);font-size:25px;line-height:1.2;margin:0 0 10px}
+.fq-framework-grid p{font-size:18px;line-height:1.5;margin:0;color:#ded8ce}
 .fq-founder{position:relative;isolation:isolate;padding-block:34px;overflow:hidden}
 .fq-founder h2{font-family:var(--fq-font);font-size:32px;font-weight:600;line-height:1.2;margin:0 0 12px}
 .fq-founder p{font-size:21px;line-height:1.45;max-width:800px;margin:0 0 14px}

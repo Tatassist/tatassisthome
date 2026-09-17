@@ -1,4 +1,4 @@
-import {RESULT_KEY,EDITIONS,readResult} from '../../lib/offer-quiz.mjs';
+import {RESULT_KEY,EDITIONS,SALES_INTRO,readResult} from '../../lib/offer-quiz.mjs';
 const root=document.getElementById('bas-main');
 if(root){
   let stored=null;
@@ -21,7 +21,7 @@ if(root){
     $('fq-included-name').textContent=edition.name;
     $('fq-mobile-cta').textContent=`GET ${edition.name.toUpperCase()} · $${edition.price}`;
     $('fq-mobile-cta').href=`#tier-${tier}`;
-    $('fq-personal-intro').textContent=stored?.tierId===tier ? stored.intro : 'The sleeve that went quiet. The project buried in messages. Put a process behind the inquiries you’re already getting.';
+    $('fq-personal-intro').textContent=stored?.tierId===tier ? stored.intro : SALES_INTRO;
   }
   if(stored){$('fq-guide-access').hidden=false;$('fq-guide-link').href='/lead-magnet/before-you-quote.pdf';$('fq-guide-link').target='_blank';$('fq-guide-link').rel='noopener noreferrer';}
   show(selected,Boolean(fromQuery || fromHash));
