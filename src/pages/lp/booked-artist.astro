@@ -4,15 +4,13 @@ import FunnelHeader from '../../components/FunnelHeader.astro';
 import BrandLogo from '../../components/BrandLogo.astro';
 import '../../styles/offer-funnel.css';
 import { bookedArtistSystemTiers } from '../../data/booking-funnel/booked-artist-system';
-import { tatassistOffer } from '../../data/booking-funnel/tatassist-offer';
 import { EDITIONS, SALES_INTRO } from '../../../lib/offer-quiz.mjs';
 const tiers=[...bookedArtistSystemTiers].sort((a,b)=>Number(b.recommended)-Number(a.recommended));
-const {assets}=tatassistOffer;
 const faqs=[
-  {question:'Will this fit the way I work?',answer:'Build it around your goals. A straightforward street-shop tattoo may need a short conversation; a sleeve may need references, placement photos, a consultation, and follow-up. Use the tools included in your edition where they help, adapt the questions and language, and revisit your process as your work changes. The numbering gives you a starting order.'},
-  {question:'What if I’m busy, but want different work?',answer:'Use the frameworks to look at which inquiries fit your direction and what you need to understand before committing. Working System supports everyday inquiry and consultation decisions. Complete adds deeper tools for creative freedom, estimate preparation, consultation close, and follow-up when you want that fuller process.'},
-  {question:'What do I get?',answer:'Your selected tools as original PNGs, individual numbered PDFs, and one numbered workbook, plus Start Here, the Core Playbook, your Implementation Guide, and License + Support. Print the pages or annotate them in your own app.'},
-  {question:'How are the editions different?',answer:'Essentials has six core inquiry and consultation tools. Working System adds seven tools for project complexity, changes, pauses, and deposit confirmation. Complete System adds nine tools for replies, body maps, estimates, closing, and follow-up. Each higher edition includes everything below it.'},
+  {question:'Will this fit the way I work?',answer:'Yes. The system is designed to adapt to your working style and the career you want to build.'},
+  {question:'What if I’m busy, but want different work?',answer:'That’s exactly who this is for, too. A full calendar should move you toward the income and creative work you want.'},
+  {question:'What do I get?',answer:'A digital package with your edition’s numbered templates and guides, ready to download and keep.'},
+  {question:'Which edition should I choose?',answer:'Working System is our recommendation for most artists. Essentials offers a smaller starting point; Complete gives you the greatest depth. Each higher edition includes everything below it.'},
   {question:'Is there a subscription?',answer:'No. Pay once for the edition you choose: Essentials $27, Working System $47, or Complete System $77. Prices are in USD.'},
   {question:'What if it’s not a fit?',answer:'You have a 30-day satisfaction guarantee. Email syd@tatassist.com from your purchase address to request a refund. See the product terms for details.'},
   {question:'Can my whole studio use it?',answer:'Each purchase covers one working artist. Email syd@tatassist.com for multi-artist use.'},
@@ -22,7 +20,7 @@ const structuredData=[
  {'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map(({question,answer})=>({'@type':'Question',name:question,acceptedAnswer:{'@type':'Answer',text:answer}}))},
 ];
 ---
-<FunnelLayout title="The Booked Artist System | Tattoo Booking Tools" description="Build a client process around the tattoo career you want. Adaptable frameworks and numbered tools by Joker Ink. Working System: $47 once." pageType="booked_artist_system_landing" structuredData={structuredData}>
+<FunnelLayout title="The Booked Artist System | Tattoo Booking Tools" description="More of the work you want to be booked for. Build toward better income, bigger projects, and clients who seek you out. By Joker Ink. Working System: $47 once." pageType="booked_artist_system_landing" structuredData={structuredData}>
   <Fragment slot="header"><a class="fq-skip" href="#bas-main">Skip to the system</a><FunnelHeader /></Fragment>
   <div class="fq-page" id="bas-main">
     <div class="fq-container">
@@ -49,15 +47,10 @@ const structuredData=[
       {!tiers.every(t=>t.checkoutUrl) && <p class="fq-small" id="fq-checkout-status" style="padding-bottom:24px;text-align:center">Checkout is not open yet. <a href="mailto:syd@tatassist.com" style="text-decoration:underline">Ask about access</a>.</p>}
     </div>
     <section class="fq-framework fq-container" aria-labelledby="framework-title">
-      <h2 id="framework-title">YOUR GOALS. YOUR CLIENTS. YOUR PROCESS.</h2>
-      <p>It takes practice to move from taking whatever comes in to making client decisions around where you want to go. The playbook gives you frameworks to think through those decisions. The templates give you something concrete to return to.</p>
-      <div class="fq-framework-grid">
-        <div><h3>Make a worthwhile inquiry count.</h3><p>Inquiry Review and Project Summary help you understand the idea, consider fit, and keep the direction clear.</p></div>
-        <div><h3>Give bigger ideas room to develop.</h3><p>Large-Project Inquiry Add-On and Clarify the References help you get beyond “something like this” and into the project.</p></div>
-        <div><h3>Keep a promising pause in view.</h3><p>Client Pause and Paused Lead keep the decision and next contact together when a client needs time.</p></div>
-      </div>
-      <p><strong>Use the tools as guardrails.</strong> Adapt the questions and language. A street-shop tattoo may take a shorter path than a sleeve. The numbering gives you a starting order; choose the pages your situation calls for.</p>
-      <p class="fq-small">All tools shown here are included in Working System. Print the PDFs or annotate them in a compatible app.</p>
+      <h2 id="framework-title">LET YOUR BOOKINGS CATCH UP WITH YOUR WORK.</h2>
+      <p>Imagine looking at next month’s calendar and seeing pieces you’re excited to create. Clients who came to you for your work. Income that makes the hours you’ve put into your art feel worthwhile.</p>
+      <p>That starts with giving the career you want a place in the decisions you make today. The Booked Artist System helps you put that shift into practice, so the work you want has a place in the business you’re building.</p>
+      <p class="fq-small">Built to adapt to your working style and your goals.</p>
     </section>
     <section class="fq-loss-band" aria-labelledby="cost-title"><div class="fq-container"><h2 id="cost-title">MORE LEADS. SAME PATTERN. <em>BIGGER BILL.</em></h2><p>A quiet calendar makes more leads tempting. A full calendar of the wrong work can keep you stuck. If promising inquiries go nowhere, more ad spend can make that pattern more expensive. Put a process behind the interest you get.</p></div></section>
     <section class="fq-founder fq-container" aria-labelledby="founder-title">
@@ -72,10 +65,6 @@ const structuredData=[
     <footer class="fq-sales-footer"><div class="fq-container">
       <p class="fq-formats"><span>Original PNGs</span><span>Numbered PDFs</span><span>Workbook</span><span>Setup guides</span><span>Individual artist license</span></p>
       <div class="fq-secondary-row">{tiers.map(t=><a href={`?edition=${t.id}#buy`} data-edition-link={t.id} hidden={t.recommended}>{t.name} · {t.count} tools · ${t.price}</a>)}<a class="fq-terms" href="/lp/booked-artist/terms">30-day satisfaction guarantee</a></div>
-      <details class="fq-sales-details" id="included-tools"><summary>What’s included in <span id="fq-included-name">Working System</span>?</summary>
-        {tiers.map(t=><ul class="fq-included-list" data-inventory={t.id} hidden={!t.recommended}>{assets.filter(a=>a.minimumTier<=t.level).map(a=><li>{a.title}</li>)}</ul>)}
-        <p class="fq-small">Every edition includes Start Here, the Core Playbook, an Implementation Guide, and License + Support. These are static PDF and PNG pages for printing or annotation.</p>
-      </details>
       <details class="fq-sales-details"><summary>A few questions before you buy</summary>{faqs.map(f=><div class="fq-faq-item"><h3>{f.question}</h3><p>{f.answer}</p></div>)}</details>
       <div class="fq-quiz-footer"><BrandLogo class="fq-footer-logo" loading="lazy" /><a href="/lp/before-you-quote">Take the free booking check</a><a href="/privacy">Privacy</a></div>
     </div></footer>
