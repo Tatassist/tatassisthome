@@ -16,9 +16,7 @@ if(root){
       el.querySelector('[data-match-label]').textContent=matched ? 'YOUR RECOMMENDED EDITION':(tier==='working'&&!explicit ? 'OUR RECOMMENDATION':'YOUR SELECTED EDITION');
       const reason=el.querySelector('[data-match-reason]');reason.hidden=!matched;reason.textContent=matched ? stored.reason:'';
     });
-    root.querySelectorAll('[data-inventory]').forEach(el=>el.hidden=el.dataset.inventory!==tier);
     root.querySelectorAll('[data-edition-link]').forEach(el=>el.hidden=el.dataset.editionLink===tier);
-    $('fq-included-name').textContent=edition.name;
     $('fq-mobile-cta').textContent=`GET ${edition.name.toUpperCase()} · $${edition.price}`;
     $('fq-mobile-cta').href=`#tier-${tier}`;
     $('fq-personal-intro').textContent=stored?.tierId===tier ? stored.intro : SALES_INTRO;

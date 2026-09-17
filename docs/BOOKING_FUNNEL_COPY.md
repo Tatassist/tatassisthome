@@ -14,165 +14,159 @@ These are overlapping situations an artist may experience at different stages. R
 **Commercial emphasis:** Working System remains the general recommendation at $47. Complete at $77 gets a relevant secondary invitation for deeper creative-direction, consultation, estimate, and follow-up needs. Its fit depends on the desired process.
 
 ## Landing-page messaging / September 17, 2026
-The two landing-page revisions implement the audience and adaptable-framework positioning above. Approved cream/black/red design, Tatassist logos, five-question quiz, prominent Working System offer, pricing, and exact tier inventory are retained.
+**Focused correction:** retain the existing design, headlines, founder story, prices, and prominent Working System offer. Remove public template inventories, named-template examples, workflow explanations, and instructions for using the system. Conversion copy should help artists picture a more rewarding tattoo career and see the purchase as a way to put the mindset shift into practice.
 ### Quiz page
 [Before You Quote](https://tatassist.com/lp/before-you-quote)
-**Headline:** YOU’VE WORKED ON YOUR ART. WHAT ABOUT YOUR BOOKINGS?
-**Supporting copy:** Maybe your calendar has too many gaps. Maybe it’s full of $200 and $300 tattoos while the larger work stays in your sketchbook. Start building a client process around where you want to go.
-**Hook:** Take the booking check. Get Before You Quote free.
-**Authority:** By Joker Ink · 18 years tattooing · Studio owner
-**Start button:** START MY BOOKING CHECK
-**Guide teaser:** The sleeve that went quiet. The quote that led nowhere. Get a fresh look at what happens before the price, so you can approach the next conversation with a clearer direction.
-**Guide explanation:** Answer five quick questions about your goals and client conversations. Get the free guide and a recommended starting point.
-The fit answer now names “the work I want to do.” Existing answer codes and recommendation thresholds are retained. The current quiz does not identify the established-but-creatively-boxed-in audience independently; the Complete offer and email L6 speak to that use case without claiming a new automatic match.
+The headline and two-avatar introduction remain. Guide teaser: “You know you’re capable of more. Start looking differently at the clients you book and the career those bookings are building.”
+Keep the five-question quiz and the existing guide title for this correction.
 ### Sales page
 [The Booked Artist System](https://tatassist.com/lp/booked-artist)
-**Headline:** MORE OF THE WORK YOU WANT TO BE BOOKED FOR.
-**Generic introduction:** Maybe you need more bookings. Maybe you’re booked with small pieces while the work you want stays in your sketchbook. Build a client process around the tattoo career you want.
-**Working description:** Understand the project, recognize fit, and make the next step clear. Practical frameworks and 13 numbered tools for consultations, changes, pauses, and deposit confirmation. Adapt them to your clients and goals.
-**Complete description:** Build a deeper process for the custom work you want to be known for. Everything in Working, plus tools for creative freedom, replies, consultation notes, body maps, estimates, closing, and follow-up. Adapt the full inquiry-to-deposit workflow to your practice.
-**Framework section:** YOUR GOALS. YOUR CLIENTS. YOUR PROCESS.
-It takes practice to move from taking whatever comes in to making client decisions around where you want to go. The playbook gives you frameworks to think through those decisions. The templates give you something concrete to return to.
-Three compact examples connect the tools to understanding a worthwhile inquiry, developing a larger idea, and keeping a promising pause in view. All featured examples use tools included in Working.
-**Adaptation paragraph:** Use the tools as guardrails. Adapt the questions and language. A street-shop tattoo may take a shorter path than a sleeve. The numbering gives you a starting order; choose the pages your situation calls for.
-**Paid-attention band:** MORE LEADS. SAME PATTERN. BIGGER BILL.
-A quiet calendar makes more leads tempting. A full calendar of the wrong work can keep you stuck. If promising inquiries go nowhere, more ad spend can make that pattern more expensive. Put a process behind the interest you get.
-**Founder headline:** “I DON’T KNOW IF I’D STILL BE TATTOOING.”
-The founder passage uses Eric’s firsthand career-survival statement, the move out of DMs, his experience taking work for immediate money, and being sought out for his work with clients happy to pay thousands. It is signed with 18 years’ experience and studio ownership, with Instagram and portfolio links.
-FAQs explain adaptation for different working situations and the established artist’s interest in deeper tools.
-### Dynamic copy and measurement
-Both the generic sales introduction and quiz-driven recommendation copy carry the revised positioning. Working remains the default; the larger-project/high-volume Complete rule remains unchanged. No income-only premium recommendation.
-Assess performance through quiz completion, successful capture, checkout starts, verified purchases, and purchased tier. Copy has been aligned with the audience; improved conversion remains something to measure.
-Checkout, package delivery, Kit activation, and the end-to-end signup/purchase test remain separate launch tasks.
+**Headline retained:** MORE OF THE WORK YOU WANT TO BE BOOKED FOR.
+**Working offer copy:** You’ve put the hours into your art. Put that same intention behind the career it earns you. Start building toward better bookings, more rewarding projects, and clients who want your work.
+**Essentials offer copy:** Take your first step toward a calendar that reflects where you want your tattoo career to go.
+**Complete offer copy:** You’ve built a client base. Now build toward the work you want to be known for. Our most in-depth edition for artists ready to make their next chapter more intentional.
+**Replacement for the template-demonstration section:**
+LET YOUR BOOKINGS CATCH UP WITH YOUR WORK.
+Imagine looking at next month’s calendar and seeing pieces you’re excited to create. Clients who came to you for your work. Income that makes the hours you’ve put into your art feel worthwhile.
+That starts with giving the career you want a place in the decisions you make today. The Booked Artist System helps you put that shift into practice, so the work you want has a place in the business you’re building.
+Built to adapt to your working style and your goals.
+**Removed:** the three named-template demonstrations, the full expandable inventory, the paragraph teaching tool selection and sequence, and detailed workflow descriptions in FAQs.
+**Retained:** concise package count/format information, price, one-payment terms, guarantee, support, founder authority, Instagram/portfolio links, and the smaller alternative-edition links. These facts support the buying decision without taking over the pitch.
+**Personalized results:** reflect the chosen goal in aspirational language. The recommendation explanation names the edition’s fit at a high level without describing the process inside it.
+### Copy review standard
+The free material introduces the mindset shift. The paid product contains the concrete structure and implementation. Public sales pages, ads, and acquisition emails should create desire for the career the artist is imagining, connect that desire to the product, establish trust, and invite purchase.
+Explain adaptation in one concise sentence. Avoid public template inventories, examples of how named templates work, process stages, or instructions. Customer delivery and buyer onboarding can provide implementation guidance after purchase.
+
 ## Later: ongoing content and community
 Explore a recurring content and community offer that helps artists practice and reinforce the mindset shift: client-situation discussions, reflections on project fit, implementation examples, and sharing progress. Eric sees this as a potential source of ongoing engagement and recurring revenue. Revisit after the core product launches and buyers provide feedback. Membership, access, pricing, cadence, and launch date are undecided and are not included or promised in the current one-time packages.
 
 ## Checkout descriptions
-
-Essentials: Six numbered inquiry and consultation tools: Inquiry Form, Inquiry Review, Ask for the Story, Ready for a Consultation?, Prep the Consultation, and Project Summary. Original PNGs, numbered PDFs, a combined workbook, Core Playbook, setup guide, and individual artist license. One payment. 30-day satisfaction guarantee.
-
-Working System: All six Essentials tools plus Large-Project Inquiry Add-On, Photograph the Placement, Clarify the References, Scope Change, Client Pause, Paused Lead, and Deposit Received. Thirteen tools total, with original PNGs, numbered PDFs, workbook, playbook, and setup guide. One payment. Individual artist license. 30-day satisfaction guarantee.
-
-Complete System: All thirteen Working System tools plus Male Body Map, Female Body Map, First Response Builder, Engagement Observation Card, Consultation Notes, Creative Freedom, Estimate Prep, Consultation Close, and Follow-Up Plan. Twenty-two tools total, with original PNGs, numbered PDFs, workbook, playbook, and setup guide. One payment. Individual artist license. 30-day satisfaction guarantee.
-
-Shared checkout note: Your purchase includes the selected tier only, including all tools from lower tiers. Digital download after successful payment. Licensed to one working tattoo artist. Covered by the published 30-day satisfaction guarantee.
-
+Essentials: A starting point for building toward the tattoo career you want. Digital package: 6 numbered tools plus guides. $27 once.
+Working System: Put the same intention behind your tattoo career that you put into your art. Our recommended digital package: 13 numbered tools plus guides. $47 once.
+Complete System: Our most in-depth edition for the work you want to be known for. Digital package: 22 numbered tools plus guides. $77 once.
+Each higher edition includes everything below it. One payment. Individual artist license. 30-day satisfaction guarantee.
+These are prepared copy descriptions, not confirmation of a Stripe dashboard update.
 
 ## Seven-email nurture sequence
 
 Confirmed, marketing-consented nonbuyers only. Sender: Joker Ink / Tatassist. These are finished static emails with general recommendations; they do not require goal or edition merge fields. Buyer suppression and Kit activation remain separate setup tasks. Delay intervals: 1 hour, 1 day, 1 day, 1 day, 1 day, 2 days, 2 days.
 
-### L1 — The career you want / 1 hour after eligibility
-**Subject:** Is your calendar taking you where you want to go?
-**Preview:** Too many gaps. Or plenty of tattoos, but too little to show for them.
+### L1 — The career they picture / 1 hour after eligibility
+**Subject:** You didn’t put all those hours in for this
+**Preview:** Better work. Better income. Clients who came for you.
 Hey,
-Maybe your calendar has too many gaps.
-Maybe it’s full of $200 and $300 tattoos, while the larger pieces you want to create stay in your sketchbook.
-You’ve put the work into your art. You want that work to lead somewhere: better income, projects you’re proud of, clients who seek you out for what you do.
-I’ve been on both sides of that.
-For me, things changed when I started making client decisions around the tattoo career I wanted to build. What did I need to understand about a project? Was it a fit? What should happen next?
-**The Booked Artist System** gives you frameworks for those decisions and practical tools to anchor them in your day-to-day work.
-Start with **Working System: 13 numbered tools plus the playbook and setup guides. $47 once.**
-Use them to build a client process around your goals.
-[**See Working System →**](https://tatassist.com/lp/booked-artist?edition=working)
+You didn’t spend years getting better at tattooing just to wonder where the next booking is coming from.
+Or to finish another packed week of small pieces with barely enough to show for it.
+There’s work you want to create. Pieces you can already picture. Clients who would love what you’re capable of if you had the chance to do it.
+Imagine opening next month’s calendar and finding more of that work waiting for you.
+I’ve been the artist hoping something would come in. I’ve been busy with work that kept me in the same place.
+Changing how I thought about clients changed where my career was heading.
+**The Booked Artist System** is how I’ve put that experience into something you can bring into your own business.
+My recommendation is **Working System. $47 once.**
+You’ve invested in your art. Give the career behind it some of that same intention.
+[**Get Working System →**](https://tatassist.com/lp/booked-artist?edition=working)
 Joker Ink
 Tatassist
 
 ### L2 — Busy without progress / 1 day after L1
-**Subject:** A full schedule can still leave you stuck
-**Preview:** The larger work stays in your sketchbook while another week fills up.
+**Subject:** Booked all week. Still not getting ahead.
+**Preview:** A full calendar should feel better than this.
 Hey,
-A tattoo on the schedule feels like a win. Especially when you need the money.
-But you can fill a week with small pieces and finish it wondering how you’re still so far from the income and the work you want.
-I know how strange it feels to consider turning down a tattoo and spend that time on your portfolio or a design instead.
-There’s money in front of you. The payoff from working on your direction is harder to see.
-I’ve stepped over dollars to pick up dimes. I know how easy it is to keep doing it.
-Changing that starts with being clear about what you’re building and looking at each inquiry with that in mind.
-**Inquiry Review** and **Ready for a Consultation?** give you a place to consider the project and the next step. The playbook helps you put those decisions into context.
-You can keep doing the small work that makes sense while building a process for the work you want more of.
-[**See the tools in Working System →**](https://tatassist.com/lp/booked-artist?edition=working)
+Another week of $200 and $300 tattoos.
+You’ve worked. You’ve been paid. But the larger pieces you want to do are still in your sketchbook, and the income still feels a long way from where it should be.
+I know that feeling.
+I also know how crazy it feels to consider passing on money in front of you because you’re trying to build something better.
+When I say I’ve stepped over dollars to pick up dimes, I mean it.
+You can spend a long time repeating the work that keeps you busy and wondering when the next stage of your career will finally arrive.
+Your own direction deserves a place in that calendar.
+**The Booked Artist System** helps you put intention behind that change, so the career you picture starts showing up in how you run your business.
+**Working System is $47 once.**
+[**Start building toward the work you want →**](https://tatassist.com/lp/booked-artist?edition=working)
 Joker Ink
 Tatassist
 
-### L3 — A promising inquiry goes quiet / 1 day after L2
-**Subject:** “How much for a sleeve?” Then nothing.
-**Preview:** Give the conversation room to become a project.
+### L3 — Being chosen for their work / 1 day after L2
+**Subject:** “I want you to do it.”
+**Preview:** Imagine hearing that about the piece you’ve been wanting to create.
 Hey,
-Someone asks about a sleeve. It’s exactly the kind of project you want more of.
-You want to keep their interest, so you try to give them an answer with almost nothing to go on.
-A number. A range. A long explanation of why it depends.
-Then the conversation goes quiet.
-What were they picturing? Full wrap or outside only? One connected design or separate pieces? What drew them to your work?
-Those details shape the tattoo and the conversation around its price.
-Working System includes **Large-Project Inquiry Add-On**, **Clarify the References**, and **Project Summary** to help you understand the idea and establish a shared direction.
-Whether you get two inquiries a month or twenty, a project you want deserves more than an improvised price exchange.
-**Thirteen numbered tools plus guides. $47 once.**
-[**Put a process behind the next inquiry →**](https://tatassist.com/lp/booked-artist?edition=working)
+Think about the project you’d love to get asked for.
+A sleeve in your style. A custom piece that lets you use what you’ve spent years learning.
+Then imagine the client saying, “I’ve been looking at your work. I want you to do it.”
+There’s a different feeling to that conversation.
+You’re excited about the piece. They’re excited about you. The project has a place to go.
+When inquiries keep ending at “How much?”, that can feel a long way off.
+I’ve lived both experiences. One of the biggest changes for me was seeing my own direction as something that belonged in the client relationship.
+**The Booked Artist System** is built around making that shift part of your working life.
+The work you want to be known for deserves more than a place in your sketchbook.
+[**See Working System →**](https://tatassist.com/lp/booked-artist?edition=working)
 Joker Ink
 Tatassist
 
-### L4 — Joker’s experience / 1 day after L3
+### L4 — Joker’s firsthand story / 1 day after L3
 **Subject:** I don’t know if I’d still be tattooing
-**Preview:** These changes affected more than my booking process.
+**Preview:** These changes affected more than my bookings.
 Hey,
-I don’t know if I’d still have a career tattooing, much less a successful one, if I hadn’t changed how I handled clients.
-I spent years on my drawings and designs. But the biggest level up came when I moved intake out of DMs and built a system around understanding the project, recognizing fit, and deciding where to put my energy.
+I don’t know if I’d still have a career tattooing, much less a successful one, if I hadn’t made these changes.
+I put countless hours into my drawings and designs. But my biggest level up came when I got intake out of DMs and changed how I approached clients.
 I know what it feels like to take work because the money is there.
 I also know what it feels like to be sought out for my work, make thousands in a day, and have a happy client give me more than I asked.
-Getting from one place to the other involved a shift in how I thought about my business and the decisions I made in it.
-That shift took practice.
-The frameworks and templates in Tatassist give you something concrete to come back to while you build your own process.
-Eighteen years tattooing. A studio of my own. These are the lessons I wanted to put into artists’ hands.
-[**See The Booked Artist System →**](https://tatassist.com/lp/booked-artist)
+That changed what a tattoo career could feel like.
+The work. The income. The way I felt coming into the shop.
+It took a shift in my thinking, and it took putting that shift into practice.
+That’s the experience behind **The Booked Artist System**.
+Eighteen years tattooing. A studio of my own. Something I wanted to put into other artists’ hands.
+[**See the system →**](https://tatassist.com/lp/booked-artist)
 Joker Ink
 Tatassist
 [@jokerinkx3](https://www.instagram.com/jokerinkx3/)
 
-### L5 — Buying more of the same inquiries / 1 day after L4
-**Subject:** What kind of work are your ads bringing in?
-**Preview:** More inquiries can keep you on the same treadmill.
+### L5 — Paying to repeat the same pattern / 1 day after L4
+**Subject:** What if more leads bring more of the same?
+**Preview:** Another busy month can still leave you wanting a different career.
 Hey,
-If the books are quiet, more leads sound like the answer.
-If you’re already busy with small tattoos, more of the same inquiries can fill another week without moving you toward the larger work you want.
-And if the promising conversations keep dying after a price, you’re paying to repeat that problem.
-Before increasing your ad spend, think about what happens when someone responds.
-Can you understand what they want, work out whether it fits your direction, and give them a clear next step?
-A larger project that never books can represent thousands in potential work. More paid attention gives that weak spot more room to cost you.
-Working System helps you put structure behind those client conversations, with tools for project details, consultations, changes, and pauses.
-**$47 once. Thirteen numbered tools plus guides.**
-[**Build the process behind your inquiries →**](https://tatassist.com/lp/booked-artist?edition=working)
+When the books are quiet, paying for more leads is tempting.
+When you’re already busy, it’s tempting to think a few more tattoos will finally make the numbers feel right.
+But what if next month fills up exactly like this one?
+The same small pieces. The same price conversations. Another project you were excited about going quiet.
+More advertising can make an expensive pattern bigger.
+The question I had to face was what kind of tattoo career I was actually building.
+I wanted people coming to me for my work. I wanted the income to reflect what I’d put into getting good at it.
+**The Booked Artist System** is built to help you put that same intention behind your own direction.
+Before you spend more trying to fill another month, invest in how you want that month to feel.
+[**Get Working System · $47 →**](https://tatassist.com/lp/booked-artist?edition=working)
 Joker Ink
 Tatassist
 
-### L6 — Adaptable guardrails / 2 days after L5
-**Subject:** Your shop. Your clients. Your process.
-**Preview:** A walk-in and a sleeve consultation need different conversations.
+### L6 — Their next chapter / 2 days after L5
+**Subject:** What do you want to be known for?
+**Preview:** Your next chapter can look different from the work that got you here.
 Hey,
-A straightforward tattoo in a street shop might need a short conversation and a clear decision.
-A sleeve can need references, placement photos, creative direction, a consultation, and room to think.
-Your client process should make sense for the work you do and the work you want more of.
-That’s how I want you to use The Booked Artist System.
-The templates are guardrails. Adapt the questions and language, choose the pages that fit, and build them into your own routine. The numbering gives you a starting order.
-Start with one inquiry and use the parts you need. Revisit the framework as your goals and project mix change.
-**Working System is my general recommendation: 13 tools plus guides for $47.**
-If you already have a client base and want a deeper process for custom work, **Complete System** includes everything in Working plus tools for replies, creative freedom, consultation notes, estimates, closing, follow-up, and body maps. **22 tools plus guides for $77.**
-[**Find the right depth for your process →**](https://tatassist.com/lp/booked-artist)
+Maybe you’ve already built a good client base.
+People book. They come back. They recommend you.
+But they keep asking for the kind of work you’re ready to move beyond.
+There’s another direction you want to take. Bigger projects. More creative freedom. Pieces that feel like yours.
+That ambition matters just as much as filling an empty calendar.
+**The Booked Artist System** is built to adapt to the way you work and where you want to go.
+**Working System is my recommendation for most artists at $47.** If you’re ready to invest more deeply in that next chapter, **Complete System is the fullest edition at $77.**
+Both are one-time purchases.
+Picture more of your working week spent on the tattoos you want to be known for.
+[**See the system for your next chapter →**](https://tatassist.com/lp/booked-artist)
 Joker Ink
 Tatassist
 
-### L7 — Put the shift into practice / 2 days after L6
-**Subject:** What do you want your next year of tattooing to look like?
-**Preview:** Give that direction a place in your next client conversation.
+### L7 — Purchase and commitment / 2 days after L6
+**Subject:** Give the career you want something to build on
+**Preview:** You’ve put the hours into your art. Take the next step for your business.
 Hey,
-More consistent bookings.
-Larger custom pieces.
-A calendar that reflects your work, with clients who came to you for it.
-Whatever you’re working toward, it needs a place in the decisions you make when an inquiry comes in.
-Changing old habits takes practice. It gets easier to return to your goals when you have a framework in front of you.
-**Working System** gives you 13 numbered tools, the **Core Playbook**, **Start Here**, and your **Implementation Guide**.
-The tools come as original PNGs, individual numbered PDFs, and a combined workbook. Print them or annotate them in a compatible app. Adapt the wording and use the pages that fit your situation.
-**$47 once. No subscription. A 30-day satisfaction guarantee.**
-Start with your next inquiry. Build from there.
+A year from now, what would make you proud of the direction your tattooing took?
+More reliable income. Larger projects. Clients who seek you out because they connect with your work.
+More days when you leave the shop excited about what you’ve created.
+That’s worth building toward.
+I know how easy it is for another week to pass while you keep doing what’s familiar. Changing that takes more than one good idea.
+**The Booked Artist System** gives you something to put to work while you make that shift.
+Start with **Working System for $47 once**, with a **30-day satisfaction guarantee**.
+Bring your own goals. Make the system part of how you pursue them.
+You’ve worked hard to become the artist you are. Give that artist a business worth coming into the shop for.
 [**Get Working System →**](https://tatassist.com/lp/booked-artist?edition=working)
 Joker Ink
 Tatassist
@@ -186,51 +180,32 @@ Body: Your [purchased tier] package is ready. Download it using the link below a
 This template must be rendered from the verified purchased tier. The bracketed variables are operator fields, never literal customer copy. Use the specific tier download, never a link that offers all three packages.
 
 ## Launch ad copy
+Prepared drafts. No ads were created or activated by this copy revision.
+Cold traffic: https://tatassist.com/lp/before-you-quote
+Retargeting: https://tatassist.com/lp/booked-artist?edition=working
 
-Cold traffic destination: https://tatassist.com/lp/before-you-quote
+### Concept A / The work you want
+Headline: YOUR WORK HAS IMPROVED. HAVE YOUR BOOKINGS?
+Primary text: You know the pieces you want to create. You’ve put the hours into getting good enough to do them. Now you want your calendar to reflect that. Take Joker Ink’s booking check and get Before You Quote free.
+CTA: Take the booking check.
+Retargeting: More of the work you want to be booked for. Working System helps you put intention behind the next chapter of your tattoo career. $47 once. 30-day satisfaction guarantee.
+Reel script: “You’ve put years into your art. But is the work coming through the door the work you want to do? I’m Joker Ink. Changing how I approached clients was the biggest level up in my tattoo career. Take the booking check and get Before You Quote free.”
 
-Retargeting destination: https://tatassist.com/lp/booked-artist?edition=working
+### Concept B / Busy without progress
+Headline: BOOKED ALL WEEK. STILL NOT GETTING AHEAD.
+Primary text: Another week of small tattoos. The larger pieces stay in your sketchbook. You’re ready for more rewarding work and income that reflects what you’ve put into your art. Get a different perspective from an artist who’s been there. Take the booking check and get Before You Quote free.
+CTA: Take the booking check.
+Retargeting: Picture next month’s calendar with more work you’re excited to create. Start putting that direction into practice with Working System. $47 once.
+Reel script: “I know what it feels like to step over dollars to pick up dimes. I also know what it feels like to be sought out for my work. Changing how I thought about clients changed the direction of my career. Take the booking check and get the free guide.”
 
-### Concept A / The project that disappeared
-
-Static headline: THEY ASKED HOW MUCH. YOU ANSWERED. GONE.
-
-Primary text: That sleeve inquiry was worth more than another notification. Now it’s buried under messages from people who were never a fit. Find the weak spot in your booking process. Take Joker Ink’s five-question booking check and get Before You Quote free.
-
-CTA: Take the booking check
-
-Retargeting variation: Stop letting good projects die in your DMs. Working System gives you 13 numbered tools and guides to handle inquiries, changing project details, client pauses, and deposit confirmation. $47 once. Get the system behind your next inquiry.
-
-Reel script: "They asked how much. You answered. Gone. That was a tattoo you wanted to do, hours in your chair, and money that could have changed your month. How many good projects are getting lost in your messages? I’m Joker Ink. I’ve been tattooing for eighteen years. Take the booking check and I’ll send you Before You Quote free."
-
-### Concept B / The costly inbox
-
-Static headline: YOUR INBOX COULD BE COSTING YOU THOUSANDS.
-
-Primary text: The sleeve that went quiet. The quote that went nowhere. The hours spent on someone who was never a fit. A messy intake process can cost you thousands a month. Take the booking check, find your sticking point, and get Before You Quote free. By Joker Ink: 18 years tattooing, studio owner.
-
-CTA: Take the booking check
-
-Retargeting variation: You have drawings to finish and clients in the chair. Stop rebuilding your intake process in every conversation. Working System: 13 numbered tools, a workbook, and guides to put them to work. $47. One payment. 30-day guarantee.
-
-Reel script: "I spent years improving my drawing and design. But the biggest level up in my career came when I got client intake out of DMs and started protecting my time for clients who fit my work. Think about the hours you’re spending on the wrong inquiries and the good projects slipping through. Take the booking check. Let’s find the gap."
-
-### Concept C / More leads, bigger bill
-
-Static headline: MORE LEADS. SAME MESS. BIGGER BILL.
-
-Primary text: If good inquiries are already getting lost in your inbox, more ads can make the problem more expensive. More messages. More unpaid time. More projects going nowhere. Before you spend more on leads, take Joker Ink’s booking check and get Before You Quote free.
-
-CTA: Take the booking check
-
-Retargeting variation: Put a process behind the inquiries you’re already getting. Working System brings together the core inquiry and consultation tools with help for project changes, client pauses, and deposit confirmation. 13 tools and guides. $47 once.
-
-Reel script: "What happens after the ad works? Someone messages you. Then the details get scattered, the replies drag on, and the project goes quiet. Paying for more inquiries gives that problem more room to grow. I’m Joker Ink. Take my booking check and get Before You Quote free."
+### Concept C / More of the same
+Headline: MORE LEADS. SAME PATTERN. BIGGER BILL.
+Primary text: A quiet calendar. Or a full one that still leaves you wanting a different career. Before paying to repeat another month, think about where you want your tattooing to go. Take Joker Ink’s booking check and get Before You Quote free.
+CTA: Take the booking check.
+Retargeting: You’ve invested in your art. Give the business behind it some of that same intention. Working System, $47 once, with a 30-day satisfaction guarantee.
+Reel script: “What if more leads bring more of the same? More of the work you’re trying to move beyond, while the pieces you want to create stay in your sketchbook. I’m Joker Ink. Take the booking check and get Before You Quote free.”
 
 ## Copy review rules
-
-Use the exact 6 / 13 / 22 cumulative counts and $27 / $47 / $77 prices. Show the body maps as two assets. Reserve the complete-workflow promise for Complete System. State static PDF/PNG formats accurately. Do not promise a calculator, editable design source, videos, coaching, campaigns, automatic follow-up, guaranteed results, future updates, or upgrade credits. Do not use fabricated popularity, testimonials, scarcity, or savings. Keep the existing unrelated calculator and other products separate from this offer.
-
-The product landing page leads with lost projects, unpaid time, and the cost of sending more traffic into a process that loses clients. It sells the value of protecting time and energy for clients who fit the artist’s work. Keep the founder story brief. Explain the benefit, exact contents, tier differences, formats, price, and guarantee. Keep usable worksheets, step-by-step workflows, and implementation instruction inside the paid packages. Public product presentation must not supply usable customer pages.
-
-Lead the landing page with the recommended $47 Working System. Its benefits, 13-tool scope, guarantee, and purchase button are the focal point. Essentials and Complete System are secondary alternatives. The hero and primary CTAs should not lead with a three-way comparison or From $27 pricing.
+Lead with the career the artist wants: more rewarding work, better income, creative pride, and clients who seek them out. The free content introduces the mindset shift. The purchase provides the concrete structure to put it into practice.
+Keep public copy free of template inventories, named-template demonstrations, detailed workflows, and implementation instructions. Explain adaptability in one sentence. Retain concise facts that help a buyer choose: package format, count, price, guarantee, and license.
+Working System remains the prominent recommendation. Essentials and Complete are secondary alternatives. Preserve exact cumulative counts (6 / 13 / 22) and prices ($27 / $47 / $77). Founder results are his firsthand experience. Buyer guidance can explain use after purchase.
