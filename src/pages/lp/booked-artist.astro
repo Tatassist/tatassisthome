@@ -2,6 +2,7 @@
 import FunnelLayout from '../../layouts/FunnelLayout.astro';
 import FunnelHeader from '../../components/FunnelHeader.astro';
 import BrandLogo from '../../components/BrandLogo.astro';
+import TemplateStack from '../../components/TemplateStack.astro';
 import '../../styles/offer-funnel.css';
 import { bookedArtistSystemTiers } from '../../data/booking-funnel/booked-artist-system';
 import { EDITIONS, SALES_INTRO } from '../../../lib/offer-quiz.mjs';
@@ -31,7 +32,7 @@ const structuredData=[
       </section>
       <div id="buy">
         {tiers.map(tier=><section class="fq-main-offer" id={`tier-${tier.id}`} data-offer={tier.id} hidden={!tier.recommended} aria-labelledby={`title-${tier.id}`}>
-          <div>{tier.id==='working' ? <img class="fq-cover" src="/booked-artist-system/working-system-cover.png" width="1086" height="1448" alt="The Booked Artist System, Working System edition, 13 tools and guides" /> : <BrandLogo class="fq-cover" alt="Tatassist, by artists, for artists" />}</div>
+          <TemplateStack count={tier.count} name={tier.name} />
           <div class="fq-offer-copy">
             <p class="fq-match-label" data-match-label>{tier.recommended ? 'OUR RECOMMENDATION':'YOUR SELECTED EDITION'}</p>
             <h2 class="fq-offer-title" id={`title-${tier.id}`}>{tier.name.toUpperCase()}</h2>
