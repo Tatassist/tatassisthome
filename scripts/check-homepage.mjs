@@ -1,35 +1,42 @@
 // Run after `npm run build` with Playwright available. No forms are submitted.
-import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
-import { spawn } from 'node:child_process';
+import { mkdir, writeFile, readFile, stat } from 'node:fs/promises';
+import { createServer } from 'node:http';
+import { resolve, extname, sep } from 'node:path';
 import { chromium } from 'playwright';
 
 const output = 'homepage-check';
 const origin = 'http://127.0.0.1:4321';
+const root = resolve('dist');
+const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.ico': 'image/x-icon', '.woff2': 'font/woff2' };
 await mkdir(output, { recursive: true });
-const server = spawn('npm', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4321'], { stdio: 'pipe' });
+// Serve the built output directly so no orphaned npm/preview subprocess keeps CI alive.
+const server = createServer(async (request, response) => {
+  try {
+    let file = resolve(root, '.' + decodeURIComponent(new URL(request.url, origin).pathname));
+    if (file !== root && !file.startsWith(root + sep)) { response.writeHead(403).end(); return; }
+    if ((await stat(file)).isDirectory()) file = resolve(file, 'index.html');
+    const body = await readFile(file);
+    response.writeHead(200, { 'Content-Type': mime[extname(file)] || 'application/octet-stream' });
+    response.end(body);
+  } catch { response.writeHead(404).end('Not found'); }
+});
+await new Promise((accept, reject) => { server.once('error', reject); server.listen(4321, '127.0.0.1', accept); });
 let browser;
 const report = { viewports: [], interactions: [], failures: [], consoleErrors: [] };
-const check = (name, condition) => {
-  if (!condition) report.failures.push(name);
-};
+const save = () => writeFile(`${output}/report.json`, JSON.stringify(report, null, 2));
+const check = (name, condition) => { if (!condition) report.failures.push(name); };
 try {
-  let ready = false;
-  for (let i = 0; i < 60; i++) {
-    try { if ((await fetch(origin)).ok) { ready = true; break; } } catch {}
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
-  assert(ready, 'Preview server did not start');
   browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  page.setDefaultTimeout(20000);
   page.on('pageerror', error => report.consoleErrors.push(error.message));
-  const viewports = [[1440, 1000], [1024, 768], [768, 1024], [600, 900], [390, 844], [320, 720]];
-  for (const [width, height] of viewports) {
+  for (const [width, height] of [[1440, 1000], [1024, 768], [768, 1024], [600, 900], [390, 844], [320, 720]]) {
+    console.log(`Checking ${width} x ${height}`);
     await page.setViewportSize({ width, height });
-    const response = await page.goto(origin, { waitUntil: 'networkidle' });
+    const response = await page.goto(origin, { waitUntil: 'networkidle', timeout: 30000 });
     await page.evaluate(() => document.fonts.ready);
     await page.locator('.th-footer').scrollIntoViewIfNeeded();
-    await page.waitForTimeout(250);
+    await page.waitForFunction(() => [...document.images].every(image => image.complete));
     await page.evaluate(() => window.scrollTo(0, 0));
     const result = await page.evaluate(() => {
       const images = [...document.images].map(image => ({ src: image.getAttribute('src'), loaded: image.complete && image.naturalWidth > 0, width: image.naturalWidth, height: image.naturalHeight }));
@@ -49,6 +56,8 @@ try {
     check(`${width}px: heading font loaded`, result.fonts);
     await page.screenshot({ path: `${output}/homepage-${width}.png`, fullPage: true });
     if (width === 1440 || width === 390) await page.screenshot({ path: `${output}/hero-${width}.png` });
+    await save();
+    console.log(`Completed ${width}px: ${report.failures.length} failures so far`);
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(origin, { waitUntil: 'networkidle' });
@@ -57,9 +66,7 @@ try {
   check('Current editions visible', ['$27', '$47', '$77'].every(price => text.includes(price)));
   const cards = page.locator('.th-edition');
   check('Three editions', await cards.count() === 3);
-  const editions = [['essentials', '6'], ['working', '13'], ['complete', '22']];
-  for (let i = 0; i < editions.length; i++) {
-    const [edition, count] = editions[i];
+  for (const [i, [edition, count]] of [['essentials', '6'], ['working', '13'], ['complete', '22']].entries()) {
     check(`${edition}: count`, (await cards.nth(i).innerText()).includes(`${count} numbered tools`));
     const href = await cards.nth(i).locator('a').getAttribute('href');
     check(`${edition}: selected sales route`, new URL(href, origin).pathname === '/lp/booked-artist' && new URL(href, origin).searchParams.get('edition') === edition);
@@ -77,9 +84,8 @@ try {
   check('Campaign attribution preserved', destinations.every(href => new URL(href).searchParams.get('utm_source') === 'homepage-test'));
   check('Contact data not forwarded', destinations.every(href => !new URL(href).searchParams.has('email')));
   await page.locator('.th-hero .th-button').click();
-  await page.waitForURL('**/lp/before-you-quote*');
+  await page.waitForURL(url => url.pathname.replace(/\/$/, '') === '/lp/before-you-quote');
   check('Quiz page loads', await page.locator('h1').count() === 1);
-  check('Quiz route preserved', new URL(page.url()).pathname.replace(/\/$/, '') === '/lp/before-you-quote');
   report.interactions.push('Hero CTA opens the real booking-check page; whitelisted campaign attribution survives and email does not. No signup or payment is submitted.');
   await page.goto(origin, { waitUntil: 'networkidle' });
   await page.getByRole('link', { name: 'Explore the system', exact: true }).click();
@@ -89,9 +95,10 @@ try {
 } catch (error) {
   report.failures.push(error.stack || String(error));
 } finally {
-  await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2));
+  await save();
   await browser?.close();
-  server.kill('SIGTERM');
+  server.closeAllConnections();
+  await new Promise(accept => server.close(accept));
 }
 console.log(JSON.stringify(report, null, 2));
-if (report.failures.length) process.exitCode = 1;
+process.exitCode = report.failures.length ? 1 : 0;
