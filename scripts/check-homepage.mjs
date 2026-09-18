@@ -1,5 +1,5 @@
 // Run after `npm run build` with Playwright available. No forms are submitted.
-import { mkdir, writeFile, readFile, stat } from 'node:fs/promises';
+import { mkdir, writeFile, readFile, stat, copyFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { resolve, extname, sep } from 'node:path';
 import { chromium } from 'playwright';
@@ -9,6 +9,8 @@ const origin = 'http://127.0.0.1:4321';
 const root = resolve('dist');
 const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.ico': 'image/x-icon', '.woff2': 'font/woff2' };
 await mkdir(output, { recursive: true });
+await copyFile('public/lead-magnet/before-you-quote-cover.png', `${output}/existing-guide-cover.png`);
+await copyFile('src/pages/index.astro', `${output}/source-index.astro`);
 // Serve the built output directly so no orphaned npm/preview subprocess keeps CI alive.
 const server = createServer(async (request, response) => {
   try {
@@ -35,8 +37,14 @@ try {
     await page.setViewportSize({ width, height });
     const response = await page.goto(origin, { waitUntil: 'networkidle', timeout: 30000 });
     await page.evaluate(() => document.fonts.ready);
-    await page.locator('.th-footer').scrollIntoViewIfNeeded();
-    await page.waitForFunction(() => [...document.images].every(image => image.complete));
+    // Jumping directly to the footer can skip a lazy image's loading threshold.
+    // Scroll each visible image into view as a visitor would, then await decoding.
+    for (const image of await page.locator('img').all()) {
+      if (!(await image.isVisible())) continue;
+      await image.scrollIntoViewIfNeeded();
+      await image.evaluate(image => image.decode());
+    }
+    if (width === 1440 || width === 390) await page.locator('.th-guide').screenshot({ path: `${output}/guide-${width}.png` });
     await page.evaluate(() => window.scrollTo(0, 0));
     const result = await page.evaluate(() => {
       const images = [...document.images].map(image => ({ src: image.getAttribute('src'), loaded: image.complete && image.naturalWidth > 0, width: image.naturalWidth, height: image.naturalHeight }));
