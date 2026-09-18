@@ -3,7 +3,7 @@ import { validatePayload, recommend, kitFields } from '../lib/offer-quiz.mjs';
 const recent = new Map();
 const reply = (data,status=200) => Response.json(data,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 export function configured(env) {
-  return Boolean(env.KIT_API_KEY?.trim() && /^\d+$/.test(env.KIT_BOOKING_FORM_ID || '') && /^\d+$/.test(env.KIT_BOOKING_NURTURE_FORM_ID || '') && env.KIT_BOOKING_DELIVERY_READY === 'true');
+  return Boolean(env.KIT_API_KEY?.trim() && /^\d+$/.test(env.KIT_BOOKING_NURTURE_FORM_ID || '') && env.KIT_BOOKING_DELIVERY_READY === 'true');
 }
 export async function handle(request,{env=process.env,fetchImpl=fetch,now=Date.now}={}) {
   if (request.method === 'GET') return reply({ready:configured(env)});
@@ -43,7 +43,7 @@ export async function handle(request,{env=process.env,fetchImpl=fetch,now=Date.n
     await kit(`subscribers/${subscriber.id}`,'PUT',{first_name:payload.contact.firstName,fields});
     const referrer = new URL('https://tatassist.com/lp/before-you-quote');
     for (const [key,value] of Object.entries(payload.attribution)) referrer.searchParams.set(key,value);
-    const form = payload.contact.marketingConsent ? env.KIT_BOOKING_NURTURE_FORM_ID : env.KIT_BOOKING_FORM_ID;
+    const form = env.KIT_BOOKING_NURTURE_FORM_ID;
     const enrolled = await kit(`forms/${form}/subscribers/${subscriber.id}`,'POST',{referrer:referrer.href});
     return reply({ok:true,emailDelivery:enrolled.status === 200 ? 'previous_request':'requested',recommendation:recommend(payload.answers),guideUrl:'/lead-magnet/before-you-quote.pdf'});
   } catch { return reply({error:'Your request didn’t go through. Your answers are still here. Please try again.',code:'PROVIDER_FAILED'},502); }
