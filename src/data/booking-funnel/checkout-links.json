@@ -5,7 +5,7 @@
     "productId": "prod_VGI6X8wrm1bIA3",
     "priceId": "price_1UFlWOPQzammyKtslWipQbSq",
     "unitAmount": 2700,
-    "enabled": false
+    "enabled": true
   },
   "working": {
     "url": "https://buy.stripe.com/eVq7sN4FT8OJ4X26tW73G02",
@@ -21,6 +21,6 @@
     "productId": "prod_VGI7UjsELH3ZHO",
     "priceId": "price_1UFlXSPQzammyKtsufz2c3MD",
     "unitAmount": 7700,
-    "enabled": false
+    "enabled": true
   }
 }
