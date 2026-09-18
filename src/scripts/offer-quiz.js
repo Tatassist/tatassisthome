@@ -3,7 +3,7 @@ const $ = id => document.getElementById(id);
 const form = $('fq-form');
 if (form) {
   const answers = {};
-  const contact = {firstName:'',lastName:'',email:'',marketingConsent:false};
+  const contact = {firstName:'',lastName:'',email:'',marketingConsent:true};
   let step=0,busy=false,complete=false;
   const attribution = {};
   for (const [key,value] of new URLSearchParams(location.search)) {
@@ -17,7 +17,6 @@ if (form) {
     if (q) answers[q.id]=form.querySelector(`input[name="${q.id}"]:checked`)?.value;
     else {
       for (const key of ['firstName','lastName','email']) contact[key]=$(key).value;
-      contact.marketingConsent=$('marketingConsent').checked;
     }
   }
   function render() {
@@ -30,7 +29,7 @@ if (form) {
     if (q) {
       $('fq-question').innerHTML=`<fieldset><legend id="fq-question-title" tabindex="-1">${esc(q.title)}</legend>${q.hint ? `<p class="fq-hint">${esc(q.hint)}</p>`:''}<div class="fq-options">${q.options.map(o=>`<label class="fq-option"><input type="radio" name="${q.id}" value="${o.value}" ${answers[q.id]===o.value ? 'checked':''}/><span>${esc(o.label)}</span></label>`).join('')}</div></fieldset>`;
     } else {
-      $('fq-question').innerHTML=`<div class="fq-contact-layout"><div><h2 id="fq-question-title" tabindex="-1">Where should we send your guide?</h2><p class="fq-hint">Get Before You Quote free and see your matched recommendation.</p><div class="fq-contact-fields"><label>First name<input id="firstName" name="firstName" autocomplete="given-name" maxlength="80" value="${esc(contact.firstName)}" required /></label><label>Last name<input id="lastName" name="lastName" autocomplete="family-name" maxlength="80" value="${esc(contact.lastName)}" required /></label><label class="fq-wide">Email<input id="email" name="email" type="email" autocomplete="email" maxlength="254" value="${esc(contact.email)}" required /></label></div><label class="fq-consent"><input id="marketingConsent" name="marketingConsent" type="checkbox" ${contact.marketingConsent ? 'checked':''}/><span>${MARKETING_LABEL}</span></label><p class="fq-small"><a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a> · Unsubscribe from tips anytime.</p><div class="fq-honey" aria-hidden="true"><label>Website<input id="website" name="website" tabindex="-1" autocomplete="off" /></label></div></div><img class="fq-contact-cover" src="/lead-magnet/before-you-quote-cover.png" width="420" height="560" alt="Before You Quote free PDF guide" /></div>`;
+      $('fq-question').innerHTML=`<div class="fq-contact-layout"><div><h2 id="fq-question-title" tabindex="-1">Where should we send your guide?</h2><p class="fq-hint">Get Before You Quote free and see your matched recommendation.</p><div class="fq-contact-fields"><label>First name<input id="firstName" name="firstName" autocomplete="given-name" maxlength="80" value="${esc(contact.firstName)}" required /></label><label>Last name<input id="lastName" name="lastName" autocomplete="family-name" maxlength="80" value="${esc(contact.lastName)}" required /></label><label class="fq-wide">Email<input id="email" name="email" type="email" autocomplete="email" maxlength="254" value="${esc(contact.email)}" required /></label></div><p class="fq-small">${MARKETING_LABEL} <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>.</p><div class="fq-honey" aria-hidden="true"><label>Website<input id="website" name="website" tabindex="-1" autocomplete="off" /></label></div></div><img class="fq-contact-cover" src="/lead-magnet/before-you-quote-cover.png" width="420" height="560" alt="Before You Quote free PDF guide" /></div>`;
     }
     error('');
     $('fq-question-title').focus({preventScroll:true});
