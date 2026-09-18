@@ -1,0 +1,16 @@
+---
+interface Props { count: number; name: string; }
+const { count, name } = Astro.props;
+---
+<figure class="fq-stack-figure" aria-label={`${name}: ${count} templates, shown as a stack with Project Summary on top`}>
+  <div class="fq-stack-stage" aria-hidden="true">
+    <div class="fq-template-stack" style={`--sheet-count:${count}`}>
+      {Array.from({length: count}, (_, layer) => (
+        <div class:list={['fq-stack-sheet', {'fq-stack-front':layer===0}]} style={`--layer:${layer}`}>
+          {layer===0 && <img src="/booked-artist-system/project-summary-preview.webp" width="1024" height="1536" alt="" loading="eager" decoding="async" />}
+        </div>
+      ))}
+    </div>
+  </div>
+  <figcaption><span>{name}</span><strong>{count} templates</strong></figcaption>
+</figure>
