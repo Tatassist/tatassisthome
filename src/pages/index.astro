@@ -1,5 +1,326 @@
 ---
-// Keep the home-page offer identical to the current one-time product page.
-import BookedArtistSystem from './lp/booked-artist-system.astro';
+import FunnelLayout from '../layouts/FunnelLayout.astro';
+import BrandLogo from '../components/BrandLogo.astro';
+import { tatassistOffer } from '../data/booking-funnel/tatassist-offer';
+
+const quizUrl = '/lp/before-you-quote';
+const salesUrl = '/lp/booked-artist';
+const year = new Date().getFullYear();
+const working = tatassistOffer.tiers.find(tier => tier.id === 'working')!;
+const situations = [
+  {
+    number: '01', label: 'NOT ENOUGH WORK', title: 'More days tattooing.',
+    body: 'Time to draw. Space in the calendar. A few “how much?” messages that go quiet. You want more of those conversations to turn into actual tattoo projects.',
+    direction: 'Give interested clients a clearer way to book.',
+  },
+  {
+    number: '02', label: 'BUSY, BUT UNDERPAID', title: 'A busy week that pays.',
+    body: 'You’re tattooing plenty. But the small pieces, squeezed prices, and extra hours leave you wondering where the money went. You want your work to support the life you’re working for.',
+    direction: 'Build toward work that makes the hours worthwhile.',
+  },
+  {
+    number: '03', label: 'ESTABLISHED. READY FOR MORE.', title: 'Your kind of projects.',
+    body: 'Clients keep coming back for the same work. Meanwhile, the projects you want to create stay in your sketchbook. You want to shape what you’re known—and booked—for.',
+    direction: 'Make room for the work you want your name on.',
+  },
+];
+const steps = [
+  { number: '01', title: 'Get into the project.', body: 'Understand the idea, the person, and what matters to them. Give the conversation somewhere useful to go before jumping to a number.' },
+  { number: '02', title: 'Make a clear plan.', body: 'Gather the details, prepare for the consultation, and put the agreement in writing. Keep your voice and adapt the depth to the piece.' },
+  { number: '03', title: 'Give it a next step.', body: 'Use the tools your edition includes to keep the project moving. Working System adds support for changing details, client pauses, and deposit confirmation.' },
+];
+const editionCopy: Record<string, string> = {
+  essentials: 'A focused starting point for inquiries, project fit, consultations, and a clear project summary.',
+  working: 'The core process, plus tools for larger projects, unclear references, scope changes, client pauses, and deposit confirmation.',
+  complete: 'The full toolkit, adding depth for creative freedom, estimates, consultation notes, closing, and follow-up.',
+};
+const toolNames = ['Inquiry Form', 'Ask for the Story', 'Clarify the References', 'Project Summary', 'Scope Change', 'Deposit Received'];
+const faqs = [
+  { question: 'Will this help if I’m not getting enough inquiries?', answer: 'The tools help you work with the interest you receive: understanding the project, preparing the conversation, and giving clients a clear next step. They don’t generate inquiries or run your advertising. Building visibility and improving your art still matter. Bookings and income are never guaranteed.' },
+  { question: 'Does this work for street-shop artists and smaller tattoos?', answer: 'Yes. Adapt the process to the way you work. Keep a straightforward piece straightforward, and use more of the framework when a project needs more discussion. The guides explain the purpose behind the tools so you can make those decisions yourself.' },
+  { question: 'What am I actually buying?', answer: 'A downloadable educational toolkit: your edition’s numbered templates, printable PDFs, a combined workbook, the Core Playbook, Start Here, and an implementation guide. These are tools you use and adapt yourself. There is no software account or automated booking service.' },
+  { question: 'Which edition should I start with?', answer: `Working System is the recommended starting point for most artists: ${working.count} tools plus guides for $${working.price}. Essentials is a smaller starting point; Complete System adds greater depth. Every higher edition includes the tools in the editions below it. The free booking check recommends an edition based on your answers.` },
+  { question: 'Is there a subscription or a guarantee?', answer: `Each edition is a one-time purchase in USD, with a ${tatassistOffer.guaranteeDays}-day satisfaction guarantee and an individual artist license. Email ${tatassistOffer.supportEmail} from your purchase address for help or a refund request. Contact support for multi-artist studio use. Full details are in the product terms.` },
+];
+const structuredData = [
+  {
+    '@context': 'https://schema.org', '@type': 'ItemList', name: 'The Booked Artist System editions',
+    itemListElement: tatassistOffer.tiers.map((tier, index) => ({ '@type': 'ListItem', position: index + 1, name: tier.name, url: new URL(`${salesUrl}?edition=${tier.id}`, Astro.site).toString() })),
+  },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
+];
 ---
-<BookedArtistSystem />
+
+<FunnelLayout
+  title="Build the Tattoo Career You Actually Want"
+  description="Practical tattoo-business tools and guides by Joker Ink. Find your next step toward more bookings, better-paying work, and projects you want to create."
+  ogImage="/brand/tatassist-logo-watermark.png"
+  pageType="tatassist_home"
+  structuredData={structuredData}
+>
+  <Fragment slot="header">
+    <a class="th-skip" href="#home-main">Skip to content</a>
+    <header class="th-header">
+      <a class="th-logo-link" href="/" aria-label="Tatassist home"><BrandLogo class="th-logo" /></a>
+      <nav aria-label="Main navigation">
+        <a href="#your-work">Your next chapter</a>
+        <a href="#the-system">The system</a>
+        <a href="#joker">Meet Joker</a>
+      </nav>
+      <a class="th-header-cta" href={quizUrl} data-attribution data-track="true" data-track-event="tatassist_home_quiz_clicked" data-track-location="home_header" data-track-destination={quizUrl}>Free booking check <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+    </header>
+  </Fragment>
+
+  <div class="th" id="home-main">
+    <svg class="th-svg-defs" aria-hidden="true" width="0" height="0"><defs><symbol id="th-arrow" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14" fill="none" stroke="currentColor" stroke-width="1.8" /></symbol></defs></svg>
+
+    <section class="th-hero" aria-labelledby="home-title">
+      <svg class="th-paint" aria-hidden="true" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <filter id="th-ragged" x="-15%" y="-20%" width="130%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="7" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="32" xChannelSelector="R" yChannelSelector="G" /></filter>
+          <pattern id="th-halftone" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2.2" fill="#F5F0E8" opacity=".23" /></pattern>
+        </defs>
+        <g filter="url(#th-ragged)">
+          <path fill="#2E86C1" d="m1210 95 256-51-45 129 114-36-93 148 78-25-88 151-44 54-95-53-169-16 70-116-73 5 69-120-72 36z" />
+          <path fill="#C0392B" d="m1143 329 500-102-70 171 97-18-35 173-406 107 40-77-202 34 66-100-74 7 66-88-123 5z" />
+          <path fill="#C0392B" opacity=".65" d="m1382 600 280-41-34 57-277 64z" />
+          <path fill="#2E86C1" opacity=".4" d="m943 694 199-31-81 74-139 16z" />
+        </g>
+        <path d="m1274 20 320 80-47 685-341-72z" fill="url(#th-halftone)" />
+        <g fill="#C0392B"><circle cx="1100" cy="274" r="9"/><circle cx="1064" cy="314" r="4"/><circle cx="1135" cy="215" r="3"/><circle cx="1020" cy="424" r="8"/><circle cx="1011" cy="461" r="3"/><circle cx="1141" cy="635" r="11"/><circle cx="1099" cy="678" r="5"/><circle cx="1159" cy="714" r="3"/><circle cx="1072" cy="749" r="6"/><circle cx="1542" cy="724" r="15"/><circle cx="1511" cy="777" r="5"/></g>
+        <g fill="#2E86C1"><circle cx="1176" cy="120" r="6"/><circle cx="1106" cy="174" r="3"/><circle cx="1152" cy="98" r="3"/><circle cx="1490" cy="64" r="11"/><circle cx="1454" cy="42" r="4"/><circle cx="1561" cy="173" r="8"/><circle cx="988" cy="733" r="4"/></g>
+        <g stroke="#F5F0E8" stroke-width="1" opacity=".13"><path d="m10 835 1300-63M302 920l1200-66M1077 0l-53 980M1290 0l-3 985"/><path d="m10 842 1200-66M1287 0l-5 982"/></g>
+      </svg>
+      <div class="th-wrap th-hero-layout">
+        <div class="th-hero-copy">
+          <h1 id="home-title">BUILD THE<br /><span class="th-outline">TATTOO CAREER</span><br /><span class="th-hero-last">YOU ACTUALLY WANT.</span></h1>
+          <p>More tattoo work. Better money for the hours you put in. Clients who come to you for the pieces you want to create.</p>
+          <p class="th-hero-support">Start building toward it with a client process you can make your own.</p>
+          <div class="th-actions">
+            <a class="th-button" href={quizUrl} data-attribution data-track="true" data-track-event="tatassist_home_quiz_clicked" data-track-location="home_hero" data-track-destination={quizUrl}>Find my next move <svg aria-hidden="true"><use href="#th-arrow" /></svg></a>
+            <a class="th-text-link" href="#the-system">Explore the system</a>
+          </div>
+          <p class="th-micro">5 questions. Your starting point. A free <i>Before You Quote</i> guide.</p>
+        </div>
+        <div class="th-wall-poster" aria-hidden="true">
+          <span class="th-tape"></span>
+          <BrandLogo class="th-poster-logo" alt="" />
+          <p>YOUR WORK.<br />YOUR WAY.</p>
+          <span class="th-poster-line"></span>
+          <small>BY ARTISTS. FOR ARTISTS.</small>
+        </div>
+      </div>
+      <div class="th-hero-footer th-wrap"><span>ARTIST-OWNED. BUILT FROM EXPERIENCE.</span><a href="#your-work">SCROLL TO FIND YOUR START <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6" /></svg></a></div>
+    </section>
+
+    <section class="th-situations th-paper" id="your-work" aria-labelledby="situations-title">
+      <div class="th-wrap">
+        <div class="th-section-head"><h2 id="situations-title">WHERE DO YOU<br />WANT TO <span class="th-mark">TAKE IT?</span></h2><p>You’ve put the hours into your art.<br />What do you want those hours to build?</p></div>
+        <div class="th-situation-grid">
+          {situations.map(situation => <article class="th-situation">
+            <div class="th-situation-top"><span class="th-number" aria-hidden="true">{situation.number}</span><p class="th-label">{situation.label}</p></div>
+            <h3>{situation.title}</h3><p>{situation.body}</p><p class="th-direction">{situation.direction}</p>
+          </article>)}
+        </div>
+        <div class="th-section-bottom"><p>Start with where you are. Build toward where you want to go.</p><a class="th-link-arrow" href={quizUrl} data-attribution data-track="true" data-track-event="tatassist_home_quiz_clicked" data-track-location="home_situations" data-track-destination={quizUrl}>Find my starting point <svg aria-hidden="true"><use href="#th-arrow" /></svg></a></div>
+      </div>
+    </section>
+
+    <section class="th-system" id="the-system" aria-labelledby="system-title">
+      <div class="th-wrap">
+        <div class="th-system-top"><div><p class="th-label th-red-label">THE BOOKED ARTIST SYSTEM</p><h2 id="system-title">PUT A PROCESS<br />BEHIND YOUR<br /><span class="th-outline">NEXT CHAPTER.</span></h2></div><div class="th-system-intro"><p>What you ask. How you listen. Which projects you take on. What happens after the consultation.</p><p>The Booked Artist System gives you practical frameworks, templates, and guides for those decisions—so the career you want has a place in the way you work today.</p><p class="th-dim">Use your own voice. Keep it simple where you can. Go deeper when the project needs it.</p></div></div>
+        <div class="th-process">{steps.map(step => <article><span class="th-label">{step.number}</span><h3>{step.title}</h3><p>{step.body}</p></article>)}</div>
+        <div class="th-tool-index"><div><p class="th-label">INSIDE WORKING SYSTEM</p><p><strong>{working.count} tools.</strong><br />Real moments in your workday.</p></div><ul>{toolNames.map(name => <li>{name}</li>)}</ul><a class="th-link-arrow" href={`${salesUrl}?edition=working#buy`} data-attribution data-track="true" data-track-event="tatassist_home_edition_clicked" data-track-location="home_toolkit" data-track-destination={`${salesUrl}?edition=working`}>See the full system <svg aria-hidden="true"><use href="#th-arrow" /></svg></a></div>
+      </div>
+    </section>
+
+    <section class="th-guide" aria-labelledby="guide-title">
+      <div class="th-wrap th-guide-layout">
+        <div class="th-guide-art"><div class="th-guide-shadow" aria-hidden="true"></div><img src="/lead-magnet/before-you-quote-cover.png" alt="Before You Quote, the free guide by Joker Ink" width="1024" height="1536" loading="lazy" decoding="async" /></div>
+        <div class="th-guide-copy"><p class="th-label">YOUR FREE STARTING POINT</p><h2 id="guide-title">START WITH<br />YOUR NEXT<br /><span>CONVERSATION.</span></h2><p>Before you answer “how much?”, get into the piece they actually want.</p><p>Answer five questions about your tattoo business. Get the free <strong>Before You Quote</strong> guide and a recommendation for the edition that fits your answers.</p><a class="th-button th-button-dark" href={quizUrl} data-attribution data-track="true" data-track-event="tatassist_home_quiz_clicked" data-track-location="home_guide" data-track-destination={quizUrl}>Take the free booking check <svg aria-hidden="true"><use href="#th-arrow" /></svg></a><p class="th-micro">After the questions, enter your name and email for the guide, booking advice, and offers. Unsubscribe whenever.</p></div>
+      </div>
+    </section>
+
+    <section class="th-editions th-paper" id="editions" aria-labelledby="editions-title">
+      <div class="th-wrap">
+        <div class="th-section-head"><h2 id="editions-title">START WHERE<br /><span class="th-mark">YOU ARE.</span></h2><p>Three editions. Room to go deeper.<br />Every higher edition includes the tools below it.</p></div>
+        <div class="th-edition-grid">{tatassistOffer.tiers.map(tier => <article class:list={['th-edition', { 'th-edition-featured': tier.recommended }]} aria-labelledby={`home-edition-${tier.id}`}>
+          <p class="th-edition-note">{tier.recommended ? 'OUR RECOMMENDATION' : tier.id === 'essentials' ? 'THE CORE PROCESS' : 'THE FULL TOOLKIT'}</p>
+          <h3 id={`home-edition-${tier.id}`}>{tier.name}</h3><p class="th-price">${tier.price}<span>USD · one time</span></p><p class="th-tool-count">{tier.count} numbered tools + guides</p><p class="th-edition-description">{editionCopy[tier.id]}</p><a class:list={['th-edition-cta', { 'th-edition-cta-featured': tier.recommended }]} href={`${salesUrl}?edition=${tier.id}#buy`} data-attribution data-track="true" data-track-event="tatassist_home_edition_clicked" data-track-location={`home_edition_${tier.id}`} data-track-destination={`${salesUrl}?edition=${tier.id}`}>Explore {tier.name}<svg aria-hidden="true"><use href="#th-arrow" /></svg></a>
+        </article>)}</div>
+        <p class="th-edition-terms">Downloadable tools and guides. Individual artist license. <a href="/lp/booked-artist/terms">{tatassistOffer.guaranteeDays}-day satisfaction guarantee.</a></p>
+      </div>
+    </section>
+
+    <section class="th-founder" id="joker" aria-labelledby="founder-title"><div class="th-wrap th-founder-layout">
+      <div class="th-founder-heading"><p class="th-label th-red-label">MEET JOKER INK</p><h2 id="founder-title">BUILT IN A<br /><span class="th-outline">WORKING SHOP.</span></h2><p class="th-founder-meta">18 years tattooing.<br />Studio owner. Still doing the work.</p></div>
+      <div class="th-founder-story"><blockquote>“I know what it feels like to take work because the money is there.”</blockquote><p>I spent years on my drawings and designs. But the biggest level up in my career came when I moved intake out of DMs and changed how I made decisions about clients.</p><p>I also know what it feels like to be sought out for my work. These frameworks came from that experience. They give you a way to put your own goals into practice, in your own shop, with your own clients.</p><p class="th-signoff">Joker Ink<span>BLACK DIAMOND CUSTOM TATTOOS · NORTH LAS VEGAS</span></p><a class="th-link-arrow" href="https://www.bdcustomtattoos.com/joker" target="_blank" rel="noopener noreferrer">See Joker’s tattoo work <svg aria-hidden="true"><use href="#th-arrow" /></svg></a></div>
+    </div></section>
+
+    <section class="th-faq th-paper" id="faq" aria-labelledby="faq-title"><div class="th-wrap th-faq-layout"><div><p class="th-label">A FEW THINGS WORTH ASKING</p><h2 id="faq-title">BEFORE<br />YOU START.</h2><a class="th-support-link" href={`mailto:${tatassistOffer.supportEmail}`}>Talk to us</a></div><div class="th-questions">{faqs.map(faq => <details><summary>{faq.question}<span aria-hidden="true" class="th-plus"></span></summary><p>{faq.answer}</p></details>)}</div></div></section>
+
+    <section class="th-final" aria-labelledby="final-title"><div class="th-wrap"><p class="th-label">YOUR ART. YOUR CLIENTS. YOUR NEXT CHAPTER.</p><h2 id="final-title">MAKE ROOM<br />FOR <span>YOUR WORK.</span></h2><a class="th-button" href={quizUrl} data-attribution data-track="true" data-track-event="tatassist_home_quiz_clicked" data-track-location="home_final" data-track-destination={quizUrl}>Find my next move <svg aria-hidden="true"><use href="#th-arrow" /></svg></a><p class="th-micro">Start with the free booking check and <i>Before You Quote.</i></p></div></section>
+  </div>
+
+  <Fragment slot="footer"><footer class="th-footer"><div class="th-wrap"><a class="th-footer-brand" href="/">TATASSIST<span>BY ARTISTS. FOR ARTISTS.</span></a><nav aria-label="Footer navigation"><a href="/privacy">Privacy</a><a href="/lp/booked-artist/terms">Product terms & refunds</a><a href={`mailto:${tatassistOffer.supportEmail}`}>Contact</a></nav><p>© {year} Tatassist.</p></div></footer></Fragment>
+  <script is:inline src="/lead-magnet/attribution.js"></script>
+</FunnelLayout>
+
+<style is:global>
+  /* Homepage-only art direction. Shared funnel, pricing and checkout remain independent. */
+  body[data-page-type="tatassist_home"]{background:#151514;color:#F5F0E8;--th-ink:#151514;--th-paper:#F5F0E8;--th-red:#C0392B;--th-blue:#2E86C1;--th-muted:#bab7af;--th-heading:"Oswald","Arial Narrow",sans-serif;--th-body:"Source Sans 3","Helvetica Neue",sans-serif;font-family:var(--th-body)}
+  .th,.th-header,.th-footer{font-size:18px;line-height:1.6}
+  .th *,.th-header *,.th-footer *{box-sizing:border-box}
+  .th a,.th-header a,.th-footer a{color:inherit;text-decoration:none}
+  .th button,.th input,.th summary{font:inherit}
+  .th :focus-visible,.th-header :focus-visible,.th-footer :focus-visible{outline:3px solid var(--th-blue);outline-offset:6px}
+  .th section[id]{scroll-margin-top:110px}
+  .th p,.th h1,.th h2,.th h3,.th ul,.th blockquote{margin:0}
+  .th h1,.th h2,.th h3{font-family:var(--th-heading);font-weight:700}
+  .th h2{font-size:clamp(38px,4.4vw,65px);line-height:1.08;letter-spacing:-.035em}
+  .th h3{font-size:30px;line-height:1.2;letter-spacing:-.025em}
+  .th-wrap{width:min(1280px,calc(100% - 112px));margin-inline:auto}
+  .th-svg-defs{position:absolute;overflow:hidden;pointer-events:none}
+  .th-skip{position:fixed;top:10px;left:20px;transform:translateY(-180%);background:#F5F0E8;color:#151514;padding:12px 20px;z-index:100}
+  .th-skip:focus{transform:none}
+  .th-header{height:104px;display:flex;align-items:center;justify-content:space-between;gap:30px;padding:0 max(32px,calc((100vw - 1280px)/2));border-bottom:1px solid #ffffff20;background:#151514;position:relative;z-index:5}
+  .th-logo-link{display:block;flex-shrink:0;line-height:0;background:var(--th-paper);width:163px;padding:0 7px;clip-path:polygon(2% 0,99% 3%,100% 95%,0 100%);transform:rotate(-3deg)}
+  .th-logo-link .th-logo{width:149px;height:88px;object-fit:contain;mix-blend-mode:multiply}
+  .th-header nav{display:flex;gap:32px;font-size:15px;font-weight:600;letter-spacing:.02em}
+  .th-header nav a:hover{color:#e87263}
+  .th-header-cta{display:flex;align-items:center;gap:20px;border-bottom:2px solid var(--th-red);padding:10px 0;font-size:16px;font-weight:700;white-space:nowrap}
+  .th-header-cta svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
+  .th-hero{position:relative;isolation:isolate;overflow:hidden;min-height:730px;display:flex;flex-direction:column;justify-content:center;background:#151514}
+  .th-hero::after,.th-paper::before,.th-system::before,.th-final::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.09;z-index:-1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.75' d='M0 0h180v180H0z'/%3E%3C/svg%3E");background-size:180px}
+  .th-paint{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+  .th-hero-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:center;padding-block:74px 70px}
+  .th-hero-copy{position:relative;z-index:1}
+  .th-hero h1{font-size:clamp(58px,6.05vw,92px);line-height:1.065;letter-spacing:-.045em;margin-bottom:31px}
+  .th-outline{color:transparent;-webkit-text-stroke:1.4px var(--th-paper)}
+  .th-hero-last{color:#ee6b5b;font-size:.81em;letter-spacing:-.04em}
+  .th-hero-copy>p{max-width:575px;font-size:21px;line-height:1.5}
+  .th-hero-copy>.th-hero-support{font-size:18px;color:var(--th-muted);max-width:530px;margin-top:13px}
+  .th-actions{display:flex;align-items:center;gap:28px;margin-top:30px}
+  .th .th-button{display:inline-flex;justify-content:space-between;align-items:center;gap:28px;min-height:60px;padding:16px 25px;background:var(--th-red);color:#fff;font-size:18px;font-weight:700;border:1px solid transparent;line-height:1.3;transition:background .2s,transform .2s}
+  .th .th-button:hover{background:#a52d21;transform:translateY(-2px)}
+  .th-button svg,.th-link-arrow svg,.th-edition-cta svg{width:22px;height:22px;flex-shrink:0}
+  .th-text-link{font-size:16px;border-bottom:1px solid #ffffff65;padding:6px 0}
+  .th-text-link:hover{border-color:#fff}
+  .th .th-micro{font-size:13px;line-height:1.6;max-width:530px;color:var(--th-muted);margin-top:17px}
+  .th-wall-poster{position:relative;transform:rotate(7deg);background:var(--th-paper);color:var(--th-ink);padding:35px 27px 36px;margin-top:18px;text-align:center;box-shadow:16px 21px 0 #00000026;clip-path:polygon(1% 1%,24% 0,49% 1%,78% 0,100% 2%,99% 32%,100% 62%,99% 100%,78% 99%,56% 100%,32% 99%,0 100%,1% 66%,0 37%)}
+  .th-tape{position:absolute;top:0;left:calc(50% - 45px);width:90px;height:28px;background:#b9b1a8b3;transform:rotate(-4deg)}
+  .th-wall-poster .th-poster-logo{width:100%;height:138px;object-fit:contain;mix-blend-mode:multiply}
+  .th-wall-poster p{font-family:var(--th-heading);font-weight:700;font-size:49px;line-height:1.06;letter-spacing:-.04em;margin:14px 0 23px}
+  .th-poster-line{display:block;height:9px;background:var(--th-red);width:74%;margin:0 auto 22px;clip-path:polygon(0 25%,100% 0,95% 70%,2% 100%)}
+  .th-wall-poster small{font-size:11px;font-weight:700;letter-spacing:.12em}
+  .th-hero-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ffffff26;padding-block:20px 24px;font-size:10px;letter-spacing:.13em;color:#c4c1b9;font-weight:600;margin-top:auto}
+  .th-hero-footer a{display:flex;align-items:center;gap:13px}
+  .th-hero-footer svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5}
+  .th-paper{position:relative;isolation:isolate;background:var(--th-paper);color:var(--th-ink)}
+  .th-paper::before{opacity:.11}
+  .th-situations{padding:100px 0 50px;clip-path:polygon(0 0,10% .25%,25% 0,42% .3%,61% 0,80% .2%,100% 0,100% 100%,0 100%)}
+  .th-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:50px;margin-bottom:52px}
+  .th-section-head>p{max-width:355px;font-size:19px;line-height:1.55;color:#57534d}
+  .th-mark{position:relative;display:inline-block;isolation:isolate;white-space:nowrap}
+  .th-mark::after{content:"";position:absolute;height:.17em;background:var(--th-red);bottom:0;left:-2%;width:104%;z-index:-1;clip-path:polygon(0 17%,100% 0,97% 82%,4% 100%)}
+  .th-situation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:38px}
+  .th-situation{border-top:1px solid #15151455;padding-top:20px;display:flex;flex-direction:column}
+  .th-situation-top{display:flex;gap:15px;align-items:center;margin-bottom:28px}
+  .th-number{font-family:var(--th-heading);font-size:51px;color:#827970;line-height:1;font-weight:500}
+  .th .th-label{font-family:var(--th-body);font-size:11px;letter-spacing:.13em;line-height:1.5;font-weight:700}
+  .th-situation h3{margin-bottom:18px;font-size:31px}
+  .th-situation>p{font-size:17px;line-height:1.6;color:#57534d}
+  .th-situation>.th-direction{margin-top:auto;padding-top:24px;font-weight:700;font-size:16px;color:var(--th-ink)}
+  .th-section-bottom{display:flex;align-items:center;justify-content:space-between;gap:32px;border-top:1px solid #15151433;margin-top:48px;padding-top:26px}
+  .th-section-bottom>p{font-size:15px;color:#57534d}
+  .th-link-arrow{display:inline-flex;align-items:center;gap:22px;font-size:16px;font-weight:700;border-bottom:1px solid currentColor;padding:7px 0;line-height:1.4}
+  .th-link-arrow:hover{color:var(--th-red)}
+  .th-system{padding:100px 0 76px;position:relative;isolation:isolate}
+  .th-system-top{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:end}
+  .th .th-red-label{color:#ee7b6d;margin-bottom:21px}
+  .th-system-intro{font-size:19px;padding-bottom:4px}
+  .th-system-intro>p+p{margin-top:18px}
+  .th-system-intro .th-dim{color:var(--th-muted);font-size:17px}
+  .th-process{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:38px;margin-top:65px}
+  .th-process article{border-top:1px solid #ffffff40;padding-top:18px}
+  .th-process .th-label{color:#ee7b6d}
+  .th-process h3{font-size:27px;margin:16px 0}
+  .th-process p{font-size:17px;color:var(--th-muted);line-height:1.65}
+  .th-tool-index{display:grid;grid-template-columns:1fr 1.3fr auto;gap:34px;align-items:center;margin-top:60px;border-top:1px solid #ffffff2a;padding-top:34px}
+  .th-tool-index>div>p+p{font-size:21px;line-height:1.4;margin-top:10px}
+  .th-tool-index ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 22px;padding:0;color:var(--th-muted);font-size:14px}
+  .th-tool-index li::before{content:"/";color:#ee7b6d;margin-right:9px}
+  .th-tool-index .th-link-arrow{font-size:14px;white-space:nowrap}
+  .th-guide{background:var(--th-red);padding:85px 0;color:#fff;position:relative;overflow:hidden}
+  .th-guide::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(173deg,transparent 0 51px,#15151409 52px 53px,transparent 54px 122px)}
+  .th-guide-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:110px;align-items:center;position:relative;z-index:1}
+  .th-guide-art{position:relative;max-width:350px;width:100%;justify-self:center;padding:0 18px}
+  .th-guide-art img{display:block;width:100%;height:auto;max-height:480px;object-fit:contain;position:relative;transform:rotate(-6deg);filter:drop-shadow(14px 23px 11px #35070035)}
+  .th-guide-shadow{position:absolute;inset:10px 0;background:var(--th-ink);transform:rotate(5deg);opacity:.4}
+  .th-guide-copy h2{margin:20px 0 25px;font-size:clamp(38px,4.4vw,62px)}
+  .th-guide-copy h2 span{font-size:.92em}
+  .th-guide-copy>p:not(.th-label):not(.th-micro){font-size:19px;line-height:1.6;margin-bottom:18px;max-width:530px}
+  .th .th-button-dark{background:var(--th-ink);margin-top:8px}
+  .th .th-button-dark:hover{background:#292927}
+  .th-guide-copy .th-micro{color:#fff;font-size:12px;max-width:430px;opacity:.88}
+  .th-editions{padding:100px 0 68px}
+  .th-edition-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;align-items:stretch;border-top:1px solid #15151444}
+  .th-edition{padding:28px 30px 30px;display:flex;flex-direction:column;position:relative}
+  .th-edition:first-child{padding-left:0;padding-right:34px}
+  .th-edition:last-child{padding-right:0;padding-left:34px}
+  .th-edition.th-edition-featured{background:var(--th-ink);color:var(--th-paper);border-top:6px solid var(--th-red);margin-top:-6px;padding-top:28px}
+  .th-edition-note{font-size:10px;font-weight:700;letter-spacing:.12em;margin-bottom:23px!important;line-height:1.5}
+  .th-edition-featured .th-edition-note{color:#ee7b6d}
+  .th-edition h3{font-size:29px}
+  .th-price{font-family:var(--th-heading);font-size:62px;font-weight:600;line-height:1;margin:24px 0 19px!important;display:flex;align-items:baseline;gap:12px;letter-spacing:-.04em}
+  .th-price span{font-family:var(--th-body);font-size:12px;font-weight:400;letter-spacing:0;opacity:.7}
+  .th-tool-count{font-size:16px;font-weight:700}
+  .th-edition-description{font-size:16px;color:#57534d;margin:16px 0 30px!important;line-height:1.6}
+  .th-edition-featured .th-edition-description{color:var(--th-muted)}
+  .th-edition-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;border:1px solid #15151465;padding:14px 16px;font-size:15px;line-height:1.4;font-weight:700;min-height:55px}
+  .th-edition-cta:hover{background:#1515140d}
+  .th .th-edition-cta-featured{background:var(--th-red);color:#fff;border-color:var(--th-red)}
+  .th .th-edition-cta-featured:hover{background:#a52d21}
+  .th-edition-terms{text-align:center;font-size:13px;color:#57534d;margin-top:30px!important}
+  .th-edition-terms a{text-decoration:underline;text-underline-offset:3px}
+  .th-founder{padding:100px 0;border-bottom:1px solid #ffffff25}
+  .th-founder-layout{display:grid;grid-template-columns:1fr 1fr;gap:90px}
+  .th-founder h2{font-size:clamp(38px,4.2vw,59px)}
+  .th-founder-meta{font-size:16px;color:var(--th-muted);line-height:1.7;margin-top:26px!important}
+  .th-founder-story blockquote{font-family:var(--th-heading);font-size:32px;line-height:1.3;margin:0 0 27px;padding-left:23px;border-left:4px solid var(--th-red)}
+  .th-founder-story>p{font-size:18px;line-height:1.7;margin-top:18px;color:var(--th-muted)}
+  .th-founder-story .th-signoff{font-family:var(--th-heading);font-size:28px;font-weight:600;color:var(--th-paper);margin:27px 0 15px}
+  .th-signoff span{display:block;font-family:var(--th-body);font-size:9px;font-weight:500;letter-spacing:.09em;color:var(--th-muted);margin-top:3px}
+  .th-founder-story .th-link-arrow{font-size:14px}
+  .th-faq{padding:85px 0}
+  .th-faq-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:80px}
+  .th-faq h2{margin:20px 0 23px}
+  .th .th-support-link{font-size:15px;text-decoration:underline;text-underline-offset:5px}
+  .th-questions details{border-bottom:1px solid #15151440}
+  .th-questions details:first-child{border-top:1px solid #15151440}
+  .th-questions summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:30px;padding:22px 0;cursor:pointer;font-size:18px;font-weight:600;line-height:1.4}
+  .th-questions summary::-webkit-details-marker{display:none}
+  .th-plus{position:relative;width:18px;height:18px;flex:0 0 18px}
+  .th-plus::before,.th-plus::after{content:"";position:absolute;top:8px;left:2px;width:14px;height:2px;background:currentColor}
+  .th-plus::after{transform:rotate(90deg);transition:transform .15s}
+  .th-questions details[open] .th-plus::after{transform:rotate(0)}
+  .th-questions details>p{font-size:16px;color:#57534d;padding:0 30px 24px 0;line-height:1.7}
+  .th-final{padding:87px 0 91px;text-align:center;position:relative;isolation:isolate;overflow:hidden}
+  .th-final::after{content:"";width:410px;height:90px;background:var(--th-blue);position:absolute;left:-205px;top:150px;transform:rotate(-43deg);z-index:-2;clip-path:polygon(0 11%,95% 0,100% 71%,2% 100%);opacity:.7}
+  .th-final h2{font-size:clamp(50px,6.4vw,92px);margin:22px 0 30px;line-height:1.04}
+  .th-final h2 span{color:#ee6b5b}
+  .th-final .th-micro{margin-inline:auto}
+  .th-footer{border-top:1px solid #ffffff25;background:#10100f;padding:31px 0;color:#bab7af}
+  .th-footer>.th-wrap{display:flex;align-items:center;justify-content:space-between;gap:30px}
+  .th-footer .th-footer-brand{font-family:"Oswald","Arial Narrow",sans-serif;font-size:23px;font-weight:700;color:#F5F0E8;line-height:1.25}
+  .th-footer-brand span{display:block;font-family:"Source Sans 3",sans-serif;font-size:8px;font-weight:400;letter-spacing:.13em;margin-top:6px;color:#bab7af}
+  .th-footer nav{display:flex;gap:25px;font-size:13px}
+  .th-footer nav a:hover{text-decoration:underline;text-underline-offset:4px}
+  .th-footer p{font-size:12px;margin:0}
+  @media(min-width:1500px){.th-hero-layout{padding-block:90px 80px}.th-hero{min-height:800px}}
+  @media(max-width:1100px){.th-wrap{width:calc(100% - 72px)}.th-header{padding-inline:36px}.th-header nav{gap:22px}.th-hero-layout{grid-template-columns:minmax(0,1fr) 235px;gap:28px}.th-hero h1{font-size:clamp(52px,6.3vw,74px)}.th-wall-poster{padding-inline:20px}.th-wall-poster p{font-size:39px}.th-wall-poster .th-poster-logo{height:100px}.th-hero-copy>p{font-size:19px}.th-system-top,.th-founder-layout{gap:55px}.th-guide-layout{gap:65px}.th-tool-index{grid-template-columns:1fr 1.5fr}.th-tool-index>.th-link-arrow{grid-column:2;justify-self:start}.th-edition{padding-inline:22px}.th-edition:first-child{padding-right:25px}.th-edition:last-child{padding-left:25px}.th-edition h3{font-size:26px}.th-edition-cta{font-size:14px;padding-inline:12px}.th-situation-grid,.th-process{gap:26px}.th-situation h3{font-size:28px}.th-faq-layout{gap:50px}}
+  @media(max-width:800px){.th-wrap{width:calc(100% - 48px)}.th-header{height:90px;padding-inline:24px;gap:20px}.th-header nav{display:none}.th-logo-link{width:140px}.th-logo-link .th-logo{width:126px;height:76px}.th-header-cta{font-size:14px;gap:15px}.th-hero{min-height:0}.th-hero-layout{grid-template-columns:minmax(0,1fr) 180px;gap:22px;padding-block:62px 55px}.th-hero h1{font-size:clamp(40px,6.2vw,53px)}.th-hero-copy>p{font-size:17px}.th-hero-copy>.th-hero-support{font-size:16px}.th-wall-poster{padding:24px 13px}.th-wall-poster p{font-size:31px}.th-wall-poster .th-poster-logo{height:76px}.th-wall-poster small{font-size:8px}.th-actions{gap:20px;flex-wrap:wrap}.th .th-button{font-size:16px;min-height:56px;padding:15px 21px;gap:23px}.th-hero-copy .th-micro{font-size:12px}.th-hero-footer{font-size:8px;letter-spacing:.08em;gap:25px}.th-section-head{gap:30px}.th-section-head>p{font-size:17px;max-width:265px}.th-situations,.th-editions{padding-top:74px}.th-situation-grid{gap:21px}.th-situation-top{flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:22px;min-height:95px}.th-situation h3{font-size:25px}.th-situation>p{font-size:15px}.th-situation>.th-direction{font-size:14px}.th-section-bottom{align-items:flex-start}.th-section-bottom>p{max-width:290px}.th-link-arrow{font-size:14px;gap:16px}.th-system{padding-block:75px 65px}.th-system-top{gap:40px}.th-system-intro{font-size:17px}.th-system-intro .th-dim{font-size:15px}.th-process h3{font-size:24px}.th-process p{font-size:15px}.th-guide{padding-block:67px}.th-guide-layout{gap:45px;grid-template-columns:.8fr 1.2fr}.th-guide-art{padding:0 8px}.th-guide-copy h2{font-size:37px}.th-guide-copy>p:not(.th-label):not(.th-micro){font-size:17px}.th-edition-grid{grid-template-columns:1fr}.th-edition,.th-edition:first-child,.th-edition:last-child{padding:30px;display:grid;grid-template-columns:1fr auto;gap:0 32px;border-bottom:1px solid #15151440}.th-edition.th-edition-featured{margin:0;border-top:5px solid var(--th-red);padding:30px}.th-edition-note{grid-column:1 / -1;margin-bottom:15px!important}.th-edition h3{font-size:30px}.th-price{grid-column:2;grid-row:2 / 4;align-self:center;flex-direction:column;gap:9px;margin:0!important;font-size:52px}.th-tool-count{margin-top:13px!important}.th-edition-description{grid-column:1;margin-bottom:23px!important}.th-edition-cta{grid-column:1 / -1;justify-content:space-between}.th-founder{padding-block:75px}.th-founder-layout{gap:45px}.th-founder-story blockquote{font-size:27px}.th-founder-story>p{font-size:16px}.th-faq-layout{grid-template-columns:.65fr 1.35fr;gap:36px}.th-questions summary{font-size:17px}.th-footer>.th-wrap{flex-wrap:wrap}.th-footer nav{gap:20px}.th-footer p{margin-left:auto}.th-final{padding-block:75px}}
+  @media(max-width:600px){.th-wrap{width:calc(100% - 40px)}.th-header{padding-inline:20px;height:84px;gap:16px}.th-logo-link{width:123px}.th-logo-link .th-logo{width:109px;height:68px}.th-header-cta{font-size:13px;gap:10px}.th-header-cta svg{width:16px}.th-hero-layout{display:block;padding-block:48px 37px}.th-hero h1{font-size:clamp(40px,8.45vw,51px);margin-bottom:26px}.th-hero-last{font-size:.81em}.th-hero-copy>p{max-width:420px;font-size:18px}.th-hero-copy>.th-hero-support{font-size:16px;max-width:390px}.th-wall-poster{display:none}.th-paint{width:210%;left:-52%;opacity:.28}.th-hero-copy{padding-bottom:7px}.th-actions{gap:23px;margin-top:25px}.th .th-button{min-height:56px;font-size:16px}.th-hero .th-text-link{font-size:14px}.th .th-micro{font-size:12px;max-width:350px}.th-hero-footer{padding-block:17px;font-size:8px}.th-hero-footer>a{font-size:0;gap:0}.th-hero-footer>a svg{width:19px;height:19px}.th-situations{padding-block:58px 34px}.th-section-head{display:block;margin-bottom:33px}.th-section-head>p{max-width:360px;font-size:17px;margin-top:22px}.th h2{font-size:41px;letter-spacing:-.035em}.th-situation-grid{display:block}.th-situation{padding-top:20px;margin-top:30px}.th-situation-top{flex-direction:row;align-items:center;min-height:0;margin-bottom:19px;gap:20px}.th-number{font-size:43px}.th-situation h3{font-size:30px;margin-bottom:14px}.th-situation>p{font-size:17px}.th-situation>.th-direction{font-size:16px;padding-top:16px}.th-section-bottom{display:block;margin-top:33px;padding-top:24px}.th-section-bottom>p{max-width:none;font-size:14px;margin-bottom:17px}.th-link-arrow{font-size:16px}.th-system{padding-block:59px 48px}.th-system-top{display:block}.th-system-top h2{font-size:42px}.th-system-intro{margin-top:28px;font-size:18px}.th-system-intro .th-dim{font-size:16px}.th-process{display:block;margin-top:33px}.th-process article{position:relative;padding:23px 0 24px 36px}.th-process article>.th-label{position:absolute;left:0;top:28px}.th-process h3{font-size:27px;margin:0 0 13px}.th-process p{font-size:16px}.th-tool-index{display:block;margin-top:16px;padding-top:26px}.th-tool-index ul{font-size:13px;margin-block:22px;gap:11px 12px}.th-tool-index>div>p+p{font-size:23px}.th-tool-index .th-link-arrow{font-size:15px}.th-guide{padding-block:46px 52px}.th-guide-layout{display:flex;flex-direction:column;gap:38px}.th-guide-art{max-width:205px;padding:0 12px}.th-guide-art img{max-height:290px}.th-guide-copy{width:100%}.th-guide-copy h2{font-size:clamp(36px,8.7vw,48px);margin-top:15px}.th-guide-copy>p:not(.th-label):not(.th-micro){font-size:18px}.th-guide-copy .th-micro{font-size:12px}.th-guide-copy .th-button{width:100%;gap:12px}.th-editions{padding-block:58px 45px}.th-edition,.th-edition:first-child,.th-edition:last-child{padding:28px 0;gap:0 22px}.th-edition.th-edition-featured{padding:26px 22px;margin-inline:-10px}.th-edition h3{font-size:27px}.th-price{font-size:48px;gap:8px}.th-price span{font-size:10px}.th-tool-count{font-size:14px}.th-edition-description{grid-column:1 / -1;font-size:16px}.th-edition-cta{font-size:16px;padding-inline:17px;min-height:56px}.th-edition-terms{font-size:12px;text-align:left;line-height:1.7}.th-founder{padding-block:58px}.th-founder-layout{display:block}.th-founder h2{font-size:41px}.th-founder-meta{font-size:15px;margin-top:20px!important}.th-founder-story{margin-top:34px}.th-founder-story blockquote{font-size:28px;padding-left:19px}.th-founder-story>p{font-size:17px}.th-signoff span{font-size:8px}.th-faq{padding-block:53px}.th-faq-layout{display:block}.th-faq h2{font-size:42px}.th-questions{margin-top:29px}.th-questions summary{font-size:17px;gap:22px;padding-block:20px}.th-questions details>p{font-size:16px;padding-right:0}.th-final{padding-block:61px}.th-final h2{font-size:clamp(43px,10vw,58px);margin:22px 0 29px}.th-final>.th-wrap>.th-label{font-size:9px;letter-spacing:.12em}.th-final .th-micro{max-width:280px}.th-footer{padding-block:28px}.th-footer>.th-wrap{display:block}.th-footer nav{margin-block:22px;gap:18px;font-size:12px;flex-wrap:wrap}.th-footer p{font-size:11px}}
+  @media(prefers-reduced-motion:reduce){.th *,.th *::before,.th *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+  @media(forced-colors:active){.th-outline{color:CanvasText;-webkit-text-stroke:0}.th-paint,.th-paper::before,.th-system::before,.th-final::before,.th-wall-poster{display:none}}
+</style>
