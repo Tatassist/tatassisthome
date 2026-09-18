@@ -39,13 +39,14 @@ const structuredData=[
             <p class="fq-offer-price">${tier.price}</p>
             <p class="fq-offer-count">{tier.count} numbered tools + guides</p>
             <p class="fq-offer-description">{EDITIONS[tier.id as keyof typeof EDITIONS].description}</p>
-            <a class="fq-button" href={tier.checkoutUrl || '#fq-checkout-status'} data-checkout={Boolean(tier.checkoutUrl)} data-tier={tier.id} data-track="true" data-track-event={tier.checkoutUrl?'booked_artist_checkout_started':'booked_artist_checkout_unavailable'} data-track-label={tier.name} data-track-location="matched_offer" data-track-destination={tier.checkoutUrl || '#fq-checkout-status'}>GET {tier.name.toUpperCase()} · ${tier.price}</a>
+            <a class="fq-button" href={tier.checkoutUrl || `#fq-checkout-status-${tier.id}`} data-checkout={Boolean(tier.checkoutUrl)} data-tier={tier.id} data-track="true" data-track-event={tier.checkoutUrl?'booked_artist_checkout_started':'booked_artist_checkout_unavailable'} data-track-label={tier.name} data-track-location="matched_offer" data-track-destination={tier.checkoutUrl || `#fq-checkout-status-${tier.id}`}>GET {tier.name.toUpperCase()} · ${tier.price}</a>
             <p class="fq-guarantee">One payment. 30-day guarantee.</p>
+            <!-- Availability follows the selected edition. -->
+            {!tier.checkoutUrl && <p class="fq-small" id={`fq-checkout-status-${tier.id}`}>This edition is not open yet. <a href="mailto:syd@tatassist.com">Ask about access</a>.</p>}
             <p class="fq-offer-reason" data-match-reason hidden></p>
           </div>
         </section>)}
       </div>
-      {!tiers.every(t=>t.checkoutUrl) && <p class="fq-small" id="fq-checkout-status" style="padding-bottom:24px;text-align:center">Checkout is not open yet. <a href="mailto:syd@tatassist.com" style="text-decoration:underline">Ask about access</a>.</p>}
     </div>
     <section class="fq-framework fq-container" aria-labelledby="framework-title">
       <h2 id="framework-title">LET YOUR BOOKINGS CATCH UP WITH YOUR WORK.</h2>

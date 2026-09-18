@@ -13,7 +13,7 @@
     "productId": "prod_VGI79SsmucxrL2",
     "priceId": "price_1UFlXNPQzammyKtsk2O605xg",
     "unitAmount": 4700,
-    "enabled": false
+    "enabled": true
   },
   "complete": {
     "url": "https://buy.stripe.com/cNi3cxa0d0id616bOg73G03",
