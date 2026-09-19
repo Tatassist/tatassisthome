@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { bookedArtistSystemConfig } from '../data/booked-artist-system';
+import { bookedArtistSystemConfig } from '../data/booking-funnel/booked-artist-system';
 
-const { supportEmail, price, guaranteeDays } = bookedArtistSystemConfig;
+const { supportEmail, guaranteeDays, tiers } = bookedArtistSystemConfig;
 const supportHref = `mailto:${supportEmail}`;
-const priceLabel = `$${price}`;
+const tierSummary = tiers.map((tier) => `${tier.name} $${tier.price} (${tier.count} tools)`).join(', ');
 ---
 
 <BaseLayout
@@ -26,7 +26,7 @@ const priceLabel = `$${price}`;
       <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed max-w-3xl">
         These terms apply to the one-time digital purchase of The Booked Artist System. They are separate from any Tatassist membership or other offer.
       </p>
-      <p class="text-sm text-brand-text-muted mt-6">Effective August 30, 2026</p>
+      <p class="text-sm text-brand-text-muted mt-6">Effective September 18, 2026</p>
     </div>
   </section>
 
@@ -35,8 +35,11 @@ const priceLabel = `$${price}`;
       <div class="prose-tatassist max-w-none">
         <h2>What you are buying</h2>
         <p>
-          The Booked Artist System is a one-time digital product for tattoo artists. The founding release is offered at <strong>{priceLabel}</strong> unless a different price is displayed at checkout. The purchase includes the files and materials listed on the sales page at the time of purchase. It is not a subscription.
+          The Booked Artist System is a one-time digital product for tattoo artists. The current tiers are <strong>{tierSummary}</strong>. Prices are in USD and each tier is paid once. Working System includes Essentials, and Complete System includes Working System. The purchase includes the files and materials listed on the sales page at the time of purchase. It is not a subscription.
         </p>
+
+        <h2>Included formats</h2>
+        <p>Each tier contains its selected tools as original PNGs, individual numbered PDFs, and a combined numbered PDF workbook. Every tier also includes Start Here, the Core Playbook, a tier-specific Implementation Guide, and License and Support. The PNG and PDF versions are alternate formats of the same tools. These are static pages for printing or annotation in your own PDF or image app.</p>
 
         <h2>Delivery and access</h2>
         <p>
