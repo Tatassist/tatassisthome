@@ -2,9 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { bookedArtistSystemConfig } from '../data/booked-artist-system';
-const { supportEmail, price, guaranteeDays } = bookedArtistSystemConfig;
+import { bookedArtistSystemConfig } from '../data/booking-funnel/booked-artist-system';
+
+const { supportEmail, guaranteeDays, tiers } = bookedArtistSystemConfig;
 const supportHref = `mailto:${supportEmail}`;
+const tierSummary = tiers.map((tier) => `${tier.name} $${tier.price} (${tier.count} tools)`).join(', ');
 ---
 
 <BaseLayout title="Terms of Use" description="Terms for the Tatassist website, free resources, and one-time digital product." pageType="terms">
@@ -14,14 +16,14 @@ const supportHref = `mailto:${supportEmail}`;
       <p class="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">Clear expectations</p>
       <h1 class="text-4xl sm:text-5xl font-heading font-bold text-brand-cream leading-tight mb-5">Terms of Use</h1>
       <p class="text-lg sm:text-xl text-brand-text-muted leading-relaxed max-w-3xl">These terms cover the Tatassist website and free resources. The product-specific terms below govern a purchase of The Booked Artist System.</p>
-      <p class="text-sm text-brand-text-muted mt-6">Updated September 4, 2026</p>
+      <p class="text-sm text-brand-text-muted mt-6">Updated September 18, 2026</p>
     </div>
   </section>
   <section class="py-14 sm:py-20 bg-brand-dark">
     <div class="max-w-4xl mx-auto px-4 sm:px-6"><div class="prose-tatassist max-w-none">
       <h2>The current launch purchase</h2>
-      <p>The Booked Artist System is offered at a <strong>${price} one-time launch price</strong>. It is not a membership, reservation, or subscription. Stripe provides the current checkout. The amount displayed at checkout and the files listed on the sales page identify the purchase.</p>
-      <p>The <a href="/booked-artist-system-terms">Booked Artist System Product Terms</a> cover delivery, the individual business license, and the <a href="/booked-artist-system-terms#refunds">{guaranteeDays}-day satisfaction guarantee</a>. Those product-specific terms control for that purchase.</p>
+      <p>The Booked Artist System is offered in three one-time digital editions: <strong>{tierSummary}</strong>. Prices are in USD. It is not a membership, reservation, or subscription. Stripe provides the current checkout. The amount displayed at checkout and the files listed on the sales page identify the purchase.</p>
+      <p>The <a href="/lp/booked-artist/terms">Booked Artist System Product Terms</a> cover delivery, the individual business license, and the <a href="/lp/booked-artist/terms#refunds">{guaranteeDays}-day satisfaction guarantee</a>. Those product-specific terms control for that purchase.</p>
       <h2>Earlier purchases and other offers</h2>
       <p>An earlier reservation, membership, or other product remains subject to the terms agreed at its original checkout. The current launch does not change an existing subscription, its price, paid access, cancellation rights, or refund rights. Contact <a href={supportHref}>{supportEmail}</a> for help with an earlier transaction.</p>
       <h2>Business education, not professional advice</h2>
