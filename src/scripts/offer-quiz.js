@@ -4,13 +4,22 @@ const form = $('fq-form');
 if (form) {
   const answers = {};
   const contact = {firstName:'',lastName:'',email:'',marketingConsent:true};
-  let step=0,busy=false,complete=false;
+  let step=0,busy=false,complete=false,quizStartedMeasured=false,quizCompletedMeasured=false;
   const attribution = {};
   for (const [key,value] of new URLSearchParams(location.search)) {
     if (['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].includes(key) && /^[a-zA-Z0-9 _.-]{1,100}$/.test(value)) attribution[key]=value;
   }
   const esc = value => String(value ?? '').replace(/[&<>"']/g,c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const track = (event,detail={}) => window.tatassistTrack?.({event,quiz_version:QUIZ_VERSION,...detail});
+  const measureOpenAIAds = (eventName,eventData,eventOptions) => {
+    try {
+      if (typeof window.oaiq !== 'function') return;
+      if (eventOptions) window.oaiq('measure',eventName,eventData,eventOptions);
+      else window.oaiq('measure',eventName,eventData);
+    } catch {}
+  };
+  const measureOpenAICustom = customEventName =>
+    measureOpenAIAds('custom',{type:'custom'},{custom_event_name:customEventName});
   function error(message) { $('fq-error').textContent=message; $('fq-error').hidden=!message; }
   function read() {
     const q=QUESTIONS[step];
@@ -42,8 +51,20 @@ if (form) {
     const q=QUESTIONS[step];
     if(q) {
       const issue=validateAnswer(q.id,answers[q.id]);if(issue){error(issue);return;}
-      if(step===0)track('tatassist_booking_quiz_started');
-      track('tatassist_booking_quiz_step',{question_id:q.id});step++;render();return;
+      if(step===0) {
+        track('tatassist_booking_quiz_started');
+        if(!quizStartedMeasured) {
+          measureOpenAICustom('quiz_started');
+          quizStartedMeasured=true;
+        }
+      }
+      const isFinalQuestion=step===QUESTIONS.length-1;
+      track('tatassist_booking_quiz_step',{question_id:q.id});
+      if(isFinalQuestion && !quizCompletedMeasured) {
+        measureOpenAICustom('quiz_completed');
+        quizCompletedMeasured=true;
+      }
+      step++;render();return;
     }
     try { validateContact(contact); } catch(e) {error(e.message);return;}
     busy=true;$('fq-next').disabled=true;$('fq-back').disabled=true;$('fq-next').textContent='SENDING…';
@@ -54,7 +75,9 @@ if (form) {
       const result=makeResult(answers);
       // Keep only anonymous answer codes for this tab. Names and email never enter storage or URLs.
       try{sessionStorage.setItem(RESULT_KEY,JSON.stringify(result));}catch{}
-      track('tatassist_booking_lead_captured');complete=true;
+      track('tatassist_booking_lead_captured');
+      measureOpenAIAds('lead_created',{type:'customer_action'});
+      complete=true;
       const url=new URL('/lp/booked-artist',location.origin);
       url.searchParams.set('edition',data.recommendation.tierId);
       location.assign(url.pathname+url.search);
