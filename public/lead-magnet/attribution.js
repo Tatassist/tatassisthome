@@ -1,7 +1,7 @@
 // Preserve campaign context between the guide and product pages.
 // Never copy email addresses or other arbitrary query parameters into analytics or links.
 (() => {
-  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref'];
+  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'oppref', 'ref'];
   const source = new URL(window.location.href);
   document.querySelectorAll('a[data-attribution]').forEach((link) => {
     try {
