@@ -90,6 +90,26 @@ const structuredDataScripts = [
     {isBookedArtistLanding && (
       <link rel="stylesheet" href="/booked-artist-system/assets.css" />
     )}
+    <!-- OpenAI Ads measurement pixel -->
+    <script is:inline>
+      (function (w, d, s, u) {
+        if (w.oaiq) return;
+        var q = function () {
+          q.q.push(arguments);
+        };
+        q.q = [];
+        w.oaiq = q;
+        var js = d.createElement(s);
+        js.async = true;
+        js.src = u;
+        var f = d.getElementsByTagName(s)[0];
+        f.parentNode.insertBefore(js, f);
+      })(window, document, "script", "https://bzrcdn.openai.com/sdk/oaiq.min.js");
+
+      oaiq("init", {
+        pixelId: "LXxYYjkPAJGcjNiiiAYvAb",
+      });
+    </script>
     {gaMeasurementId && !hasGTM && (
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
     )}
