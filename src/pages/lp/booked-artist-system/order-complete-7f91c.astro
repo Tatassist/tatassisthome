@@ -2,55 +2,58 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import '../../../styles/booked-artist-system.css';
 
-const supportEmail = import.meta.env.PUBLIC_TATASSIST_SUPPORT_EMAIL || 'support@tatassist.com';
+const supportEmail = import.meta.env.PUBLIC_TATASSIST_SUPPORT_EMAIL || 'syd@tatassist.com';
 const supportHref = `mailto:${supportEmail}?subject=${encodeURIComponent('Booked Artist System download help')}`;
-const downloadUrl = 'https://drive.google.com/file/d/1GKb1hAb2_iwssvgTGxjHWHKQoWjquh0c/view?usp=sharing';
 ---
 
 <BaseLayout
   title="Your Booked Artist System Is Ready"
-  description="Download The Booked Artist System founding release."
+  description="Your Tatassist purchase is complete. Download your Booked Artist System."
   pageType="booked_artist_system_delivery"
   robots="noindex,nofollow"
 >
   <section class="bas-delivery">
     <div class="bas-delivery-grid" aria-hidden="true"></div>
     <div class="bas-delivery-card">
-      <a class="bas-brand" href="/lp/booked-artist-system" aria-label="The Booked Artist System">
+      <a class="bas-brand" href="/lp/booked-artist" aria-label="The Booked Artist System">
         <span class="bas-brand-mark" aria-hidden="true">T/A</span>
         <span><b>TATASSIST</b><small>ARTIST SYSTEMS</small></span>
       </a>
 
       <p class="bas-kicker">PAYMENT COMPLETE</p>
       <h1>YOUR SYSTEM<br />IS READY.</h1>
-      <p class="bas-delivery-lead">
-        Download the complete founding release, save the ZIP somewhere permanent, and begin with
-        <strong>00_START_HERE.pdf</strong>.
+      <p class="bas-delivery-lead" id="delivery-lead">
+        Your payment went through. Your download is being prepared now.
       </p>
 
       <a
+        id="download-button"
         class="bas-button bas-button-primary bas-button-wide"
-        href={downloadUrl}
+        href="#"
         target="_blank"
         rel="noopener noreferrer nofollow"
         data-track="true"
         data-track-event="booked_artist_package_downloaded"
-        data-track-label="Download founding release"
+        data-track-label="Download purchased edition"
         data-track-location="booked_artist_order_complete"
         data-track-type="download"
-        data-track-destination={downloadUrl}
+        hidden
       >
-        DOWNLOAD THE FOUNDING RELEASE <span aria-hidden="true">↓</span>
+        DOWNLOAD YOUR SYSTEM <span aria-hidden="true">↓</span>
       </a>
+
+      <p class="bas-delivery-status" id="delivery-status" role="status">
+        Confirming your purchased edition…
+      </p>
 
       <div class="bas-delivery-details">
         <div>
           <span>01</span>
-          <p><b>Download the ZIP.</b> The package is approximately 67 MB.</p>
+          <p><b>Download your files.</b> Save the package somewhere permanent.</p>
         </div>
         <div>
           <span>02</span>
-          <p><b>Open Start Here.</b> It gives you the recommended implementation sequence.</p>
+          <p><b>Start with the setup guide.</b> It walks you through the recommended implementation order.</p>
         </div>
         <div>
           <span>03</span>
@@ -71,35 +74,92 @@ const downloadUrl = 'https://drive.google.com/file/d/1GKb1hAb2_iwssvgTGxjHWHKQoW
 
   <script is:inline>
     window.addEventListener('DOMContentLoaded', () => {
-      const sessionId = new URLSearchParams(window.location.search).get('session_id');
-      if (!sessionId) return;
+      const editions = {
+        essentials: {
+          name: 'Booked Artist Essentials',
+          amount: 2700,
+          itemId: 'booked_artist_essentials',
+          downloadUrl: 'https://drive.google.com/file/d/1Q0ILKh6KC7YJV2TJJFKT2ldDgbgNFYM9/view'
+        },
+        working: {
+          name: 'Booked Artist Working System',
+          amount: 4700,
+          itemId: 'booked_artist_working',
+          downloadUrl: 'https://drive.google.com/file/d/1zFOS55owbcx56pQB53ACsCX-jLVhOmd-/view'
+        },
+        complete: {
+          name: 'Booked Artist Complete System',
+          amount: 7700,
+          itemId: 'booked_artist_complete',
+          downloadUrl: 'https://drive.google.com/file/d/1wwbWI9sMBQlGJX29K_L62zOnpLqBwewd/view'
+        }
+      };
 
-      const storageKey = `booked-artist-purchase:${sessionId}`;
-      if (window.sessionStorage.getItem(storageKey)) return;
+      const params = new URLSearchParams(window.location.search);
+      const tier = params.get('tier');
+      const sessionId = params.get('session_id') || '';
+      const edition = tier ? editions[tier] : null;
+
+      const button = document.getElementById('download-button');
+      const status = document.getElementById('delivery-status');
+      const lead = document.getElementById('delivery-lead');
+
+      if (!edition || !/^cs_(?:live|test)_[A-Za-z0-9]+$/.test(sessionId)) {
+        if (status) status.textContent = 'We could not identify this order from the return link. Your payment receipt is still valid—contact support and we will get the correct files to you.';
+        return;
+      }
+
+      if (button) {
+        button.href = edition.downloadUrl;
+        button.dataset.trackDestination = edition.downloadUrl;
+        button.dataset.trackLabel = `Download ${edition.name}`;
+        button.hidden = false;
+      }
+      if (lead) lead.innerHTML = `Your <strong>${edition.name}</strong> purchase is complete. Your files are ready below.`;
+      if (status) status.textContent = 'Purchase confirmed.';
+
+      const eventData = {
+        type: 'contents',
+        amount: edition.amount,
+        currency: 'USD',
+        contents: [
+          {
+            id: edition.itemId,
+            name: edition.name,
+            content_type: 'product',
+            quantity: 1,
+            amount: edition.amount,
+            currency: 'USD'
+          }
+        ]
+      };
+
+      try {
+        window.oaiq?.('measure', 'order_created', eventData, { event_id: sessionId });
+      } catch {}
 
       window.tatassistTrack?.({
         event: 'purchase',
         transaction_id: sessionId,
-        value: 49,
+        value: edition.amount / 100,
         currency: 'USD',
         items: [
           {
-            item_id: 'booked_artist_system_founding_release',
-            item_name: 'The Booked Artist System — Founding Release',
-            price: 49,
-            quantity: 1,
-          },
-        ],
+            item_id: edition.itemId,
+            item_name: edition.name,
+            price: edition.amount / 100,
+            quantity: 1
+          }
+        ]
       });
 
       window.tatassistTrack?.({
         event: 'booked_artist_purchase_completed',
         transaction_id: sessionId,
-        value: 49,
-        currency: 'USD',
+        edition: tier,
+        value: edition.amount / 100,
+        currency: 'USD'
       });
-
-      window.sessionStorage.setItem(storageKey, '1');
     });
   </script>
 
@@ -134,7 +194,7 @@ const downloadUrl = 'https://drive.google.com/file/d/1GKb1hAb2_iwssvgTGxjHWHKQoW
       width: min(100%, 860px);
       padding: clamp(1.5rem, 5vw, 4.5rem);
       border: 1px solid rgba(242, 238, 229, 0.2);
-      background: rgba(15, 15, 15, 0.9);
+      background: rgba(15, 15, 15, 0.92);
       box-shadow: 1rem 1rem 0 #7046a3;
     }
 
@@ -154,7 +214,7 @@ const downloadUrl = 'https://drive.google.com/file/d/1GKb1hAb2_iwssvgTGxjHWHKQoW
 
     .bas-delivery-lead {
       max-width: 660px;
-      margin: 2rem 0;
+      margin: 2rem 0 1rem;
       color: rgba(242, 238, 229, 0.75);
       font-size: clamp(1.05rem, 2vw, 1.3rem);
       line-height: 1.55;
@@ -162,6 +222,12 @@ const downloadUrl = 'https://drive.google.com/file/d/1GKb1hAb2_iwssvgTGxjHWHKQoW
 
     .bas-delivery-lead strong {
       color: #f2eee5;
+    }
+
+    .bas-delivery-status {
+      margin: 1rem 0 0;
+      color: rgba(242, 238, 229, 0.55);
+      font-size: 0.9rem;
     }
 
     .bas-delivery-details {
